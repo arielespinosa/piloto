@@ -1,0 +1,29 @@
+<aside class="bg-dark dk aside-md hidden-print" id="nav">
+  <section class="vbox">
+    <header class="header bg-primary lter text-center clearfix">
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-dark btn-icon" title="New project"><i class="fa fa-plus"></i></button>
+        <div class="btn-group hidden-nav-xs">
+          <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+            Switch Project
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu text-left">
+            <li><a href="#">Project</a></li>
+            <li><a href="#">Another Project</a></li>
+            <li><a href="#">More Projects</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="w-f scrollable">
+      <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
+        <nav class="nav-primary hidden-xs">
+        {% block menu_lateral %} {% endblock %}
+        </nav>
+      </div>
+    </div>
+  </section> 
+</aside>
+
+

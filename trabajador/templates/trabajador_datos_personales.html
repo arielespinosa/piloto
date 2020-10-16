@@ -1,0 +1,137 @@
+{% load staticfiles %}
+
+<div class="wrapper">
+    <div class="clearfix m-b">
+      <a class="pull-left thumb m-r">
+        {% if user.trabajador.foto.url %}
+          <img src="{{ user.trabajador.foto.url }}" class="img-circle">
+        {% else %}
+          <img src="{% static 'images/avatar_default.jpg' %}" class="img-circle">
+        {% endif %}
+      </a>
+      <div class="clear">
+        <div class="h4 m-t-xs m-b-xs">{{ trabajador.nombre_coloquial }}</div>
+        <small class="text-muted"><i class="fa fa-map-marker"></i> {{ trabajador.categoria_ocupacional }}</small>
+      </div>                
+    </div>
+    <div class="panel wrapper panel-success">
+      <div class="row">
+        <div class="col-xs-4">
+          <a href="#">
+            <span class="m-b-xs h5 block">245</span>
+            <small class="text-muted">Followers</small>
+          </a>
+        </div>
+        <div class="col-xs-4">
+          <a href="#">
+            <span class="m-b-xs h5 block">55</span>
+            <small class="text-muted">Following</small>
+          </a>
+        </div>
+        <div class="col-xs-4">
+          <a href="#">
+            <span class="m-b-xs h5 block">2,035</span>
+            <small class="text-muted">Tweets</small>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="btn-group btn-group-justified m-b">
+      <a class="btn btn-primary btn-rounded" data-toggle="button">
+        <span class="text">
+          <i class="fa fa-eye"></i> Follow
+        </span>
+        <span class="text-active">
+          <i class="fa fa-eye-slash"></i> Following
+        </span>
+      </a>
+      <a class="btn btn-dark btn-rounded" data-loading-text="Connecting">
+        <i class="fa fa-comment-o"></i> Chat
+      </a>
+    </div>
+    <div>
+      <!-- Datos personales -->
+      <small class="text-uc text-xs text-muted">datos personales</small>
+      <div class="row" style="margin-left: 10px;">            
+        <div class="col-lg-6">
+          <div class="row">Carnet de identidad:</div>
+          <div class="row">Sexo:</div>
+          <div class="row">Direcci&oacute;n:</div>
+          <div class="row">Municipio:</div>
+          <div class="row">Raza:</div>
+          <div class="row">&Aacute;reas de interes:</div>
+        </div>
+        <div class="col-lg-6">
+          <div class="row">{{trabajador.ci}}</div>
+          <div class="row">{{trabajador.sexo}}</div>
+          <div class="row">{{trabajador.direccion}}</div>
+          <div class="row">{{trabajador.municipio}}</div>
+          <div class="row">{{trabajador.raza}}</div>
+          <div class="row">{{trabajador.areas_interes}}</div>
+        </div>            
+      </div>
+      <p></p>
+      <!-- Datos laborales -->
+      <small class="text-uc text-xs text-muted">datos laborales</small>
+      <div class="row" style="margin-left: 10px;">
+        <div class="col-lg-6">
+          <div class="row">Nivel de escolaridad:</div>
+          <div class="row">Especialidad:</div>
+          <div class="row">Grado cient&iacute;fico:</div>
+          <div class="row">Cateogor&iacute;a cient&iacute;fica:</div>
+          <div class="row">Cateogor&iacute;a docente:</div>
+        </div>
+        <div class="col-lg-6">
+          <div class="row">{{trabajador.nivel_escolar}}</div>
+          <div class="row">{{trabajador.especialidad}}</div>
+          <div class="row">{{trabajador.grado_cientifico}}</div>
+          <div class="row">{{trabajador.cateogoria_cientifica}}</div>
+          <div class="row">{{trabajador.cateogoria_docente}}</div>   
+        </div>
+      </div>
+      <p></p>
+      <!-- Datos laborales | INSMET -->
+      <small class="text-uc text-xs text-muted">Datos laborales | INSMET</small>
+      <div class="row" style="margin-left: 10px;">
+        <div class="col-lg-6">
+          <div class="row">Tarjeta:</div>
+          <div class="row">Plaza:</div>
+          <div class="row">Categor&iacute;a ocupacional:</div>
+          <div class="row">Fecha de entrada:</div>
+          <div class="row">Resoluci&oacute;n 34-19:</div>
+          <div class="row">Bono Msc-Dr:</div>
+          <div class="row">Grupo escala antiguo:</div>
+          <div class="row">Grupo escala actual:</div>
+          <div class="row">Salario escala antiguo:</div>
+          <div class="row">Salario escala actual:</div>
+          <div class="row">Otros pagos antiguo:</div>
+          <div class="row">Otros pagos actual:</div>
+          <div class="row">Salario total antiguo:</div>
+          <div class="row">Salario total actual:</div>
+          <div class="row">Membresias:</div>
+          <div class="row">Afiliaciones:</div>
+        </div>
+        <div class="col-lg-6">
+          <div class="row">{{trabajador.tarjeta}}</div>
+          <div class="row">{{trabajador.plaza}}</div>
+          <div class="row">{{trabajador.categoria_ocupacional}}</div>
+          <div class="row">{{trabajador.fecha_entrada_insmet}}</div>           
+          <div class="row">{{trabajador.res_34_19}}</div>   
+          <div class="row">{{trabajador.msc_dr}}</div>  
+          <div class="row">{{trabajador.grupo_escala_antiguo}}</div>  
+          <div class="row">{{trabajador.grupo_escala_actual}}</div>  
+          <div class="row">{{trabajador.salario_escala_antiguo}}</div>  
+          <div class="row">{{trabajador.salario_escala_actual}}</div>  
+          <div class="row">{{trabajador.otros_pagos_antiguo}}</div>  
+          <div class="row">{{trabajador.otros_pagos_actual}}</div> 
+          <div class="row">{{trabajador.salario_total_antiguo}}</div>  
+          <div class="row">{{trabajador.salario_total_actual}}</div> 
+          <div class="row">{{trabajador.membresias}}</div>  
+          <div class="row">{{trabajador.afiliaciones}}</div>  
+        </div>
+      </div>
+
+      <div class="line"></div>
+      <small class="text-uc text-xs text-muted">contacto</small>
+    </div>
+  </div>

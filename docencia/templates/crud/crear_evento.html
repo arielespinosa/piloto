@@ -1,0 +1,54 @@
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+<!-- Modal -->
+<form id='crear_evento' role="form" method="POST" class="" action="">
+  {% csrf_token %}
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title font-bold" id="myModalLabel">A&Ntilde;ADIR EVENTO</h5>
+  </div>
+  <div class="modal-body">
+    {% if form_seleccionar_eventos %}
+      <div id="form_seleccionar_eventos">
+        <div class="alert alert-info 3x">
+          <i class="fa fa-exclamation-triangle"></i> Seleccione un evento en el que no haya participado. Tambien puede a&ntilde;adir 
+            uno nuevo o ambas cosas.
+        </div>   
+        {{ form_seleccionar_eventos|crispy }}
+      </div>
+      <div class="line pull-in"></div>
+    {% endif %}
+
+      <div class="form-group pull-in clearfix">
+        <div class="col-lg-7">
+          {{ form_crear_evento.fecha|as_crispy_field }}
+        </div>
+        <div class="col-lg-5">          
+          {{ form_crear_evento.nivel|as_crispy_field }}
+        </div>
+      </div>
+      
+
+    <div class="form-group pull-in clearfix">
+      <div class="col-sm-7">
+        {{ form_crear_evento.nombre|as_crispy_field }}
+      </div>
+      <div class="col-sm-5">
+        {{ form_crear_evento.lugar|as_crispy_field }}
+      </div>
+    </div>
+    <div class="form-group pull-in clearfix">
+      <div class="col-sm-12">
+        {{ form_crear_evento.descripcion|as_crispy_field }}
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="submit-btn btn btn-primary">A&ntilde;adir</button>
+  </div>      
+</form>
+
+

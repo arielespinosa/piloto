@@ -1,0 +1,173 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es-es" class="app">
+
+<head>
+  <meta charset="utf-8"/>
+  <title>{% block titulo %}CFA | INSMET{% endblock %}</title>
+  <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/> 
+  
+  <!-- Basics CSS style block -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
+  <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}" type="text/css"/>
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css"/>
+  <link rel="stylesheet" href="{% static 'css/font.css' %}" type="text/css"/>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css"/>
+  <link rel="stylesheet" href="{% static 'js/amaranjs/css/animate.min.css' %}" type="text/css"/>
+  <link rel="stylesheet" href="{% static 'js/amaranjs/css/amaran.min.css' %}" type="text/css"/>
+
+  <style type="text/css">
+    .asteriskField {
+      display: none;
+    }
+
+    #menu {
+      left: 20%;
+    }
+    .nav-primary {
+      border-bottom: none;
+    }
+
+    .nav .sc {
+      margin-left: 10px;
+    }
+
+    .nav-primary ul.nav > li > a {
+      border-top: none;
+    }
+
+    .nav-primary li > a > svg {
+      border-right: none;
+      margin-right: 10px;
+    }
+
+    .selectdatewidget {
+      display: inline-block;
+      margin-left: 5px;      
+    }
+
+    select[name$="_day"].selectdatewidget {
+        width: 20%;
+    }
+    select[name$="_month"].selectdatewidget {
+        width: 50%;
+    }
+    select[name$="_year"].selectdatewidget {
+        width: 25%;
+    }
+
+  </style>
+  <!--  Basics CSS style end block -->
+  {% block css %} {% endblock %}
+  <!--[if lt IE 9]>
+    <script src="{% static 'js/ie/html5shiv.js' %}"></script>
+    <script src="{% static 'js/ie/respond.min.js' %}"></script>
+    <script src="{% static 'js/ie/excanvas.js' %}"></script>
+  <![endif]-->
+</head>
+
+<body>   
+
+  <section class="vbox">
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content"></div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <!-- HEADER SECTION -->
+    {% if not user.is_authenticated %}
+    <header class="bg-dark dk header navbar navbar-fixed-top-xs">
+      <div class="navbar-header aside-md">
+        <a href="#" class="navbar-brand" data-toggle="fullscreen"><img src="{% static 'images/logo.png' %}" class="m-r-sm">CFA</a>
+      </div>      
+    </header> 
+    {% else %}      
+       {% include 'navbar.html' %}
+    {% endif %} 
+
+    <!-- MAIN SECTION -->                                    
+    <section>
+      <section class="hbox stretch"> 
+
+        <!-- ASIDE NAVBAR SECTION -->               
+        {% if user.is_authenticated and user.is_superuser %}
+        <aside class="bg-dark dk aside-md hidden-print" id="nav">
+          <section class="vbox">
+            <header class="header bg-primary lter text-center clearfix">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-dark btn-icon" title="New project"><i class="fa fa-plus"></i></button>
+                <div class="btn-group hidden-nav-xs">
+                  <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Switch Project
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu text-left">
+                    <li><a href="#">Project</a></li>
+                    <li><a href="#">Another Project</a></li>
+                    <li><a href="#">More Projects</a></li>
+                  </ul>
+                </div>
+              </div>
+            </header>
+            <div class="w-f scrollable">
+              <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
+                <nav class="nav-primary hidden-xs">
+                
+                  {% block menu_lateral %} {% endblock %}
+           
+                </nav>
+              </div>
+            </div>
+          </section> 
+        </aside>
+        {% endif %} 
+        
+        <!-- DOC CONTENT SECTION --> 
+        <section id="content">
+          <section class="vbox">
+            {% block content_header %}{% endblock %}   
+
+            <section class="scrollable">
+              {% block content %}            
+                {% block content_wrapper %}
+                {% endblock %}
+                {% block content_footer %}{% endblock %}              
+              {% endblock %}
+            </section>
+          <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+        </section>
+
+         <!-- ASIDE CONTENT SECTION -->
+        {% block aside %}
+          <aside class="bg-light lter b-l aside-md hide" id="notes">
+            <div class="wrapper">Notification</div>
+          </aside>
+        {% endblock %}
+                          
+      </section>
+    </section>
+  </section>                    
+
+  
+
+  <!-- Basic JavaScript files block -->  
+  <script src="{% static 'js/jquery3.2.min.js' %}"></script>
+  <script src="{% static 'js/tether.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static 'js/jquery.bootstrap.modal.forms_2.js' %}"></script>
+  <script src="{% static 'js/app.js' %}"></script>
+  <script src="{% static 'js/app.plugin.js' %}"></script>
+  <script src="{% static 'fontawesome/js/all.js' %}"></script>
+  <script src="{% static 'js/slimscroll/jquery.slimscroll.min.js' %}"></script>
+  <script src="{% static 'js/amaranjs/js/jquery.amaran.min.js' %}"></script>
+  <script src="{% static 'js/own/own.js' %}"></script>
+  <!-- Basic JavaScript files enblock -->
+
+  {% block javascript %}
+  {% endblock %}
+
+</body>
+</html>

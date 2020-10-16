@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block css %} 
+<link rel="stylesheet" href="{% static 'js/fuelux/fuelux.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+  <div style="margin: 1% "> 
+    <div class="m-b-md">
+      <h3 class="m-b-none">Registro</h3>
+        <small>
+          Por favor, complete los siguientes datos para registrarse en la aplicaci&oacute;n.
+          Usted podr&aacute; iniciar sesi&oacute;n una vez se apruebe su registro.
+        </small>
+    </div>          
+    <section class="panel panel-default"> 
+      <div class="wizard clearfix">
+        <ul class="steps">
+          <li data-target="#step1" class="active"><span class="badge badge-info"><i class="fa fa-user"></i></span>Datos Personales</li> 
+          <li data-target="#step2" class=""><span class="badge">2</span>Datos Laborales</li>
+          <li data-target="#step3" class=""><span class="badge"><i class="fa fa-key"></i></span>Autenticaci&oacute;n</li>
+        </ul>
+        <div class="actions">
+          <button type="button" class="btn btn-default btn-xs btn-prev" disabled="disabled">Anterior</button>
+          <button type="button" class="btn btn-default btn-xs btn-next" data-last="Finish">Siguiente</button>
+        </div>
+      </div>
+      <div class="step-content">
+        <form role="form" method="POST" class="panel-body wrapper-lg" action="{% url 'configuracion:registrar_trabajador' %}">
+          {% csrf_token %}
+          <div class="step-pane active" id="step1">
+            <div class="form-group pull-in clearfix">    
+              <div class="col-sm-6">
+                {{ form.foto|as_crispy_field }}
+              </div>              
+            </div>                    
+            <div class="form-group pull-in clearfix">    
+              <div class="col-lg-2">
+                {{ form.ci|as_crispy_field }}
+              </div>   
+              <div class="col-lg-2">
+                {{ form.nombre|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.apellido1|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.apellido2|as_crispy_field }}
+              </div>           
+              <div class="col-lg-2">
+                {{ form.raza|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.sexo|as_crispy_field }}
+              </div>
+            </div>
+            <div class="form-group pull-in clearfix">
+              <div class="col-lg-4">
+                {{ form.direccion|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.municipio|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.nivel_escolar|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.especialidad|as_crispy_field }}                
+              </div>
+              <div class="col-lg-2">
+                {{ form.grado_cientifico|as_crispy_field }}
+              </div>
+            </div>            
+            <div class="form-group pull-in clearfix">
+              <div class="col-lg-3">
+                {{ form.areas_de_interes|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.cateogoria_cientifica|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.cateogoria_docente|as_crispy_field }}
+              </div>
+            </div> 
+            
+          </div>
+          <div class="step-pane" id="step2">                 
+            <div class="form-group pull-in clearfix">    
+              <div class="col-lg-2">                
+                {{ form.fecha_entrada_insmet|as_crispy_field }}
+              </div>   
+              <div class="col-lg-2">
+                {{ form.tarjeta|as_crispy_field }}
+              </div>  
+              <div class="col-lg-2">
+                {{ form.grupo_escala_antiguo|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.grupo_escala_actual|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.res_34_19|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.msc_dr|as_crispy_field }}
+              </div>
+            </div>
+            <div class="form-group pull-in clearfix">        
+              <div class="col-lg-2">
+                {{ form.salario_escala_antiguo|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.salario_escala_actual|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.otros_pagos_antiguo|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.otros_pagos_actual|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.salario_total_antiguo|as_crispy_field }}
+              </div>
+              <div class="col-lg-2">
+                {{ form.salario_total_actual|as_crispy_field }}
+              </div>       
+            </div>             
+          </div>
+          <div class="step-pane" id="step3">
+            <div class="form-group pull-in clearfix">    
+              <div class="col-lg-2">                
+                {{ form_usuario.username|as_crispy_field }}
+              </div>   
+              <div class="col-lg-2">
+                {{ form_usuario.password1|as_crispy_field }}
+              </div>    
+              <div class="col-lg-2">
+                {{ form_usuario.password2|as_crispy_field }}
+              </div>          
+            </div>     
+          </div>
+          <button type="submit" class="btn btn-primary">Aceptar</button>         
+        </form>
+      </div>
+    </section>
+
+    <div class="row">
+      <div class="col-lg-4">      
+        {% csrf_token %}   
+        </form> 
+      </div>
+      <div class="col-lg-8"></div>
+
+      
+
+  </div> 
+
+{% endblock %}   
+
+{% block javascript %}
+<script src="{% static 'js/fuelux/fuelux.js' %}"></script>
+{% endblock %}
+
+
+
+

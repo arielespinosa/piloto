@@ -1,0 +1,26 @@
+      {% if user.notifications.unread|length > 0 %}
+      <section class="dropdown-menu aside-xl">
+        <section class="panel bg-white">
+          <header class="panel-heading b-light bg-light">
+            <strong>{{user.trabajador}} tienes {% notifications_unread %} notificaciones</strong>
+          </header>
+
+          <div class="list-group list-group-alt">
+            {% for notification in notifications %}
+            <a href="#" class="view_egt media list-group-item", data-id="#">
+              <span class="pull-left thumb-sm">
+                <img src={{notification.actor.user.avatar.url}} alt="John said" class="img-circle">
+              </span>
+              <span class="media-body block m-b-none">
+                {{notification.verb}}<br>
+                <small class="text-muted">{{notification.timestamp}}</small>
+              </span>
+            </a>     
+            {% endfor %}      
+          </div>
+          <footer class="panel-footer text-sm">
+            <strong><a href="{{ user.trabajador.get_absolute_url }}">Ver todas en mi perfil</a></strong>
+          </footer>
+        </section>
+      </section>
+      {% endif %}
