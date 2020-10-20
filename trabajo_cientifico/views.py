@@ -6,7 +6,7 @@ from bootstrap_modal_forms.generic import (BSModalLoginView,
                                            BSModalReadView,
                                            BSModalDeleteView)
 from .mixins import BSModalAjaxFormMixin
-from .models import (Proyecto)
+from .app_models.elementos import (Proyecto)
 from . import forms
 
 def inicio(request):

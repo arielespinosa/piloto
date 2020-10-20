@@ -2,12 +2,13 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate
-from human_resource.models import Trabajador
+from trabajador.app_models.trabajador import Trabajador
 from bootstrap_modal_forms.forms import BSModalForm
 
 
 class DateInput(forms.DateInput):
     input_type = 'date'
+
 
 class FormAutenticacion(AuthenticationForm):
     username  = forms.CharField(min_length=1, label='Usuario', widget=forms.TextInput())
@@ -59,6 +60,7 @@ class FormAutenticacion(AuthenticationForm):
 
         return self.cleaned_data
 
+
 class FormRegistrarUsuario(UserCreationForm):
     username = forms.CharField(min_length=1, label='Usuario', widget=forms.TextInput())
     password1  = forms.CharField(min_length=1, label='Contraseña', widget=forms.PasswordInput(render_value=True))
@@ -76,15 +78,7 @@ class FormRegistrarUsuario(UserCreationForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Las contraseñas no coinciden")
         return password2
-        
-    """
-    def save(self, commit=True):
-        usuario = super(FormRegistrarUsuario, self).save(commit=False)
-        nombre_usuario = self.cleaned_data.get("nombre_usuario")
-        password = self.cleaned_data.get("password1")
-        usuario = User.objects.create(username=nombre_usuario, password=password)
-        return usuario
-    """
+
 
 class FormRegistrarTrabajador(forms.ModelForm):
 
@@ -110,12 +104,6 @@ class FormRegistrarTrabajador(forms.ModelForm):
                 raise forms.ValidationError('La dirección de correo debe ser del dominio insmet.cu')
             return  email_address
         """
-
-
-
-class JoinForm(forms.Form):
-    email = forms.EmailField()
-    name = forms.CharField(max_length=120)
 
 
 class FormAppUser(BSModalForm):

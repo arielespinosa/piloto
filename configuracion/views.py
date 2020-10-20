@@ -5,7 +5,7 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from . import forms
-from human_resource.models import Trabajador
+from trabajador.app_models.trabajador import Trabajador
 from .mixins import AjaxFormMixin, BSModalAjaxFormMixin
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -48,7 +48,7 @@ class RegistrarTrabajador(CreateView):
             trabajador = form_class.save(commit=False)
             trabajador.usuario = form_registrar_usuario.save()
             trabajador.save()
-            return HttpResponseRedirect('')
+            return HttpResponseRedirect('/')
         else:
              return super(RegistrarTrabajador, self).post(request, *args, **kwargs)
 

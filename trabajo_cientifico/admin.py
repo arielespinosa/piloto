@@ -1,6 +1,10 @@
 from django.contrib import admin
-from .models import (
-    Entidad, Proyecto, Servicio, Resultado, LiteraturaGris, Libro, Articulo, Cliente, GrupoTrabajo, Programa
+from .app_models.nomencladores import (
+    Entidad, Cliente, GrupoTrabajo, Programa
+)
+
+from .app_models.elementos import (
+    Proyecto, Servicio, Resultado, LiteraturaGris, Libro, Articulo
 )
 
 admin.register(Entidad)

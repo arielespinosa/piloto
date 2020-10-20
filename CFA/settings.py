@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'configuracion',
     'centro',
     'docencia',
-    'human_resource',
     'trabajo_cientifico',
 ]
 

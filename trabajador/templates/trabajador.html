@@ -44,7 +44,7 @@
 <section class="hbox stretch" style="padding-top: 10px;">
   <!-- DATOS PERSONALES-->
   <aside class="col-lg-3 bg-light lter b-r">
-    <section class="vbox">
+    <section class="vbox">     
       <section class="scrollable">
         {% include 'trabajador_datos_personales.html' %}
       </section>
@@ -57,24 +57,33 @@
       <header class="header bg-light bg-gradient">
         <ul class="nav nav-tabs nav-white">
           <li class="active"><a href="#eventos" data-toggle="tab">Eventos</a></li>
-          <li class=""><a href="#events" data-toggle="tab">Tesis</a></li>
-          <li class=""><a href="#interaction" data-toggle="tab">Tribunales</a></li>
+          <li class=""><a href="#tesis" data-toggle="tab">Tesis</a></li>
+          <li class=""><a href="#tribunales" data-toggle="tab">Tribunales</a></li>
         </ul>
       </header>
       <section class="scrollable">
         <div class="tab-content">
           <div class="tab-pane active" id="eventos">
-            {% include 'trabajador_eventos.html'%}
+            {% if trabajador.eventos.count > 0 %}
+              {% include 'trabajador_eventos.html'%}
+             {% else %} 
+              <div class="container" style="padding-top: 15%; padding-left:40%;">
+                <div class="inline text-center">
+                  <div class="easypiechart easyPieChart" data-percent="75" data-line-width="5" data-bar-color="#4cc0c1" data-track-color="#f5f5f5" data-scale-color="false" data-size="130" data-line-cap="butt" data-animate="1000" style="width: 130px; height: 130px; line-height: 130px;">
+                    <div class="thumb-lg">
+                      <i class="fa fa-eye-slash fa-10x"></i>
+                    </div>
+                  <canvas width="130" height="130"></canvas></div>
+                  <div class="h1 m-t m-b-xs">NO EVENTOS</div>         
+                </div>
+              </div>    
+            {% endif %}
           </div>
-          <div class="tab-pane" id="events">
-            <div class="text-center wrapper">
-              <i class="fa fa-spinner fa fa-spin fa fa-large"></i>
-            </div>
+          <div class="tab-pane" id="tesis">
+            <div class="h1 m-t m-b-xs">TESIS</div>     
           </div>
-          <div class="tab-pane" id="interaction">
-            <div class="text-center wrapper">
-              <i class="fa fa-spinner fa fa-spin fa fa-large"></i>
-            </div>
+          <div class="tab-pane" id="tribunales">
+            <div class="h1 m-t m-b-xs">TRIBUNALES</div>     
           </div>
         </div>
       </section>

@@ -1,11 +1,11 @@
 from django.db import models
-from human_resource.models import Trabajador
-from trabajo_cientifico.models import Proyecto
+from trabajador.app_models.trabajador import Trabajador
+from trabajo_cientifico.app_models.elementos import Proyecto
 
 
 class Local(models.Model):
     nombre = models.CharField(max_length=10)
-    representante = models.ForeignKey(Trabajador, on_delete=models.DO_NOTHING, null=True, blank=True) # Que significa esto?
+    identificador = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return self.nombre
@@ -47,4 +47,10 @@ class Inventario(models.Model):
 
     def __str__(self):
         return self.numero
+
+
+    class Sindicato(models.Model):
+        trabajador = models.ForeignKey(Trabajador, on_delete=models.CASCADE)
+
+        
 

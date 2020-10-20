@@ -1,5 +1,5 @@
 from django import forms
-from human_resource.models import Trabajador
+from .app_models.trabajador import Trabajador
 from bootstrap_modal_forms.forms import BSModalForm
 
 

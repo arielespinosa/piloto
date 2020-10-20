@@ -1,7 +1,6 @@
 import datetime
 from CFA import settings
 from django import forms
-from human_resource.models import Trabajador
 from bootstrap_modal_forms.forms import BSModalForm
 from .models import *
 
@@ -76,7 +75,7 @@ class FormCrearCertificacion(BSModalForm):
         model = Certificacion
         fields = ['nombre', 'nombre_profesor', 'cantidad_horas', 
         'fecha_inicio', 'fecha_terminacion', 'centro_estudios',
-        'pais', 'creditos', 'descripcion']
+        'creditos', 'descripcion']
     
     @property
     def is_empity(self):

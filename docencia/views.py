@@ -85,7 +85,6 @@ class EliminarEvento(BSModalAjaxFormMixin, BSModalDeleteView):
     success_message = 'El evento fue eliminado de su CV satisfactoriamente.'
     success_url = reverse_lazy('trabajador:perfil')
 
-
 # Tesis ----------------------------------
 class CrearTesis(BSModalCreateView):
     template_name = 'crud/crear_tesis.html'

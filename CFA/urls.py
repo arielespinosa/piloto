@@ -13,8 +13,6 @@ urlpatterns = [
     path('centro/', include('centro.urls')),
     path('docencia/', include('docencia.urls')),
     path('trabajo_cientifico/', include('trabajo_cientifico.urls')),
-    path('configuracion/', include('configuracion.urls')),
-    path('recursos_humanos/', include('human_resource.urls')),
 ]
 
 if settings.DEBUG:

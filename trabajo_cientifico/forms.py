@@ -1,5 +1,5 @@
 from django import forms
-from .models import (
+from .app_models.elementos import (
     Proyecto, Articulo, Servicio, Libro, LiteraturaGris, Resultado
 )
 from django.db.models import Q
