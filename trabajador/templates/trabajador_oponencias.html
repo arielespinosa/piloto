@@ -40,23 +40,23 @@
                 <i class="fa fa-sort"></i>
               </span>
             </th>    
-            <th>Nombre</th>       
-            <th>Lugar</th>
-            <th>Nivel</th>
+            <th>Tipo</th>       
+            <th>T&iacute;tulo</th>
+            <th>Autor principal</th>
             <th width="80"></th>
           </tr>
         </thead>
-        <tbody id="tb_trabajador_eventos">          
-          {% for evento in eventos %}
+        <tbody id="tb_trabajador_oponencias">          
+          {% for oponencia in oponencias %}
           <tr>
-            <td><input type="checkbox" name="post[]" value="{{ evento.pk }}"></td>
-            <td>{{ evento.fecha }}</td>       
-            <td>{{ evento.nombre }}</td>
-            <td>{{ evento.lugar }}</td>
-            <td>{{ evento.nivel }}</td>   
+            <td><input type="checkbox" name="post[]" value="{{ oponencia.pk }}"></td>
+            <td>{{ oponencia.fecha }}</td>       
+            <td>{{ oponencia.nombre }}</td>
+            <td>{{ oponencia.lugar }}</td>
+            <td>{{ oponencia.nivel }}</td>   
             <td class="text-right">
-              <a class="ver_evento" data-id="{% url 'docencia:ver_evento' evento.pk %}"><i class="fa fa-eye icon-muted"></i></a>
-              <a class="eliminar_evento" data-id="{% url 'docencia:eliminar_evento' evento.pk %}"><i class="fa fa-trash icon-muted "></i></a>
+              <a class="ver_oponencia" data-id="{% url 'docencia:ver_oponencia' oponencia.pk %}"><i class="fa fa-eye icon-muted"></i></a>
+              <a class="eliminar_oponencia" data-id="{% url 'docencia:eliminar_oponencia' oponencia.pk %}"><i class="fa fa-trash icon-muted "></i></a>
             </td>          
           </tr>
           {% endfor %}
@@ -68,21 +68,21 @@
       <div class="row">
         <div class="col-sm-5">
           <strong>
-            <small class="inline m-t-sm m-b-sm">Mostrando {{ eventos.start_index }}-{{ eventos.end_index }} de {{ eventos.paginator.count }} elementos</small>
+            <small class="inline m-t-sm m-b-sm">Mostrando {{ oponencias.start_index }}-{{ oponencias.end_index }} de {{ oponencias.paginator.count }} elementos</small>
           </strong>
         </div>
         <div class="col-sm-7 text-right text-center-xs">    
           <ul class="pagination pagination-sm m-t-none m-b-none">
-            {% if eventos.has_previous %}
-                <li><a href="?page={{ eventos.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+            {% if oponencias.has_previous %}
+                <li><a href="?page={{ oponencias.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
                 <li><a href="?page=1">Inicio</a></li>          
             {% endif %}
 
-            <li><a href="#"> P&aacute;gina {{ eventos.number }} de {{ eventos.paginator.num_pages }}</a></li>
+            <li><a href="#"> P&aacute;gina {{ oponencias.number }} de {{ oponencias.paginator.num_pages }}</a></li>
 
-            {% if eventos.has_next %}
-                <li><a href="?page={{ eventos.paginator.num_pages }}">&Uacute;ltima</a></li>
-                <li><a href="?page={{ eventos.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
+            {% if oponencias.has_next %}
+                <li><a href="?page={{ oponencias.paginator.num_pages }}">&Uacute;ltima</a></li>
+                <li><a href="?page={{ oponencias.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
             {% endif %}
           </ul>
         </div>

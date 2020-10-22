@@ -88,6 +88,7 @@ class Ponencia(models.Model):
         ('P', 'Ponente'),
     )
 
+    fecha = models.DateField()
     evento = models.ForeignKey(Evento, on_delete=models.DO_NOTHING) # añadi esto..me parec que una ponencia se hace en un evento
     titulo = models.CharField(max_length=100)
     participacion = models.CharField(max_length=40, choices=PARTICIPACION)

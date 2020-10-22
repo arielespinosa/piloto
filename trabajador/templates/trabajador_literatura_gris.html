@@ -40,23 +40,21 @@
                 <i class="fa fa-sort"></i>
               </span>
             </th>    
-            <th>Nombre</th>       
-            <th>Lugar</th>
-            <th>Nivel</th>
+            <th>T&iacute;tulo</th>       
+            <th>Autores</th>
             <th width="80"></th>
           </tr>
         </thead>
-        <tbody id="tb_trabajador_eventos">          
-          {% for evento in eventos %}
+        <tbody id="tb_trabajador_literatura_gris">          
+          {% for literatura in literatura_gris %}
           <tr>
-            <td><input type="checkbox" name="post[]" value="{{ evento.pk }}"></td>
-            <td>{{ evento.fecha }}</td>       
-            <td>{{ evento.nombre }}</td>
-            <td>{{ evento.lugar }}</td>
-            <td>{{ evento.nivel }}</td>   
+            <td><input type="checkbox" name="post[]" value="{{ literatura.pk }}"></td>
+            <td>{{ literatura.fecha }}</td>       
+            <td>{{ literatura.titulo }}</td>  
+            <td>{{ literatura.autores }}</td>    
             <td class="text-right">
-              <a class="ver_evento" data-id="{% url 'docencia:ver_evento' evento.pk %}"><i class="fa fa-eye icon-muted"></i></a>
-              <a class="eliminar_evento" data-id="{% url 'docencia:eliminar_evento' evento.pk %}"><i class="fa fa-trash icon-muted "></i></a>
+              <a class="ver_literatura_gris" data-id="{% url 'docencia:ver_literatura_gris' literatura.pk %}"><i class="fa fa-eye icon-muted"></i></a>
+              <a class="eliminar_literatura_gris" data-id="{% url 'docencia:eliminar_literatura_gris' literatura.pk %}"><i class="fa fa-trash icon-muted "></i></a>
             </td>          
           </tr>
           {% endfor %}
@@ -68,21 +66,21 @@
       <div class="row">
         <div class="col-sm-5">
           <strong>
-            <small class="inline m-t-sm m-b-sm">Mostrando {{ eventos.start_index }}-{{ eventos.end_index }} de {{ eventos.paginator.count }} elementos</small>
+            <small class="inline m-t-sm m-b-sm">Mostrando {{ literatura_gris.start_index }}-{{ literatura_gris.end_index }} de {{ literatura_gris.paginator.count }} elementos</small>
           </strong>
         </div>
         <div class="col-sm-7 text-right text-center-xs">    
           <ul class="pagination pagination-sm m-t-none m-b-none">
-            {% if eventos.has_previous %}
-                <li><a href="?page={{ eventos.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+            {% if literatura_gris.has_previous %}
+                <li><a href="?page={{ literatura_gris.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
                 <li><a href="?page=1">Inicio</a></li>          
             {% endif %}
 
-            <li><a href="#"> P&aacute;gina {{ eventos.number }} de {{ eventos.paginator.num_pages }}</a></li>
+            <li><a href="#"> P&aacute;gina {{ literaturas.number }} de {{ literaturas.paginator.num_pages }}</a></li>
 
-            {% if eventos.has_next %}
-                <li><a href="?page={{ eventos.paginator.num_pages }}">&Uacute;ltima</a></li>
-                <li><a href="?page={{ eventos.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
+            {% if literatura_gris.has_next %}
+                <li><a href="?page={{ literatura_gris.paginator.num_pages }}">&Uacute;ltima</a></li>
+                <li><a href="?page={{ literatura_gris.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
             {% endif %}
           </ul>
         </div>

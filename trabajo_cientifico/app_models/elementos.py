@@ -56,7 +56,7 @@ class Libro(models.Model):
 class LiteraturaGris(models.Model):
     titulo = models.CharField(max_length=200)
     autores = models.CharField(max_length=500)
-    fecha_publicado = models.DateField()
+    fecha = models.DateField()
 
     def __str__(self):
         return self.titulo
