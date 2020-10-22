@@ -126,10 +126,16 @@ class Trabajador(Persona):
         return datetime(1991, 11, 28)
     
     @property
-    def diferencia_salarial(self):
+    def salario_total_antiguo(self):
         return 7
 
+    @property
+    def salario_total_actual(self):
+        return 7
 
+    @property
+    def diferencia_salarial(self):
+        return 7
     """
     def get_absolute_url(self):
         return reverse("recursos_humanos:perfil_trabajador", kwargs={"id":self.id})

@@ -67,7 +67,9 @@
           <div class="row">{{trabajador.direccion}}</div>
           <div class="row">{{trabajador.municipio}}</div>
           <div class="row">{{trabajador.raza}}</div>
-          <div class="row">{{trabajador.areas_interes}}</div>
+          {% for area_interes in trabajador.areas_de_interes.all %}
+            <div class="row">{{ area_interes }}</div>
+          {% endfor %}
         </div>            
       </div>
       <p></p>
@@ -118,16 +120,24 @@
           <div class="row">{{trabajador.fecha_entrada_insmet}}</div>           
           <div class="row">{{trabajador.res_34_19}}</div>   
           <div class="row">{{trabajador.msc_dr}}</div>  
-          <div class="row">{{trabajador.grupo_escala_antiguo}}</div>  
-          <div class="row">{{trabajador.grupo_escala_actual}}</div>  
-          <div class="row">{{trabajador.salario_escala_antiguo}}</div>  
-          <div class="row">{{trabajador.salario_escala_actual}}</div>  
+          <div class="row">{{trabajador.plaza.grupo_escala_antiguo}}</div>  
+          <div class="row">{{trabajador.plaza.grupo_escala_actual}}</div>  
+          <div class="row">{{trabajador.plaza.salario_escala_antiguo}}</div>  
+          <div class="row">{{trabajador.plaza.salario_escala_actual}}</div>  
           <div class="row">{{trabajador.otros_pagos_antiguo}}</div>  
           <div class="row">{{trabajador.otros_pagos_actual}}</div> 
           <div class="row">{{trabajador.salario_total_antiguo}}</div>  
           <div class="row">{{trabajador.salario_total_actual}}</div> 
-          <div class="row">{{trabajador.membresias}}</div>  
-          <div class="row">{{trabajador.afiliaciones}}</div>  
+          <div class="row">
+            {% for organismo in trabajador.membresias.all %}
+              {{ organismo }} /
+            {% endfor %}
+          </div>
+          <div class="row">
+            {% for organismo in trabajador.afiliaciones.all %}
+              {{ organismo }} /
+            {% endfor %}
+          </div>
         </div>
       </div>
 

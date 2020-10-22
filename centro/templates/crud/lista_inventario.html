@@ -14,30 +14,8 @@
       <header class="panel-heading">
         <strong>Inventario</strong>
       </header>
-      <div class="row wrapper">
-        <!--
-        <div class="col-sm-5 m-b-xs">
-          <div class="row text-center no-gutter">
-            <div class="col-xs-3 b-r b-light">
-              <span class="h4 font-bold m-t block">14</span>
-              <small class="text-muted m-b block">PTH</small>
-            </div>
-            <div class="col-xs-3 b-r b-light">
-              <span class="h4 font-bold m-t block">10</span>
-              <small class="text-muted m-b block">PTRD</small>
-            </div>
-            <div class="col-xs-3 b-r b-light">
-              <span class="h4 font-bold m-t block">21</span>
-              <small class="text-muted m-b block">PTT</small>
-            </div>
-            <div class="col-xs-3">
-              <span class="h4 font-bold m-t block">12</span>
-              <small class="text-muted m-b block">ACT</small>                        
-            </div>
-          </div>               
-        </div>
-        -->
-        <div class="col-sm-4 m-b-xs">
+      <div class="row wrapper">      
+        <div class="col-sm-6 m-b-xs">
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-sm btn-default active">
               <input type="radio" name="options" id="option1"> Todos
@@ -56,6 +34,8 @@
             </label>
           </div>
         </div>
+        <div class="col-sm-3">  
+        </div>
         <div class="col-sm-3">
           <div class="input-group">
             <input type="text" class="input-sm form-control" placeholder="Search">
@@ -70,18 +50,18 @@
           <thead>
             <tr>
               <th width="10"><input type="checkbox"></th>
-              <th class="th-sortable" data-toggle="class">N&uacute;mero
+              <th class="th-sortable" data-toggle="class">Fecha
                 <span class="th-sort">
                   <i class="fa fa-sort-down text"></i>
                   <i class="fa fa-sort-up text-active"></i>
                   <i class="fa fa-sort"></i>
                 </span>
-              </th>           
+              </th>     
+              <th>N&uacute;mero</th>      
               <th>Objeto</th>
               <th>Estado</th>
               <th>Responsable</th>
               <th>Proyecto</th>
-              <th>Expediente X</th>
               <th width="80"></th>
             </tr>
           </thead>
@@ -90,12 +70,12 @@
             {% for i in page_obj %}
             <tr>
               <td><input type="checkbox" name="post[]" value="{{ i.pk }}"></td>
+              <td>{{ i.fecha }}</td> 
               <td>{{ i.numero }}</td>           
               <td>{{ i.objeto }}</td>
               <td>{{ i.estado }}</td>
               <td>{{ i.responsable.nombre }}</td>
               <td>{{ i.proyecto }}</td>
-              <td>{{ i.expediente_x }}</td>
               <td class="text-right">    
               <a class="ver_inventario" data-id="{% url 'centro:ver_inventario' i.pk %}"><i class="fa fa-eye icon-muted"></i></a>          
                 {% if user %}

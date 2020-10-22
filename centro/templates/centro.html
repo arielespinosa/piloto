@@ -12,7 +12,85 @@
 
 {% block content_wrapper %}
 <div class="m-b-md">
-  <h3 class="m-b-none">Centro</h3>
+  <h3 class="m-b-none">Centro de F&iacute;sica de la Atm&oacute;sfera</h3>
+  <small>Bienvenido otra vez Administrador</small>
 </div>
 
+<section class="panel panel-default">
+  <div class="row m-l-none m-r-none bg-light lter">
+    <div class="col-sm-6 col-md-3 padder-v b-r b-light">
+  
+      <a class="clear" href="#">
+        <span class="h3 block m-t-xs"><strong>52,000</strong></span>
+        <small class="text-muted text-uc">New robots</small>
+      </a>
+    </div>
+    <div class="col-sm-6 col-md-3 padder-v b-r b-light lt">
+      <span class="fa-stack fa-2x pull-left m-r-sm">        
+        <i class="fa fa-bug fa-stack-1x text-dark"></i>
+        <span class="easypiechart pos-abt" data-percent="100" data-line-width="4" data-track-Color="#fff" data-scale-Color="false" data-size="50" data-line-cap='butt' data-animate="2000" data-target="#bugs" data-update="3000"></span>
+      </span>
+      <a class="clear" href="#">
+        <span class="h3 block m-t-xs"><strong id="bugs">468</strong></span>
+        <small class="text-muted text-uc">Bugs intruded</small>
+      </a>
+    </div>
+    <div class="col-sm-6 col-md-3 padder-v b-r b-light">                     
+      <span class="fa-stack fa-2x pull-left m-r-sm">
+        <i class="fa fa-fire-extinguisher fa-stack-1x text-danger"></i>
+        <span class="easypiechart pos-abt" data-percent="100" data-line-width="4" data-track-Color="#f5f5f5" data-scale-Color="false" data-size="50" data-line-cap='butt' data-animate="3000" data-target="#firers" data-update="5000"></span>
+      </span>
+      <a class="clear" href="#">
+        <span class="h3 block m-t-xs"><strong id="firers">359</strong></span>
+        <small class="text-muted text-uc">Extinguishers ready</small>
+      </a>
+    </div>
+    <div class="col-sm-6 col-md-3 padder-v b-r b-light lt">
+      <span class="fa-stack fa-2x pull-left m-r-sm">       
+        <i class="fa fa-clock fa-stack-1x text-success"></i>
+      </span>
+      <a class="clear" href="#">
+        <span class="h3 block m-t-xs"><strong>31:50</strong></span>
+        <small class="text-muted text-uc">Left to exit</small>
+      </a>
+    </div>
+  </div>
+</section>
+
+
 {% endblock %}   
+
+
+{% block javascript %}
+<script src="{% static 'js/datatables_2/datatables.min.js' %}"></script>
+<script src="{% static 'js/calendar/bootstrap_calendar.js' %}"></script>
+<script src="{% static 'js/calendar/demo.js' %}"></script>
+<script src="{% static 'js/fuelux/fuelux.js' %}"></script>
+<script src="{% static 'js/trabajadores.js' %}"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {    
+
+    // Centro CRUD -------------------------
+    $("#crear_local").modalForm({
+      formURL: "{% url 'centro:crear_local' %}",
+    });
+
+    $("#crear_objeto").modalForm({
+      formURL: "{% url 'centro:crear_objeto' %}",
+    });
+
+    $("#crear_inventario").modalForm({
+      formURL: "{% url 'centro:crear_inventario' %}",
+    });
+
+
+
+   
+
+  });
+
+</script>
+
+{% endblock %}   
+

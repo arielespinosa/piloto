@@ -9,21 +9,33 @@
 <div class="modal-body">
   <form class="form-horizontal">
     <div class="form-group">
-      <label class="col-sm-2 control-label"><strong>Numero:</strong></label>
+      <label class="col-sm-2 control-label"><strong>Fecha:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.fecha }}</label>                            
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>N&uacute;mero:</strong></label>
       <div class="col-sm-10">
         <label style="cursor: text;" class="checkbox-inline">{{ object.numero }}</label>                            
       </div>
     </div>
     <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Local:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.local }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
       <label class="col-sm-2 control-label"><strong>Objeto:</strong></label>
       <div class="col-sm-10">
-        <label style="cursor: text;" class="checkbox-inline">{{ object.title }}</label>                            
+        <label style="cursor: text;" class="checkbox-inline">{{ object.objeto }}</label>                            
       </div>            
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label"><strong>Nombre:</strong></label>
       <div class="col-sm-10">
-        <label style="cursor: text;" class="checkbox-inline">{{ object.nombre}}</label>                            
+        <label style="cursor: text;" class="checkbox-inline">{{ object.nombre }}</label>                            
       </div>            
     </div>
     <div class="form-group">
@@ -33,9 +45,27 @@
       </div>            
     </div>
     <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Responsable:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.responsable }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
       <label class="col-sm-2 control-label"><strong>Proyecto:</strong></label>
       <div class="col-sm-10">
         <label style="cursor: text;" class="checkbox-inline">{{ object.proyecto }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Expediente X:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.expediente_x }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Inventario contable:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.inventario_contable }}</label>                            
       </div>            
     </div>
     <div class="line line-dashed line-lg pull-in"></div>>

@@ -26,7 +26,7 @@ class Inventario(models.Model):
         ('PB', 'Proceso de baja'),
         ('R', 'Roto'),
     )
- 
+    fecha = models.DateField()
     numero = models.CharField(max_length=30)
     local = models.ForeignKey(Local, on_delete=models.CASCADE, null=True, blank=True)
     objeto = models.ForeignKey(Objeto, on_delete=models.CASCADE, null=True, blank=True)
@@ -35,7 +35,7 @@ class Inventario(models.Model):
     responsable = models.ForeignKey(Trabajador, on_delete=models.DO_NOTHING, null=True, blank=True) # cambie a responsable la variable
     proyecto = models.ForeignKey(Proyecto, on_delete=models.DO_NOTHING, null=True, blank=True)
     expediente_x = models.BooleanField(default=False)
-    inventario_contable = models.BooleanField(default=True)
+    inventario_contable = models.BooleanField(default=False)
     medio_computacion = models.BooleanField(default=False)
     carta_prestamo_in = models.FileField(null=True, blank=True)
     carta_prestamo_out = models.FileField(null=True, blank=True)

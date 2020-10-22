@@ -38,19 +38,23 @@ class RegistrarTrabajador(CreateView):
         context['form_usuario'] = self.get_form(self.form_registrar_usuario)
         return context
 
-
-    def post(self, request, *args, **kwargs): 
-
+    def post(self, request, *args, **kwargs):
         form_registrar_usuario = self.form_registrar_usuario(request.POST)
         form_class = self.form_class(request.POST)
         
         if form_registrar_usuario.is_valid() and form_class.is_valid():
             trabajador = form_class.save(commit=False)
-            trabajador.usuario = form_registrar_usuario.save()
+            usuario = form_registrar_usuario.save(commit=False)
+
+            usuario.is_active = False
+            usuario.save()
+            trabajador.usuario = usuario
             trabajador.save()
+
             return HttpResponseRedirect('/')
         else:
-             return super(RegistrarTrabajador, self).post(request, *args, **kwargs)
+            return super(RegistrarTrabajador, self).post(request, *args, **kwargs)
+
 
 class AppUserProfile(DetailView):
     template_name = "user_profile.html"

@@ -40,10 +40,10 @@ class Certificacion(models.Model):
 # compuesto por muchas personas
 class Oponencia(models.Model):
     TIPO = (
-        ('Articulo', 'Articulo'),
-        ('Tesis', 'Tesis'),
-        ('Proyecto', 'Proyecto'),
-        ('Resultados', 'Resultados'),
+        ('A', 'Artículo'),
+        ('T', 'Tesis'),
+        ('P', 'Proyecto'),
+        ('R', 'Resultado'),
     )
 
     titulo = models.CharField(max_length=100)

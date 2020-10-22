@@ -10,13 +10,11 @@
   
   <!-- Basics CSS style block -->
   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
-  <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}" type="text/css"/>
   <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css"/>
   <link rel="stylesheet" href="{% static 'css/font.css' %}" type="text/css"/>
-  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css"/>
   <link rel="stylesheet" href="{% static 'js/amaranjs/css/animate.min.css' %}" type="text/css"/>
   <link rel="stylesheet" href="{% static 'js/amaranjs/css/amaran.min.css' %}" type="text/css"/>
-
+  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css"/>
   <style type="text/css">
     .asteriskField {
       display: none;
@@ -130,7 +128,7 @@
           <section class="vbox">
             {% block content_header %}{% endblock %}   
 
-            <section class="scrollable">
+            <section class="scrollable padder">
               {% block content %}            
                 {% block content_wrapper %}
                 {% endblock %}
@@ -155,8 +153,8 @@
 
   <!-- Basic JavaScript files block -->  
   <script src="{% static 'js/jquery3.2.min.js' %}"></script>
-  <script src="{% static 'js/tether.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static 'js/tether.min.js' %}"></script>
   <script src="{% static 'js/jquery.bootstrap.modal.forms_2.js' %}"></script>
   <script src="{% static 'js/app.js' %}"></script>
   <script src="{% static 'js/app.plugin.js' %}"></script>

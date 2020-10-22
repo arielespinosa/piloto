@@ -234,6 +234,7 @@ class ListaTribunal(ListView):
 # Certificaciones --------------------------------
 class CrearCertificacion(BSModalCreateView):
     template_name = 'crud/crear_certificacion.html'
+    form_seleccionar_certificacion = forms.FormCertificaciones
     form_class = forms.FormCrearCertificacion
     success_message = 'El evento se añadio satisfactoriamente.'
     success_url = reverse_lazy('trabajador:perfil')
@@ -243,18 +244,18 @@ class CrearCertificacion(BSModalCreateView):
         context = super(CrearCertificacion, self).get_context_data(**kwargs)
 
         # Establecer formulario para seleccionar tribunales existentes que el usuario no haya participado
-        form_seleccionar_tribunales = self.form_seleccionar_tribunales(self.request.GET)
-        form_seleccionar_tribunales.fields['tribunales'].queryset = Certificacion.objects.all().exclude(trabajador=self.request.user.trabajador)
+        form_seleccionar_certificacion = self.form_seleccionar_certificacion(self.request.GET)
+        form_seleccionar_certificacion.fields['certificaciones'].queryset = Certificacion.objects.all().exclude(trabajador=self.request.user.trabajador)
         
-        # Si hay Eventos en los que el trabajador no ha participado, enviarlos al template
-        if form_seleccionar_tribunales.fields['tribunales'].queryset.count() > 0:
+        # Si hay Certificaciones en los que el trabajador no ha participado, enviarlos al template
+        if form_seleccionar_certificacion.fields['certificaciones'].queryset.count() > 0:
             context.update({
-                'form_seleccionar_tribunales': form_seleccionar_tribunales,
+                'form_seleccionar_certificacion': form_seleccionar_certificacion,
             })
 
         # Ofrecer siempre la posibilidad de crear un nuevo evento
         context.update({
-            'form_crear_tribunal': self.get_form(self.form_class),
+            'form_crear_certificacion': self.get_form(self.form_class),
         })
         return context
 

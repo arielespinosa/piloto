@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="step-content">
-        <form role="form" method="POST" class="panel-body wrapper-lg" action="{% url 'configuracion:registrar_trabajador' %}">
+        <form role="form" method="POST" class="panel-body wrapper-sm" action="{% url 'configuracion:registrar_trabajador' %}">
           {% csrf_token %}
           <div class="step-pane active" id="step1">
             <div class="form-group pull-in clearfix">    
@@ -37,88 +37,104 @@
               </div>              
             </div>                    
             <div class="form-group pull-in clearfix">    
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.ci|as_crispy_field }}
               </div>   
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.nombre|as_crispy_field }}
               </div>
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.apellido1|as_crispy_field }}
               </div>
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.apellido2|as_crispy_field }}
               </div>           
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.raza|as_crispy_field }}
               </div>
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.sexo|as_crispy_field }}
               </div>
             </div>
             <div class="form-group pull-in clearfix">
-              <div class="col-lg-4">
+              <div class="col-sm-5">
                 {{ form.direccion|as_crispy_field }}
               </div>
-              <div class="col-lg-2">
+              <div class="col-sm-3">
                 {{ form.municipio|as_crispy_field }}
               </div>
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.nivel_escolar|as_crispy_field }}
               </div>
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.especialidad|as_crispy_field }}                
-              </div>
-              <div class="col-lg-2">
+              </div>          
+            </div>            
+            <div class="form-group pull-in clearfix"> 
+              <div class="col-sm-3">
                 {{ form.grado_cientifico|as_crispy_field }}
               </div>
-            </div>            
-            <div class="form-group pull-in clearfix">
-              <div class="col-lg-3">
-                {{ form.areas_de_interes|as_crispy_field }}
-              </div>
-              <div class="col-lg-2">
+              <div class="col-sm-3">
                 {{ form.cateogoria_cientifica|as_crispy_field }}
               </div>
-              <div class="col-lg-2">
+              <div class="col-sm-3">
                 {{ form.cateogoria_docente|as_crispy_field }}
               </div>
+              <div class="col-sm-3">
+                {{ form.areas_de_interes|as_crispy_field }}
+              </div>
             </div> 
-            
           </div>
           <div class="step-pane" id="step2">                 
             <div class="form-group pull-in clearfix">    
-              <div class="col-lg-2">                
+              <div class="col-sm-3">                
                 {{ form.fecha_entrada_insmet|as_crispy_field }}
               </div>   
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.tarjeta|as_crispy_field }}
               </div>  
-              <div class="col-lg-2">
+              <div class="col-sm-2">
+                {{ form.plaza|as_crispy_field }}
+              </div>
+              <div class="col-sm-2">
+                {{ form.oficina|as_crispy_field }}
+              </div>
+              <div class="col-sm-3">
+                {{ form.categoria_ocupacional|as_crispy_field }}
+              </div>           
+            </div>
+            <div class="form-group pull-in clearfix"> 
+              <div class="col-sm-2">
                 {{ form.res_34_19|as_crispy_field }}
               </div>
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.msc_dr|as_crispy_field }}
-              </div>
-            </div>
-            <div class="form-group pull-in clearfix">        
-              <div class="col-lg-2">
+              </div>       
+              <div class="col-sm-2">
                 {{ form.otros_pagos_antiguo|as_crispy_field }}
               </div>
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form.otros_pagos_actual|as_crispy_field }}
               </div> 
-            </div>             
+            </div>    
+            <div class="form-group pull-in clearfix"> 
+              <div class="col-sm-3">
+                {{ form.membresias|as_crispy_field }}
+              </div>
+              <div class="col-sm-3">
+                {{ form.afiliaciones|as_crispy_field }}
+              </div>   
+            </div>               
           </div>
           <div class="step-pane" id="step3">
             <div class="form-group pull-in clearfix">    
-              <div class="col-lg-2">                
+              <div class="col-sm-2">                
                 {{ form_usuario.username|as_crispy_field }}
               </div>   
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form_usuario.password1|as_crispy_field }}
               </div>    
-              <div class="col-lg-2">
+              <div class="col-sm-2">
                 {{ form_usuario.password2|as_crispy_field }}
               </div>          
             </div>     
@@ -129,11 +145,11 @@
     </section>
 
     <div class="row">
-      <div class="col-lg-4">      
+      <div class="col-sm-4">      
         {% csrf_token %}   
         </form> 
       </div>
-      <div class="col-lg-8"></div>
+      <div class="col-sm-8"></div>
 
       
 
