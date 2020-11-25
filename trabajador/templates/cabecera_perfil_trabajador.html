@@ -5,23 +5,58 @@
                 <div class="btn-group">
                     <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;A&ntilde;adir&nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" id="crear_evento">Evento</a></li>
-                        <li><a href="#" id="crear_tesis">Tesis</a></li>
-                        <li><a href="#" id="crear_certificacion">Certificaci&oacute;n</a></li>
-                        <li><a href="#" id="crear_oponencia">Oponencia</a></li>
-                        <li><a href="#" id="crear_ponencia">Ponencia</a></li>
-                        <li><a href="#" id="crear_publicacion">Publicaci&oacute;n</a></li>
-                        <li><a href="#" id="crear_proyecto">Proyecto</a></li>
-                        <li><a href="#" id="crear_servicio">Servicio</a></li>
-                        <li><a href="#" id="crear_articulo">Art&iacute;culo</a></li>
-                        <li><a href="#" id="crear_libro">Libro</a></li>
-                        <li><a href="#" id="crear_literatura_gris">Litura gris</a></li>
-                    
-                        <li><a href="#" id="crear_resultado">Resultado</a></li>
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="#">
+                                <span class="pull-right">
+                                    <i class="fa fa-angle-right text"></i>
+                                </span>
+                                <span>Elemento al CV</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id="crear_evento">Evento</a></li>
+                                <li><a href="#" id="crear_tesis">Tesis</a></li>
+                                <li><a href="#" id="crear_tutoria">Tutoria</a></li>
+                                <li><a href="#" id="crear_tribunal">Tribunal</a></li>
+                                <li><a href="#" id="crear_certificacion">Certificaci&oacute;n</a></li>
+                                <li><a href="#" id="crear_oponencia">Oponencia</a></li>
+                                <li><a href="#" id="crear_ponencia">Ponencia</a></li>
+                                <li><a href="#" id="crear_publicacion">Publicaci&oacute;n</a></li>
+                                <li><a href="#" id="crear_proyecto">Proyecto</a></li>
+                                <li><a href="#" id="crear_servicio">Servicio</a></li>
+                                <li><a href="#" id="crear_articulo">Art&iacute;culo</a></li>
+                                <li><a href="#" id="crear_libro">Libro</a></li>                           
+                            </ul>
+                        </li>    
+                        <li class="dropdown-submenu">
+                            <a tabindex="-1" href="#">
+                                <span class="pull-right">
+                                    <i class="fa fa-angle-right text"></i>
+                                </span>
+                                <span>Nomenclador</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id="crear_premio">Premio</a></li>  
+                                <li><a href="#" id="crear_entidad">Entidad</a></li> 
+                                <li><a href="#" id="crear_programa">Programa</a></li> 
+                                <li><a href="#" id="crear_grupo_de_trabajo">Grupo de trabajo</a></li> 
+                                <li><a href="#" id="crear_cliente">Cliente</a></li> 
+                                <li><a href="#" id="crear_centro_de_costo">Centro de costo</a></li> 
+                                <li class="divider"></li>
+                                <li><a href="#" id="crear_centro_de_estudios">Centro de estudios</a></li>                               
+                            </ul>
+                        </li>            
                     </ul>
                 </div>
                 <div class="btn-group">
-                <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;&nbsp;Reportes&nbsp;<b class="caret"></b></a>
+                    <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font"><i class="fa fa-pen"></i>&nbsp;&nbsp;&nbsp;Editar&nbsp;<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="modificar_datos_personales" data-id="{% url 'trabajador:modificar_datos_personales' trabajador.pk %}">Datos personales</a></li>
+                        <li><a href="#" id="export_word">Word</a></li>
+                        <li><a href="#" id="export_excel">Excel</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;&nbsp;Reportes&nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#" id="export_pdf">PDF</a></li>
                         <li><a href="#" id="export_word">Word</a></li>
@@ -63,14 +98,5 @@
         </div>
         -->
 
-
-        <div class="col-sm-4 m-b-xs">
-            <div class="input-group">
-                <input type="text" class="input-sm form-control" placeholder="Search">
-                <span class="input-group-btn">
-                    <button class="btn btn-sm btn-default" type="button">Go!</button>
-                </span>
-            </div>
-        </div>
     </div>
 </header>

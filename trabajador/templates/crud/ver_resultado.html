@@ -1,0 +1,42 @@
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+<!-- Modal ver PTHOY -->
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h5 class="modal-title font-bold" id="myModalLabel">DETALLE RESULTADO</h5>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>T&iacute;tulo:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.titulo }}</label>                            
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Nivel:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.nivel }}</label>                            
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Aprobado:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.aprobado_cc }}</label>                            
+      </div>            
+    </div>
+    {% for premio in object.premios %}
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>ISSN:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ premio }}</label>                            
+      </div>            
+    </div>
+    {% endfor %}
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+</div>      
+

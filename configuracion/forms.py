@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate
-from trabajador.app_models.trabajador import Trabajador
+from trabajador.modelos.trabajadores import Trabajador
 from bootstrap_modal_forms.forms import BSModalForm
 
 

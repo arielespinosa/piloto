@@ -1,0 +1,39 @@
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+<!-- Crear/Asignar Artículo -->
+<form id='crear_literatura_gris' role="form" method="POST" class="" action="">
+  {% csrf_token %}
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title" id="myModalLabel">A&Ntilde;ADIR LITERATURA GRIS</h4>
+  </div>
+  <div class="modal-body">
+    {% if form_seleccionar_literatura_gris %}
+      <div id="form_seleccionar_literatura_gris">
+        <div class="alert alert-info 3x">
+          <i class="fa fa-exclamation-triangle"></i> Seleccione una Literatura Gris en la que no haya participado. Tambien puede a&ntilde;adir 
+            uno nuevo o ambas cosas.
+        </div>   
+        {{ form_seleccionar_literatura_gris|crispy }}
+      </div>
+      <div class="line pull-in"></div>
+    {% endif %}
+    
+    <div class="form-group pull-in clearfix">
+      <div class="col-sm-8">
+        {{ form_crear_literatura_gris.titulo|as_crispy_field }}
+        {{ form_crear_literatura_gris.autores|as_crispy_field }}
+      </div>
+      <div class="col-sm-4">          
+        {{ form_crear_literatura_gris.fecha|as_crispy_field }}
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="submit-btn btn btn-primary">Aceptar</button>
+  </div>      
+</form>
+

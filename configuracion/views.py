@@ -5,7 +5,7 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from . import forms
-from trabajador.app_models.trabajador import Trabajador
+from trabajador.modelos.trabajadores import Trabajador
 from .mixins import AjaxFormMixin, BSModalAjaxFormMixin
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -18,6 +18,7 @@ from bootstrap_modal_forms.generic import (BSModalLoginView,
 import time
 
 from django.contrib.auth.decorators import login_required
+
 
 # -----------------------------------------
 class IniciarSesion(LoginView):
@@ -40,10 +41,10 @@ class RegistrarTrabajador(CreateView):
 
     def post(self, request, *args, **kwargs):
         form_registrar_usuario = self.form_registrar_usuario(request.POST)
-        form_class = self.form_class(request.POST)
-        
-        if form_registrar_usuario.is_valid() and form_class.is_valid():
-            trabajador = form_class.save(commit=False)
+        form_registrar_trabajador = self.form_class(request.POST)
+
+        if form_registrar_usuario.is_valid() and form_registrar_trabajador.is_valid():
+            trabajador = form_registrar_trabajador.save(commit=False)
             usuario = form_registrar_usuario.save(commit=False)
 
             usuario.is_active = False
@@ -53,7 +54,10 @@ class RegistrarTrabajador(CreateView):
 
             return HttpResponseRedirect('/')
         else:
-            return super(RegistrarTrabajador, self).post(request, *args, **kwargs)
+            return render(request, self.template_name, {
+                'form': form_registrar_trabajador,
+                'form_usuario': form_registrar_usuario,
+            })
 
 
 class AppUserProfile(DetailView):

@@ -1,6 +1,6 @@
 from django.db import models
-from trabajador.app_models.trabajador import Trabajador
-from trabajo_cientifico.app_models.elementos import Proyecto
+from trabajador.modelos.trabajadores import Trabajador
+from trabajador.modelos.trabajo_cientifico import Proyecto
 
 
 class Local(models.Model):
@@ -9,7 +9,6 @@ class Local(models.Model):
 
     def __str__(self):
         return self.nombre
-
 
 class Objeto(models.Model):
     nombre = models.CharField(max_length=50)
@@ -49,8 +48,8 @@ class Inventario(models.Model):
         return self.numero
 
 
-    class Sindicato(models.Model):
-        trabajador = models.ForeignKey(Trabajador, on_delete=models.CASCADE)
+class Sindicato(models.Model):
+    trabajador = models.ForeignKey(Trabajador, on_delete=models.CASCADE)
 
         
 

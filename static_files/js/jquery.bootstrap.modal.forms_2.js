@@ -73,9 +73,6 @@ function message_success(data){
             success: function (response) {  
                 
                 if (typeof(response) == typeof("a")) {
-
-                    console.log('error 2');       
-                   
                     // Form is not valid, update it with errors
                     $(modalID).find(modalContent).html(response);
                     $(modalForm).attr("action", formURL);
@@ -87,9 +84,8 @@ function message_success(data){
                     // Hide modal form                    
                     $(modalID).modal("hide");
 
-                    //success_action(response);
-                    ActualizarEventos(response);
-                   
+                    ActualizarTablas(response);
+
                     // Show message success with json response as content
                     message_success(response);
                 }

@@ -1,14 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85128127-3ed5-4ba9-9dfa-cbf1acc127a3" name="Default Changelist" comment="" />
+    <list default="true" id="85128127-3ed5-4ba9-9dfa-cbf1acc127a3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CFA/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/CFA/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CFA/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CFA/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/centro/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/centro/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/centro/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/centro/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/centro/migrations/0002_auto_20201020_1804.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/centro/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/centro/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuracion/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/configuracion/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuracion/templates/registrar_trabajador.html" beforeDir="false" afterPath="$PROJECT_DIR$/configuracion/templates/registrar_trabajador.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuracion/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/configuracion/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuracion/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/configuracion/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/migrations/0002_auto_20201020_1349.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/mixins.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/certificaciones.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/crud/crear_certificacion.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/crud/crear_evento.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/crud/crear_oponencia.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/crud/crear_ponencia.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/crud/crear_tesis.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/crud/crear_tribunal.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/crud/ver_evento.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/docencia.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/eventos.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/menu_lateral.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/oponencias.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/ponencias.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/templates/tesis.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docencia/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static_files/js/jquery.bootstrap.modal.forms_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/static_files/js/jquery.bootstrap.modal.forms_2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static_files/js/trabajadores.js" beforeDir="false" afterPath="$PROJECT_DIR$/static_files/js/trabajadores.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crud/crear_articulo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crud/crear_libro.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crud/crear_literatura_gris.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crud/crear_proyecto.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crud/crear_resultado.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/crud/crear_servicio.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/app_models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/app_models/nomencladores.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/app_models/trabajador.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/cabecera_perfil_trabajador.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/cabecera_perfil_trabajador.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_articulos.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_articulos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_certificaciones.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_certificaciones.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_datos_personales.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_datos_personales.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_eventos.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_eventos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_libros.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_libros.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_literatura_gris.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_literatura_gris.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_oponencias.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_oponencias.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_ponencias.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_ponencias.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_proyectos.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_proyectos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_servicios.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_servicios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_tesis.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_tesis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador_tribunales.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador_tribunales.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/app_models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/app_models/elementos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/app_models/nomencladores.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/migrations/0002_auto_20201020_1349.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/mixins.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/templates/crud/crear_articulo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/templates/crud/crear_libro.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/templates/crud/crear_literatura_gris.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/templates/crud/crear_proyecto.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/templates/crud/crear_resultado.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/templates/crud/crear_servicio.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/templates/trabajo_cientifico.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajo_cientifico/views.py" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1gWMcPA5podPfxWjhTPs7P4DSDY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -71,5 +167,18 @@
       <updated>1598225973768</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

@@ -37,14 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mathfilters',
+    'gm2m',
     'bootstrap_modal_forms',
     'crispy_forms',
     'notifications',
     'trabajador',
     'configuracion',
     'centro',
-    'docencia',
-    'trabajo_cientifico',
 ]
 
 MIDDLEWARE = [

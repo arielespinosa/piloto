@@ -43,7 +43,6 @@
             <th>Evento</th>       
             <th>T&iacute;tulo</th>
             <th>Participaci&oacute;n</th>
-            <th>Autores</th>
             <th width="80"></th>
           </tr>
         </thead>
@@ -51,14 +50,13 @@
           {% for ponencia in ponencias %}
           <tr>
             <td><input type="checkbox" name="post[]" value="{{ ponencia.pk }}"></td>
-            <td>{{ ponencia.fecha }}</td>       
+            <td>{{ ponencia.evento.fecha }}</td>       
             <td>{{ ponencia.evento }}</td>
-            <td>{{ ponencia.titulo }}</td>
-            <td>{{ ponencia.participacion }}</td>   
-            <td>{{ ponencia.autores }}</td>   
+            <td>{{ ponencia.ponencia.titulo }}</td>
+            <td>{{ ponencia.participacion }}</td>     
             <td class="text-right">
-              <a class="ver_ponencia" data-id="{% url 'docencia:ver_ponencia' ponencia.pk %}"><i class="fa fa-eye icon-muted"></i></a>
-              <a class="eliminar_ponencia" data-id="{% url 'docencia:eliminar_ponencia' ponencia.pk %}"><i class="fa fa-trash icon-muted "></i></a>
+              <a class="ver_ponencia" data-id="{% url 'trabajador:ver_ponencia' ponencia.pk %}"><i class="fa fa-eye icon-muted"></i></a>
+              <a class="eliminar_ponencia" data-id="{% url 'trabajador:eliminar_ponencia' ponencia.pk %}"><i class="fa fa-trash icon-muted "></i></a>
             </td>          
           </tr>
           {% endfor %}
@@ -76,15 +74,15 @@
         <div class="col-sm-7 text-right text-center-xs">    
           <ul class="pagination pagination-sm m-t-none m-b-none">
             {% if ponencias.has_previous %}
-                <li><a href="?page={{ ponencias.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
-                <li><a href="?page=1">Inicio</a></li>          
+                <li><a href="?page_ponencias={{ ponencias.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="?page_ponencias=1">Inicio</a></li>          
             {% endif %}
 
             <li><a href="#"> P&aacute;gina {{ ponencias.number }} de {{ ponencias.paginator.num_pages }}</a></li>
 
             {% if ponencias.has_next %}
-              <li><a href="?page={{ ponencias.paginator.num_pages }}">&Uacute;ltima</a></li>
-              <li><a href="?page={{ ponencias.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
+              <li><a href="?page_ponencias={{ ponencias.paginator.num_pages }}">&Uacute;ltima</a></li>
+              <li><a href="?page_ponencias={{ ponencias.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
             {% endif %}
           </ul>
         </div>

@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load mathfilters %}
+{% load math_tags %}
 
 <div class="wrapper">
     <div class="clearfix m-b">
@@ -11,45 +13,11 @@
       </a>
       <div class="clear">
         <div class="h4 m-t-xs m-b-xs">{{ trabajador.nombre_coloquial }}</div>
-        <small class="text-muted"><i class="fa fa-map-marker"></i> {{ trabajador.categoria_ocupacional }}</small>
+        <small class="text-muted">{{ trabajador.get_categoria_ocupacional_display }}</small>
       </div>                
     </div>
-    <div class="panel wrapper panel-success">
-      <div class="row">
-        <div class="col-xs-4">
-          <a href="#">
-            <span class="m-b-xs h5 block">245</span>
-            <small class="text-muted">Followers</small>
-          </a>
-        </div>
-        <div class="col-xs-4">
-          <a href="#">
-            <span class="m-b-xs h5 block">55</span>
-            <small class="text-muted">Following</small>
-          </a>
-        </div>
-        <div class="col-xs-4">
-          <a href="#">
-            <span class="m-b-xs h5 block">2,035</span>
-            <small class="text-muted">Tweets</small>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="btn-group btn-group-justified m-b">
-      <a class="btn btn-primary btn-rounded" data-toggle="button">
-        <span class="text">
-          <i class="fa fa-eye"></i> Follow
-        </span>
-        <span class="text-active">
-          <i class="fa fa-eye-slash"></i> Following
-        </span>
-      </a>
-      <a class="btn btn-dark btn-rounded" data-loading-text="Connecting">
-        <i class="fa fa-comment-o"></i> Chat
-      </a>
-    </div>
-    <div>
+
+    <div id="menu">
       <!-- Datos personales -->
       <small class="text-uc text-xs text-muted">datos personales</small>
       <div class="row" style="margin-left: 10px;">            
@@ -59,7 +27,9 @@
           <div class="row">Direcci&oacute;n:</div>
           <div class="row">Municipio:</div>
           <div class="row">Raza:</div>
-          <div class="row">&Aacute;reas de interes:</div>
+          {% if trabajador.area_de_interes %}
+            <div class="row">&Aacute;reas de interes:</div>
+          {% endif %}
         </div>
         <div class="col-lg-6">
           <div class="row">{{trabajador.ci}}</div>
@@ -67,8 +37,8 @@
           <div class="row">{{trabajador.direccion}}</div>
           <div class="row">{{trabajador.municipio}}</div>
           <div class="row">{{trabajador.raza}}</div>
-          {% for area_interes in trabajador.areas_de_interes.all %}
-            <div class="row">{{ area_interes }}</div>
+          {% for areas in trabajador.area_de_interes.all %}
+            <div class="row">{{ area }}</div>
           {% endfor %}
         </div>            
       </div>
@@ -79,16 +49,28 @@
         <div class="col-lg-6">
           <div class="row">Nivel de escolaridad:</div>
           <div class="row">Especialidad:</div>
-          <div class="row">Grado cient&iacute;fico:</div>
-          <div class="row">Cateogor&iacute;a cient&iacute;fica:</div>
-          <div class="row">Cateogor&iacute;a docente:</div>
+          {% if trabajador.grado_cientifico %}
+            <div class="row">Grado cient&iacute;fico:</div>
+          {% endif %}
+          {% if trabajador.cateogoria_cientifica %}
+            <div class="row">Cateogor&iacute;a cient&iacute;fica:</div>
+          {% endif %}
+          {% if trabajador.cateogoria_docente %}
+            <div class="row">Cateogor&iacute;a docente:</div>
+          {% endif %}
         </div>
         <div class="col-lg-6">
           <div class="row">{{trabajador.nivel_escolar}}</div>
           <div class="row">{{trabajador.especialidad}}</div>
-          <div class="row">{{trabajador.grado_cientifico}}</div>
-          <div class="row">{{trabajador.cateogoria_cientifica}}</div>
-          <div class="row">{{trabajador.cateogoria_docente}}</div>   
+          {% if trabajador.grado_cientifico %}
+            <div class="row">{{trabajador.grado_cientifico}}</div>
+          {% endif %}
+          {% if trabajador.cateogoria_cientifica %}
+            <div class="row">{{trabajador.cateogoria_cientifica}}</div>
+          {% endif %}
+          {% if trabajador.cateogoria_docente %}
+            <div class="row">{{trabajador.cateogoria_docente}}</div>
+          {% endif %}
         </div>
       </div>
       <p></p>
@@ -98,50 +80,101 @@
         <div class="col-lg-6">
           <div class="row">Tarjeta:</div>
           <div class="row">Plaza:</div>
+          <div class="row">Oficina:</div>
           <div class="row">Categor&iacute;a ocupacional:</div>
           <div class="row">Fecha de entrada:</div>
-          <div class="row">Resoluci&oacute;n 34-19:</div>
-          <div class="row">Bono Msc-Dr:</div>
+          {% if trabajador.res_34_19 %}
+            <div class="row">Resoluci&oacute;n 34-19:</div>
+          {% endif %}
+          {% if trabajador.msc_dr %}
+            <div class="row">Bono Msc-Dr:</div>
+          {% endif %}
           <div class="row">Grupo escala antiguo:</div>
           <div class="row">Grupo escala actual:</div>
           <div class="row">Salario escala antiguo:</div>
           <div class="row">Salario escala actual:</div>
-          <div class="row">Otros pagos antiguo:</div>
-          <div class="row">Otros pagos actual:</div>
-          <div class="row">Salario total antiguo:</div>
+          {% if trabajador.otros_pagos_antiguo %}
+            <div class="row">Otros pagos antiguo:</div>
+          {% endif %}
+          {% if trabajador.otros_pagos_actual %}
+            <div class="row">Otros pagos actual:</div>
+          {% endif %}
+          {% if trabajador.salario_total_antiguo %}
+            <div class="row">Salario total antiguo:</div>
+          {% endif %}
           <div class="row">Salario total actual:</div>
-          <div class="row">Membresias:</div>
-          <div class="row">Afiliaciones:</div>
+          {% if trabajador.membresias %}
+            <div class="row">Membresias:</div>
+            {% for i in 1|range:trabajador.membresias.all.count %}
+              <div class="row">&nbsp;</div>
+            {% endfor %}
+          {% endif %}
+          {% if trabajador.afiliaciones %}
+            <div class="row">Afiliaciones:</div>
+            {% for i in 1|range:trabajador.afiliaciones.all.count %}
+              <div class="row">&nbsp;</div>
+            {% endfor %}
+          {% endif %}
         </div>
         <div class="col-lg-6">
           <div class="row">{{trabajador.tarjeta}}</div>
           <div class="row">{{trabajador.plaza}}</div>
+          <div class="row">{{trabajador.oficina}}</div>
           <div class="row">{{trabajador.categoria_ocupacional}}</div>
           <div class="row">{{trabajador.fecha_entrada_insmet}}</div>           
-          <div class="row">{{trabajador.res_34_19}}</div>   
-          <div class="row">{{trabajador.msc_dr}}</div>  
+          {% if trabajador.res_34_19 %}
+            <div class="row">{{trabajador.res_34_19}}</div>
+          {% endif %}
+          {% if trabajador.msc_dr %}
+            <div class="row">{{trabajador.msc_dr}}</div>
+          {% endif %}
           <div class="row">{{trabajador.plaza.grupo_escala_antiguo}}</div>  
-          <div class="row">{{trabajador.plaza.grupo_escala_actual}}</div>  
-          <div class="row">{{trabajador.plaza.salario_escala_antiguo}}</div>  
-          <div class="row">{{trabajador.plaza.salario_escala_actual}}</div>  
-          <div class="row">{{trabajador.otros_pagos_antiguo}}</div>  
-          <div class="row">{{trabajador.otros_pagos_actual}}</div> 
-          <div class="row">{{trabajador.salario_total_antiguo}}</div>  
-          <div class="row">{{trabajador.salario_total_actual}}</div> 
-          <div class="row">
+          <div class="row">{{trabajador.plaza.grupo_escala_actual}}</div>
+          <div class="row">{{trabajador.plaza.salario_escala_antiguo}}</div>
+          <div class="row">{{trabajador.plaza.salario_escala_actual}}</div>
+          {% if trabajador.otros_pagos_antiguo %}
+            <div class="row">{{trabajador.otros_pagos_antiguo}}</div>
+          {% endif %}
+          {% if trabajador.otros_pagos_actual %}
+            <div class="row">{{trabajador.otros_pagos_actual}}</div>
+          {% endif %}
+          {% if trabajador.salario_total_antiguo %}
+            <div class="row">{{trabajador.salario_total_antiguo}}</div>
+          {% endif %}
+          <div class="row">{{trabajador.salario_total_actual}}</div>
+          {% if trabajador.membresias %}
             {% for organismo in trabajador.membresias.all %}
-              {{ organismo }} /
+              <div class="row">{{ organismo }}</div>
             {% endfor %}
-          </div>
-          <div class="row">
+          {% endif %}
+          {% if trabajador.afiliaciones %}
             {% for organismo in trabajador.afiliaciones.all %}
-              {{ organismo }} /
+              <div class="row">{{ organismo }}</div>
             {% endfor %}
-          </div>
+          {% endif %}
         </div>
       </div>
 
       <div class="line"></div>
       <small class="text-uc text-xs text-muted">contacto</small>
+      <div class="row" style="margin-left: 10px;">
+        {% for contacto in trabajador.contacto.all %}
+          <div class="row">
+            <div class="col-lg-1">
+              {% if contacto.tipo == 'T' %}
+                <i class="fa fa-phone"></i>
+              {% elif contacto.tipo == 'M' %}
+                <i class="fa fa-mobile"></i>
+              {% elif contacto.tipo == 'E' %}
+                <i class="fa fa-email"></i>
+              {% endif %}
+            </div>
+            <div class="col-lg-3">{{ contacto.get_descripcion_display }}</div>
+            <div class="col-lg-4">{{ contacto.valor }}</div>
+            <div class="row"><span></span></div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
     </div>
   </div>

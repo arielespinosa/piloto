@@ -1,0 +1,71 @@
+<section class="panel panel-default">
+    <div class="row wrapper">
+      <div class="col-sm-8 m-b-xs">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-sm btn-default active">
+            <input type="radio" name="options" id="option1"> Todos
+          </label>
+          <label class="btn btn-sm btn-default">
+            <input type="radio" name="options" id="option2"> Hoy
+          </label>
+          <label class="btn btn-sm btn-default">
+            <input type="radio" name="options" id="option3"> &Uacute;ltimos 3 d&iacute;a
+          </label>
+          <label class="btn btn-sm btn-default">
+            <input type="radio" name="options" id="option4"> Semana
+          </label>
+          <label class="btn btn-sm btn-default">
+            <input type="radio" name="options" id="option5"> Mes
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="input-group">
+          <input type="text" class="input-sm form-control" placeholder="Search">
+          <span class="input-group-btn">
+            <button class="btn btn-sm btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped b-t b-light">
+        <thead>
+          <tr>
+            <th width="20"><input type="checkbox"></th>
+            <th class="th-sortable" data-toggle="class">Fecha
+              <span class="th-sort">
+                <i class="fa fa-sort-down text"></i>
+                <i class="fa fa-sort-up text-active"></i>
+                <i class="fa fa-sort"></i>
+              </span>
+            </th>    
+            <th>Tesis</th>       
+            <th width="80"></th>
+          </tr>
+        </thead>
+        <tbody id="tb_trabajador_tutorias">          
+          {% for tutoria in tutorias %}
+          <tr>
+            <td><input type="checkbox" name="post[]" value="{{ tutoria.pk }}"></td>
+            <td>{{ tutoria.fecha_inicio }}</td>       
+            <td>{{ tutoria.tesis.titulo }}</td>  
+            <td class="text-right">
+              <a class="eliminar_tutoria" data-id="{% url 'trabajador:eliminar_tutoria' tutoria.pk %}"><i class="fa fa-trash icon-muted "></i></a>
+            </td>          
+          </tr>
+          {% endfor %}
+
+      </tbody>
+      </table>
+    </div>
+    <footer class="panel-footer">
+      <div class="row">
+        <div class="col-sm-5">
+          <strong>
+            <small class="inline m-t-sm m-b-sm">Mostrando {{ tutorias.start_index }}-{{ tutorias.end_index }} de {{ tutorias.paginator.count }} elementos</small>
+          </strong>
+        </div>
+      </div>
+    </footer>
+  </section>

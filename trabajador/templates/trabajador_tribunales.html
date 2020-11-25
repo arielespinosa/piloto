@@ -40,24 +40,22 @@
                 <i class="fa fa-sort"></i>
               </span>
             </th>    
-            <th>T&iacute;tulo</th>       
-            <th>Autor principal</th>
+            <th>Tesis</th>       
             <th width="80"></th>
           </tr>
         </thead>
-        <tbody id="tb_trabajador_tribunals">          
+        <tbody id="tb_trabajador_tribunales">          
           {% for tribunal in tribunales %}
           <tr>
             <td><input type="checkbox" name="post[]" value="{{ tribunal.pk }}"></td>
             <td>{{ tribunal.fecha }}</td>       
-            <td>{{ tribunal.nombre }}</td>
+            <td>{{ tribunal.tesis }}</td>
             <td class="text-right">
-              <a class="ver_tribunal" data-id="{% url 'docencia:ver_tribunal' tribunal.pk %}"><i class="fa fa-eye icon-muted"></i></a>
-              <a class="eliminar_tribunal" data-id="{% url 'docencia:eliminar_tribunal' tribunal.pk %}"><i class="fa fa-trash icon-muted "></i></a>
+              <a class="ver_tribunal" data-id="{% url 'trabajador:ver_tribunal' tribunal.pk %}"><i class="fa fa-eye icon-muted"></i></a>
+              <a class="eliminar_tribunal" data-id="{% url 'trabajador:eliminar_tribunal' tribunal.pk %}"><i class="fa fa-trash icon-muted "></i></a>
             </td>          
           </tr>
           {% endfor %}
-
       </tbody>
       </table>
     </div>
@@ -71,15 +69,15 @@
         <div class="col-sm-7 text-right text-center-xs">    
           <ul class="pagination pagination-sm m-t-none m-b-none">
             {% if tribunales.has_previous %}
-                <li><a href="?page={{ tribunales.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
-                <li><a href="?page=1">Inicio</a></li>          
+                <li><a href="?page_tribunales={{ tribunales.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="?page_tribunales=1">Inicio</a></li>          
             {% endif %}
 
             <li><a href="#"> P&aacute;gina {{ tribunales.number }} de {{ tribunals.paginator.num_pages }}</a></li>
 
             {% if tribunales.has_next %}
-                <li><a href="?page={{ tribunales.paginator.num_pages }}">&Uacute;ltima</a></li>
-                <li><a href="?page={{ tribunales.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
+                <li><a href="?page_tribunales={{ tribunales.paginator.num_pages }}">&Uacute;ltima</a></li>
+                <li><a href="?page_tribunales={{ tribunales.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
             {% endif %}
           </ul>
         </div>

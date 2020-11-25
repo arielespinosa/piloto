@@ -33,30 +33,40 @@
         <thead>
           <tr>
             <th width="20"><input type="checkbox"></th>
-            <th class="th-sortable" data-toggle="class">Fecha
+            <th class="th-sortable" data-toggle="class">Inicio
               <span class="th-sort">
                 <i class="fa fa-sort-down text"></i>
                 <i class="fa fa-sort-up text-active"></i>
                 <i class="fa fa-sort"></i>
               </span>
             </th>    
-            <th>Nombre</th>       
-            <th>Lugar</th>
+            <th>Terminaci&oacute;n</th>       
+            <th>Centro de Costo</th>
+            <th>Programa</th>
+            <th>T&iacute;tulo</th>
+            <th>Tipo</th>
             <th>Nivel</th>
+            <th>Presupuesto anual</th>
+            <th>Presupuesto total</th>
             <th width="80"></th>
           </tr>
         </thead>
-        <tbody id="tb_trabajador_eventos">          
-          {% for evento in eventos %}
+        <tbody id="tb_trabajador_proyectos">          
+          {% for proyecto in proyectos %}
           <tr>
-            <td><input type="checkbox" name="post[]" value="{{ evento.pk }}"></td>
-            <td>{{ evento.fecha }}</td>       
-            <td>{{ evento.nombre }}</td>
-            <td>{{ evento.lugar }}</td>
-            <td>{{ evento.nivel }}</td>   
+            <td><input type="checkbox" name="post[]" value="{{ proyecto.pk }}"></td>
+            <td>{{ proyecto.fecha_inicio }}</td>       
+            <td>{{ proyecto.fecha_terminacion }}</td>
+            <td>{{ proyecto.centro_costo }}</td>
+            <td>{{ proyecto.programa }}</td>  
+            <td>{{ proyecto.titulo }}</td>
+            <td>{{ proyecto.tipo }}</td>  
+            <td>{{ proyecto.nivel }}</td>  
+            <td>{{ proyecto.presupuesto_anno }}</td> 
+            <td>{{ proyecto.presupuesto_total }}</td>
             <td class="text-right">
-              <a class="ver_evento" data-id="{% url 'docencia:ver_evento' evento.pk %}"><i class="fa fa-eye icon-muted"></i></a>
-              <a class="eliminar_evento" data-id="{% url 'docencia:eliminar_evento' evento.pk %}"><i class="fa fa-trash icon-muted "></i></a>
+              <a class="ver_proyecto" data-id="{% url 'trabajador:ver_proyecto' proyecto.pk %}"><i class="fa fa-eye icon-muted"></i></a>
+              <a class="eliminar_proyecto" data-id="{% url 'trabajador:eliminar_proyecto' proyecto.pk %}"><i class="fa fa-trash icon-muted "></i></a>
             </td>          
           </tr>
           {% endfor %}
@@ -68,21 +78,21 @@
       <div class="row">
         <div class="col-sm-5">
           <strong>
-            <small class="inline m-t-sm m-b-sm">Mostrando {{ eventos.start_index }}-{{ eventos.end_index }} de {{ eventos.paginator.count }} elementos</small>
+            <small class="inline m-t-sm m-b-sm">Mostrando {{ proyectos.start_index }}-{{ proyectos.end_index }} de {{ proyectos.paginator.count }} elementos</small>
           </strong>
         </div>
         <div class="col-sm-7 text-right text-center-xs">    
           <ul class="pagination pagination-sm m-t-none m-b-none">
-            {% if eventos.has_previous %}
-                <li><a href="?page={{ eventos.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
-                <li><a href="?page=1">Inicio</a></li>          
+            {% if proyectos.has_previous %}
+                <li><a href="?page_proyectos={{ proyectos.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="?page_proyectos=1">Inicio</a></li>          
             {% endif %}
 
-            <li><a href="#"> P&aacute;gina {{ eventos.number }} de {{ eventos.paginator.num_pages }}</a></li>
+            <li><a href="#"> P&aacute;gina {{ proyectos.number }} de {{ proyectos.paginator.num_pages }}</a></li>
 
-            {% if eventos.has_next %}
-                <li><a href="?page={{ eventos.paginator.num_pages }}">&Uacute;ltima</a></li>
-                <li><a href="?page={{ eventos.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
+            {% if proyectos.has_next %}
+                <li><a href="?page_proyectos={{ proyectos.paginator.num_pages }}">&Uacute;ltima</a></li>
+                <li><a href="?page_proyectos={{ proyectos.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
             {% endif %}
           </ul>
         </div>

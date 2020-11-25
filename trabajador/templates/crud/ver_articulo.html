@@ -1,0 +1,88 @@
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+<!-- Modal ver PTHOY -->
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h5 class="modal-title font-bold" id="myModalLabel">DETALLE ART&Iacute;CULO</h5>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Fecha de Publicaci&oacute;n:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.fecha_publicado }}</label>                            
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>T&iacute;tulo:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.titulo }}</label>                            
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>DOI:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.doi }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>ISSN:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.issn }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Base de Datos:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.db }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Referencia web:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.referencia_web }}</label>                            
+      </div>            
+    </div> 
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>P&aacute;ginas:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.paginas }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Volumen:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.volumen }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>N&uacute;mero:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.numero }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Impacto:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.impacto }}</label>                            
+      </div>            
+    </div>         
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Indexado:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.indexado }}</label>                            
+      </div>            
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label"><strong>Arbitrado:</strong></label>
+      <div class="col-sm-10">
+        <label style="cursor: text;" class="checkbox-inline">{{ object.arbitrado }}</label>                            
+      </div>            
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+</div>      
+

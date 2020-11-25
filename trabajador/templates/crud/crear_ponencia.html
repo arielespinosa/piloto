@@ -1,0 +1,42 @@
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+<!-- Modal -->
+<form id='crear_ponencia' role="form" method="POST" class="" action="">
+  {% csrf_token %}
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h5 class="modal-title font-bold" id="myModalLabel">A&Ntilde;ADIR PONENCIA</h5>
+  </div>
+  <div class="modal-body">
+    {% if form_seleccionar_ponencias %}
+      <div class="form-group pull-in clearfix">  
+        <div class="col-sm-6">
+          {{ form_seleccionar_ponencias.ponencias|as_crispy_field }}
+        </div>  
+      </div> 
+    {% endif %}
+    <div class="form-group pull-in clearfix">  
+      <div class="col-sm-12">
+        {{ form_crear_ponencia.titulo|as_crispy_field }}
+      </div>     
+    </div>  
+    <div class="form-group pull-in clearfix">
+      <div class="col-sm-4">          
+        {{ form_crear_ponencia.autores|as_crispy_field }}
+      </div>  
+      <div class="col-sm-4">          
+        {{ form_crear_ponencia_realizada.evento|as_crispy_field }}
+      </div>    
+      <div class="col-sm-4">          
+        {{ form_crear_ponencia_realizada.participacion|as_crispy_field }}
+      </div>    
+    </div>   
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="submit-btn btn btn-primary">A&ntilde;adir</button>
+  </div>      
+</form>
+
+

@@ -56,67 +56,73 @@
     <section class="vbox">
       <header class="header bg-light bg-gradient">
         <ul class="nav nav-tabs nav-white">
-          {% if trabajador.eventos.count > 0 %}<li class="active"><a href="#eventos" data-toggle="tab">Eventos</a></li>{% endif %}
-          {% if trabajador.tesis.count > 0 %}<li class=""><a href="#tesis" data-toggle="tab">Tesis</a></li>{% endif %}
-          {% if trabajador.articulos.count > 0 %}<li class=""><a href="#articulos" data-toggle="tab">Art&iacute;culos</a></li>{% endif %}
-          {% if trabajador.certificaciones.count > 0 %}<li class=""><a href="#certificaciones" data-toggle="tab">Certificaciones</a></li>{% endif %}
-          {% if trabajador.literatura_gris.count > 0 %}<li class=""><a href="#literaturas_grises" data-toggle="tab">Literatura Gris</a></li>{% endif %}
-          {% if trabajador.oponencias.count > 0 %}<li class=""><a href="#oponencias" data-toggle="tab">Oponencias</a></li>{% endif %}
-          {% if trabajador.ponencias.count > 0 %}<li class=""><a href="#ponencias" data-toggle="tab">Ponencias</a></li>{% endif %}
-          {% if trabajador.proyectos.count > 0 %}<li class=""><a href="#proyectos" data-toggle="tab">Proyectos</a></li>{% endif %}
-          {% if trabajador.servicios.count > 0 %}<li class=""><a href="#servicios" data-toggle="tab">Servicios</a></li>{% endif %}
-          {% if trabajador.tribunales.count > 0 %}<li class=""><a href="#tribunales" data-toggle="tab">Tribunales</a></li>{% endif %}
+          {% if trabajador.eventos.count > 0 %}<li class="{% if active == 'eventos' %} active {% endif %}"><a href="#eventos" data-toggle="tab">Eventos</a></li>{% endif %}
+          {% if tesis %}<li class="{% if active == 'tesis' %} active {% endif %}"><a href="#tesis" data-toggle="tab">Tesis</a></li>{% endif %}
+          {% if trabajador.tutorias.count > 0 %}<li class="{% if active == 'tutorias' %} active {% endif %}"><a href="#tutorias" data-toggle="tab">Tutorias</a></li>{% endif %}
+          {% if trabajador.articulos.count > 0 %}<li class="{% if active == 'articulos' %} active {% endif %}"><a href="#articulos" data-toggle="tab">Art&iacute;culos</a></li>{% endif %}
+          {% if trabajador.libros.count > 0 %}<li class="{% if active == 'libros' %} active {% endif %}"><a href="#libros" data-toggle="tab">Libros</a></li>{% endif %}
+          {% if trabajador.certificaciones.count > 0 %}<li class="{% if active == 'certificaciones' %} active {% endif %}"><a href="#certificaciones" data-toggle="tab">Certificaciones</a></li>{% endif %}
+          {% if trabajador.oponencias.count > 0 %}<li class="{% if active == 'oponencias' %} active {% endif %}"><a href="#oponencias" data-toggle="tab">Oponencias</a></li>{% endif %}
+          {% if trabajador.ponencias.count > 0 %}<li class="{% if active == 'ponencias' %} active {% endif %}"><a href="#ponencias" data-toggle="tab">Ponencias</a></li>{% endif %}
+          {% if trabajador.proyectos.count > 0 %}<li class="{% if active == 'proyectos' %} active {% endif %}"><a href="#proyectos" data-toggle="tab">Proyectos</a></li>{% endif %}
+          {% if trabajador.servicios.count > 0 %}<li class="{% if active == 'servicios' %} active {% endif %}"><a href="#servicios" data-toggle="tab">Servicios</a></li>{% endif %}
+          {% if trabajador.tribunales.count > 0 %}<li class="{% if active == 'tribunales' %} active {% endif %}"><a href="#tribunales" data-toggle="tab">Tribunales</a></li>{% endif %}
         </ul>
       </header>
       <section class="scrollable">
         <div class="tab-content">
-          {% if trabajador.eventos.count > 0 %}
-            <div class="tab-pane active" id="eventos">
-              {% include 'trabajador_eventos.html'%}             
-            </div>
-          {% endif %}
-          {% if trabajador.tesis.count > 0 %}
-            <div class="tab-pane" id="tesis">
+          {% if tesis %}
+            <div class="tab-pane {% if active == 'tesis' %} active {% endif %}" id="tesis">
               {% include 'trabajador_tesis.html'%}             
             </div>
           {% endif %}
+          {% if trabajador.tutorias.count > 0 %}
+          <div class="tab-pane {% if active == 'tutorias' %} active {% endif %}" id="tutorias">
+            {% include 'trabajador_tutorias.html'%}             
+          </div>
+        {% endif %}
+          {% if trabajador.eventos.count > 0 %}
+            <div class="tab-pane {% if active == 'eventos' %} active {% endif %}" id="eventos">
+              {% include 'trabajador_eventos.html'%}             
+            </div>
+          {% endif %}
           {% if trabajador.articulos.count > 0 %}
-            <div class="tab-pane" id="articulos">
+            <div class="tab-pane {% if active == 'articulos' %} active {% endif %}" id="articulos">
               {% include 'trabajador_articulos.html'%}             
             </div>
           {% endif %}
+          {% if trabajador.libros.count > 0 %}
+          <div class="tab-pane {% if active == 'libros' %} active {% endif %}" id="libros">
+            {% include 'trabajador_libros.html'%}             
+          </div>
+          {% endif %}
           {% if trabajador.certificaciones.count > 0 %}
-            <div class="tab-pane" id="certificaciones">
+            <div class="tab-pane {% if active == 'certificaciones' %} active {% endif %}" id="certificaciones">
               {% include 'trabajador_certificaciones.html'%}             
             </div>
           {% endif %}
-          {% if trabajador.literatura_gris.count > 0 %}
-            <div class="tab-pane" id="literatura_gris">
-              {% include 'trabajador_literatura_gris.html'%}             
-            </div>
-          {% endif %}
           {% if trabajador.oponencias.count > 0 %}
-            <div class="tab-pane" id="oponencias">
+            <div class="tab-pane {% if active == 'oponencias' %} active {% endif %}" id="oponencias">
               {% include 'trabajador_oponencias.html'%}             
             </div>
           {% endif %}
           {% if trabajador.ponencias.count > 0 %}
-            <div class="tab-pane" id="ponencias">
+            <div class="tab-pane {% if active == 'ponencias' %} active {% endif %}" id="ponencias">
               {% include 'trabajador_ponencias.html'%}             
             </div>
           {% endif %}
           {% if trabajador.proyectos.count > 0 %}
-            <div class="tab-pane" id="proyectos">
+            <div class="tab-pane {% if active == 'proyectos' %} active {% endif %}" id="proyectos">
               {% include 'trabajador_proyectos.html'%}             
             </div>
           {% endif %}
           {% if trabajador.servicios.count > 0 %}
-            <div class="tab-pane" id="servicios">
+            <div class="tab-pane {% if active == 'servicios' %} active {% endif %}" id="servicios">
               {% include 'trabajador_servicios.html'%}             
             </div>
           {% endif %}     
           {% if trabajador.tribunales.count > 0 %}
-            <div class="tab-pane" id="tribunales">
+            <div class="tab-pane {% if active == 'tribunales' %} active {% endif %}" id="tribunales">
               {% include 'trabajador_tribunales.html'%}             
             </div>
           {% endif %}    
@@ -124,58 +130,6 @@
       </section>
     </section>
   </aside>
-  
-  <!-- OTROS -->
-  <aside class="col-lg-3 b-l">
-    <section class="vbox">
-      <section class="scrollable">
-        <div class="wrapper">
-          <section class="panel panel-default">
-            <form>
-              <textarea class="form-control no-border" rows="3" placeholder="What are you doing..."></textarea>
-            </form>
-            <footer class="panel-footer bg-light lter">
-              <button id="prueba" class="btn btn-info pull-right btn-sm">POST</button>
-              <ul class="nav nav-pills nav-sm">
-                <li><a href="#"><i class="fa fa-camera text-muted"></i></a></li>
-                <li><a href="#"><i class="fa fa-video-camera text-muted"></i></a></li>
-              </ul>
-            </footer>
-          </section>
-          <section class="panel panel-default">
-            <h4 class="font-thin padder">Latest Tweets</h4>
-            <ul class="list-group">
-              <li class="list-group-item">
-                  <p>Wellcome <a href="#" class="text-info">@Drew Wllon</a> and play this web application template, have fun1 </p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 minuts ago</small>
-              </li>
-              <li class="list-group-item">
-                  <p>Morbi nec <a href="#" class="text-info">@Jonathan George</a> nunc condimentum ipsum dolor sit amet, consectetur</p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 1 hour ago</small>
-              </li>
-              <li class="list-group-item">                     
-                  <p><a href="#" class="text-info">@Josh Long</a> Vestibulum ullamcorper sodales nisi nec adipiscing elit. </p>
-                  <small class="block text-muted"><i class="fa fa-clock-o"></i> 2 hours ago</small>
-              </li>
-            </ul>
-          </section>
-          <section class="panel clearfix bg-info lter">
-            <div class="panel-body">
-              <a href="#" class="thumb pull-left m-r">
-                <img src="images/avatar.jpg" class="img-circle">
-              </a>
-              <div class="clear">
-                <a href="#" class="text-info">@Mike Mcalidek <i class="fa fa-twitter"></i></a>
-                <small class="block text-muted">2,415 followers / 225 tweets</small>
-                <a href="#" class="btn btn-xs btn-success m-t-xs">Follow</a>
-              </div>
-            </div>
-          </section>
-        </div>
-      </section>
-    </section>              
-  </aside>
-  
 </section>
 {% endblock %}
 
@@ -191,75 +145,165 @@
 <script src="{% static 'js/trabajadores.js' %}"></script>
 
 <script type="text/javascript">
-  $(document).ready(function() {    
 
-    $('#prueba').on('click', function(){
-     
+
+  $(document).ready(function() {   
+    
+
+    // Nomencladores -------------------------
+    $("#crear_centro_de_estudios").modalForm({
+      formURL: "{% url 'trabajador:crear_centro_de_estudios' %}",
     });
 
-    // Trabajo Científico -------------------------
     $("#crear_articulo").modalForm({
-      formURL: "{% url 'trabajo_cientifico:crear_articulo' %}",
+      formURL: "{% url 'trabajador:crear_articulo' %}",
     });
 
     $("#crear_proyecto").modalForm({
-      formURL: "{% url 'trabajo_cientifico:crear_proyecto' %}",
+      formURL: "{% url 'trabajador:crear_proyecto' %}",
     });
 
     $("#crear_libro").modalForm({
-      formURL: "{% url 'trabajo_cientifico:crear_libro' %}",
-    });
-
-    $("#crear_literatura_gris").modalForm({
-      formURL: "{% url 'trabajo_cientifico:crear_literatura_gris' %}",
+      formURL: "{% url 'trabajador:crear_libro' %}",
     });
 
     $("#crear_resultado").modalForm({
-      formURL: "{% url 'trabajo_cientifico:crear_resultado' %}",
+      formURL: "{% url 'trabajador:crear_resultado' %}",
     });
 
     $("#crear_servicio").modalForm({
-      formURL: "{% url 'trabajo_cientifico:crear_servicio' %}",
+      formURL: "{% url 'trabajador:crear_servicio' %}",
     });
 
-    // Docencia -----------------------------------
+    // Crear -----------------------------------
     $("#crear_evento").modalForm({
-      formURL: "{% url 'docencia:crear_evento' %}", 
-    });
-
-    $(".ver_evento").each(function (){
-      $(this).modalForm({formURL: $(this).data('id')});
-    });
-
-    $(".eliminar_evento").each(function () {
-      $(this).modalForm({formURL: $(this).data('id')});
+      formURL: "{% url 'trabajador:crear_evento' %}", 
     });
 
     $("#crear_tesis").modalForm({
-      formURL: "{% url 'docencia:crear_tesis' %}",
+      formURL: "{% url 'trabajador:crear_tesis' %}",
+    });
+
+    $("#crear_tutoria").modalForm({
+      formURL: "{% url 'trabajador:crear_tutoria' %}",
     });
 
     $("#crear_ponencia").modalForm({
-      formURL: "{% url 'docencia:crear_ponencia' %}",
+      formURL: "{% url 'trabajador:crear_ponencia' %}",
     });
 
-
     $("#crear_oponencia").modalForm({
-      formURL: "{% url 'docencia:crear_oponencia' %}",
+      formURL: "{% url 'trabajador:crear_oponencia' %}",
     });
 
 
     $("#crear_tribunal").modalForm({
-      formURL: "{% url 'docencia:crear_tribunal' %}",
+      formURL: "{% url 'trabajador:crear_tribunal' %}",
     });
-
 
     $("#crear_certificacion").modalForm({
-      formURL: "{% url 'docencia:crear_certificacion' %}",
+      formURL: "{% url 'trabajador:crear_certificacion' %}",
+    });
+
+    // Nomencladores -------------------------------------
+    $("#crear_premio").modalForm({
+      formURL: "{% url 'trabajador:crear_premio' %}",
+    });
+
+    $("#crear_entidad").modalForm({
+      formURL: "{% url 'trabajador:crear_entidad' %}",
+    });
+
+    $("#crear_programa").modalForm({
+      formURL: "{% url 'trabajador:crear_programa' %}",
+    });
+
+    $("#crear_cliente").modalForm({
+      formURL: "{% url 'trabajador:crear_cliente' %}",
+    });
+
+    $("#crear_centro_de_costo").modalForm({
+      formURL: "{% url 'trabajador:crear_centro_de_costo' %}",
     });
 
 
-    $(".update_trabajador").each(function () {
+
+    // Ver -----------------------------------    
+    $(".ver_evento").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".ver_tesis").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".ver_ponencia").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".ver_oponencia").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".ver_tribunal").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".ver_certificacion").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".ver_articulo").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".ver_libro").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+    
+    $(".ver_proyecto").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".ver_servicio").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+
+    // Eliminar -----------------------------------
+    $(".eliminar_evento").each(function () {
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".eliminar_tesis").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".eliminar_ponencia").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".eliminar_oponencia").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".eliminar_tribunal").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+    $(".eliminar_certificacion").each(function (){
+      $(this).modalForm({formURL: $(this).data('id')});
+    });
+
+
+    // Modificar -----------------------------------
+    $(".modificar_evento").each(function () {
+      $(this).modalForm({
+        formURL: $(this).data('id')        
+      });
+    });
+
+    $("#modificar_datos_personales").each(function () {
       $(this).modalForm({
         formURL: $(this).data('id')        
       });

@@ -56,6 +56,7 @@
             <td>{{ evento.nivel }}</td>   
             <td class="text-right">
               <a class="ver_evento" data-id="{% url 'docencia:ver_evento' evento.pk %}"><i class="fa fa-eye icon-muted"></i></a>
+              <a id="evento_{{ evento.pk }}" class="modificar_evento" data-id="{% url 'docencia:modificar_evento' evento.pk %}"><i class="fa fa-pen icon-muted "></i></a> 
               <a class="eliminar_evento" data-id="{% url 'docencia:eliminar_evento' evento.pk %}"><i class="fa fa-trash icon-muted "></i></a>
             </td>          
           </tr>
@@ -74,15 +75,15 @@
         <div class="col-sm-7 text-right text-center-xs">    
           <ul class="pagination pagination-sm m-t-none m-b-none">
             {% if eventos.has_previous %}
-                <li><a href="?page={{ eventos.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
-                <li><a href="?page=1">Inicio</a></li>          
+                <li><a href="?page_eventos={{ eventos.previous_page_number }&active='eventos'"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="?page_eventos=1&active='eventos'">Inicio</a></li>          
             {% endif %}
 
             <li><a href="#"> P&aacute;gina {{ eventos.number }} de {{ eventos.paginator.num_pages }}</a></li>
 
             {% if eventos.has_next %}
-                <li><a href="?page={{ eventos.paginator.num_pages }}">&Uacute;ltima</a></li>
-                <li><a href="?page={{ eventos.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
+                <li><a href="?page_eventos={{ eventos.paginator.num_pages }}&active='eventos'">&Uacute;ltima</a></li>
+                <li><a href="?page_eventos={{ eventos.next_page_number }}&active='eventos'"><i class="fa fa-chevron-right"></i></a></li>         
             {% endif %}
           </ul>
         </div>

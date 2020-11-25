@@ -33,30 +33,38 @@
         <thead>
           <tr>
             <th width="20"><input type="checkbox"></th>
-            <th class="th-sortable" data-toggle="class">Fecha
+            <th class="th-sortable" data-toggle="class">Inicio
               <span class="th-sort">
                 <i class="fa fa-sort-down text"></i>
                 <i class="fa fa-sort-up text-active"></i>
                 <i class="fa fa-sort"></i>
               </span>
             </th>    
-            <th>Nombre</th>       
-            <th>Lugar</th>
-            <th>Nivel</th>
+            <th>Fin</th>       
+            <th>Centro de Costo</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>DIM</th>
+            <th>Cliente</th>
+            <th>Monto</th>
             <th width="80"></th>
           </tr>
         </thead>
-        <tbody id="tb_trabajador_eventos">          
-          {% for evento in eventos %}
+        <tbody id="tb_trabajador_servicios">          
+          {% for servicio in servicios %}
           <tr>
-            <td><input type="checkbox" name="post[]" value="{{ evento.pk }}"></td>
-            <td>{{ evento.fecha }}</td>       
-            <td>{{ evento.nombre }}</td>
-            <td>{{ evento.lugar }}</td>
-            <td>{{ evento.nivel }}</td>   
+            <td><input type="checkbox" name="post[]" value="{{ servicio.pk }}"></td>
+            <td>{{ servicio.fecha_inicio }}</td>       
+            <td>{{ servicio.fecha_terminacion }}</td>
+            <td>{{ servicio.centro_costo }}</td>
+            <td>{{ servicio.nombre }}</td>   
+            <td>{{ servicio.tipo }}</td>
+            <td>{{ servicio.dim }}</td>  
+            <td>{{ servicio.cliente }}</td>
+            <td>{{ servicio.monto }}</td>  
             <td class="text-right">
-              <a class="ver_evento" data-id="{% url 'docencia:ver_evento' evento.pk %}"><i class="fa fa-eye icon-muted"></i></a>
-              <a class="eliminar_evento" data-id="{% url 'docencia:eliminar_evento' evento.pk %}"><i class="fa fa-trash icon-muted "></i></a>
+              <a class="ver_servicio" data-id="{% url 'trabajador:ver_servicio' servicio.pk %}"><i class="fa fa-eye icon-muted"></i></a>
+              <a class="eliminar_servicio" data-id="{% url 'trabajador:eliminar_servicio' servicio.pk %}"><i class="fa fa-trash icon-muted "></i></a>
             </td>          
           </tr>
           {% endfor %}
@@ -68,21 +76,21 @@
       <div class="row">
         <div class="col-sm-5">
           <strong>
-            <small class="inline m-t-sm m-b-sm">Mostrando {{ eventos.start_index }}-{{ eventos.end_index }} de {{ eventos.paginator.count }} elementos</small>
+            <small class="inline m-t-sm m-b-sm">Mostrando {{ servicios.start_index }}-{{ servicios.end_index }} de {{ servicios.paginator.count }} elementos</small>
           </strong>
         </div>
         <div class="col-sm-7 text-right text-center-xs">    
           <ul class="pagination pagination-sm m-t-none m-b-none">
-            {% if eventos.has_previous %}
-                <li><a href="?page={{ eventos.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
-                <li><a href="?page=1">Inicio</a></li>          
+            {% if servicios.has_previous %}
+                <li><a href="?page_servicios={{ servicios.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="?page_servicios=1">Inicio</a></li>          
             {% endif %}
 
-            <li><a href="#"> P&aacute;gina {{ eventos.number }} de {{ eventos.paginator.num_pages }}</a></li>
+            <li><a href="#"> P&aacute;gina {{ servicios.number }} de {{ servicios.paginator.num_pages }}</a></li>
 
-            {% if eventos.has_next %}
-                <li><a href="?page={{ eventos.paginator.num_pages }}">&Uacute;ltima</a></li>
-                <li><a href="?page={{ eventos.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
+            {% if servicios.has_next %}
+                <li><a href="?page_servicios={{ servicios.paginator.num_pages }}">&Uacute;ltima</a></li>
+                <li><a href="?page_servicios={{ servicios.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
             {% endif %}
           </ul>
         </div>

@@ -1,0 +1,35 @@
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+<!-- Modal -->
+<form id='crear_oponencia' role="form" method="POST" class="" action="">
+  {% csrf_token %}
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">A&Ntilde;ADIR OPONENCIA</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group pull-in clearfix">  
+      <div class="col-sm-4">
+        {{ form_crear_oponencia.fecha|as_crispy_field }}
+      </div>
+      <div class="col-sm-8">          
+        {{ form_crear_oponencia.titulo|as_crispy_field }}
+      </div>      
+    </div>  
+    <div class="form-group pull-in clearfix">  
+      <div class="col-sm-4">
+        {{ form_crear_oponencia.tipo|as_crispy_field }}
+      </div>
+      <div class="col-sm-8">          
+        {{ form_crear_oponencia.autor_principal|as_crispy_field }}
+      </div>      
+    </div>  
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="submit-btn btn btn-primary">A&ntilde;adir</button>
+  </div>      
+</form>
+
+
