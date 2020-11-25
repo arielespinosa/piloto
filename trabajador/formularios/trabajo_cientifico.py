@@ -61,7 +61,6 @@ class FormCrearTesis(BSModalForm):
 
     def __init__(self, *args, **kwargs):
         super(FormCrearTesis, self).__init__(*args, **kwargs)
-        
         self.fields['estudiante'].choices = trabajadores_personas_choices()
         self.fields['tutores'].choices = trabajadores_personas_choices()
 
@@ -98,17 +97,8 @@ class FormCrearProyecto(BSModalForm):
 
     def __init__(self, *args, **kwargs):
         super(FormCrearProyecto, self).__init__(*args, **kwargs)
-        
-        jefe = Trabajador.objects.all().values_list('pk', 'nombre').union(
-            PersonaExterna.objects.all().values_list('pk', 'nombre')
-        )
-
-        participantes = Trabajador.objects.all().exclude(pk=self.request.user.trabajador.pk).values_list('pk', 'nombre').union(
-            PersonaExterna.objects.all().values_list('pk', 'nombre')
-        )
-
-        self.fields['jefe'].choices = list(jefe)
-        self.fields['participantes'].choices = list(participantes)
+        self.fields['jefe'].choices = trabajadores_personas_choices()
+        self.fields['participantes'].choices = trabajadores_personas_choices(self.request.user.trabajador)
 
 
 class FormCrearArticulo(BSModalForm):
@@ -127,12 +117,7 @@ class FormCrearArticulo(BSModalForm):
 
     def __init__(self, *args, **kwargs):
         super(FormCrearArticulo, self).__init__(*args, **kwargs)
-        
-        autores = Trabajador.objects.all().values_list('pk', 'nombre').union(
-            PersonaExterna.objects.all().values_list('pk', 'nombre')
-        )
-
-        self.fields['autores'].choices = list(autores)
+        self.fields['autores'].choices = trabajadores_personas_choices(self.request.user.trabajador)
     
     def clean_fecha_publicado(self):
         fecha = self.cleaned_data['fecha_publicado']
@@ -153,12 +138,7 @@ class FormCrearLibro(BSModalForm):
 
     def __init__(self, *args, **kwargs):
         super(FormCrearLibro, self).__init__(*args, **kwargs)
-        
-        autores = Trabajador.objects.all().values_list('pk', 'nombre').union(
-            PersonaExterna.objects.all().values_list('pk', 'nombre')
-        )
-
-        self.fields['autores'].choices = list(autores)
+        self.fields['autores'].choices = trabajadores_personas_choices()
 
     def clean_fecha_publicado(self):
         fecha = self.cleaned_data['fecha_publicado']
@@ -187,16 +167,8 @@ class FormCrearServicio(BSModalForm):
 
     def __init__(self, *args, **kwargs):
         super(FormCrearServicio, self).__init__(*args, **kwargs)
-        
-        responsable = Trabajador.objects.all().values_list('pk', 'nombre').union(
-            PersonaExterna.objects.all().values_list('pk', 'nombre')
-        )        
-        participantes = Trabajador.objects.all().exclude(pk=self.request.user.trabajador.pk).values_list('pk', 'nombre').union(
-            PersonaExterna.objects.all().values_list('pk', 'nombre')
-        )
-
-        self.fields['responsable'].choices = list(responsable)
-        self.fields['participantes'].choices = list(participantes)
+        self.fields['responsable'].choices = trabajadores_personas_choices()
+        self.fields['participantes'].choices = trabajadores_personas_choices(self.request.user.trabajador)
 
     def clean_fecha_inicio(self):
         fecha_inicio = self.cleaned_data['fecha_inicio']

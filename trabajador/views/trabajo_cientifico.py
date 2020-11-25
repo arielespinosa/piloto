@@ -21,7 +21,7 @@ class CrearTesis(BSModalCreateView):
     success_url = reverse_lazy('trabajador:perfil')
 
     def to_dict(self, tesis):
-        dict_tesis = model_to_dict(tesis, exclude=['graduado'])
+        dict_tesis = model_to_dict(tesis, exclude=['estudiante', 'tutores'])
         dict_tesis['especialidad'] = CampoEspecialidad.objects.get(pk=dict_tesis['especialidad']).nombre
         dict_tesis['lugar'] = CentroEstudios.objects.get(pk=dict_tesis['lugar']).nombre
         return dict_tesis

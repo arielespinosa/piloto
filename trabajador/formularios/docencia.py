@@ -6,7 +6,7 @@ from django import forms
 from bootstrap_modal_forms.forms import BSModalForm
 from trabajador.modelos.trabajo_cientifico import (Tesis, Articulo, Resultado, Proyecto)
 from trabajador.modelos.docencia import *
-
+from .utils import trabajadores_personas_choices
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -94,16 +94,13 @@ class FormCrearOponencia(BSModalForm):
     def __init__(self, *args, **kwargs):
         super(FormCrearOponencia, self).__init__(*args, **kwargs)
         
-        choices = [(t.pk, '{0} {1} {2}'.format(t.nombre, t.apellido1, t.apellido2)) for t in Trabajador.objects.all().exclude(pk=self.request.user.trabajador.pk) ]       
-        choices += [(p.pk, '{0} {1} {2}'.format(p.nombre, p.apellido1, p.apellido2)) for p in PersonaExterna.objects.all()]
-   
         elemento = Articulo.objects.all().values_list('pk', 'titulo').union(
             Tesis.objects.all().values_list('pk', 'titulo'),
             Resultado.objects.all().values_list('pk', 'titulo'),
             Proyecto.objects.all().values_list('pk', 'titulo')
         )
 
-        self.fields['oponentes'].choices = choices
+        self.fields['oponentes'].choices = trabajadores_personas_choices()
         self.fields['elemento'].choices = list(elemento)
 
 
@@ -121,15 +118,9 @@ class FormCrearPonencia(BSModalForm):
         print(self.fields.keys())
         return False
 
-
     def __init__(self, *args, **kwargs):
         super(FormCrearPonencia, self).__init__(*args, **kwargs)
-        
-        autores = Trabajador.objects.all().exclude(pk=self.request.user.trabajador.pk).values_list('pk', 'nombre').union(
-            PersonaExterna.objects.all().values_list('pk', 'nombre')
-        )
-
-        self.fields['autores'].choices = list(autores)
+        self.fields['autores'].choices = trabajadores_personas_choices(trabajador=self.request.user.trabajador)
 
 
 class FormCrearPonenciaRealizada(BSModalForm):  
@@ -165,12 +156,7 @@ class FormCrearTribunal(BSModalForm):
     
     def __init__(self, *args, **kwargs):
         super(FormCrearTribunal, self).__init__(*args, **kwargs)
-        
-        miembros = Trabajador.objects.all().exclude(pk=self.request.user.trabajador.pk).values_list('pk', 'nombre').union(
-            PersonaExterna.objects.all().values_list('pk', 'nombre')
-        )
-
-        self.fields['miembros'].choices = list(miembros)
+        self.fields['miembros'].choices = trabajadores_personas_choices(trabajador=self.request.user.trabajador)
 
 
 class FormCrearComision(BSModalForm):
@@ -192,12 +178,7 @@ class FormCrearComision(BSModalForm):
     
     def __init__(self, *args, **kwargs):
         super(FormCrearComision, self).__init__(*args, **kwargs)
-        
-        integrantes = Trabajador.objects.all().values_list('pk', 'nombre').union(
-            PersonaExterna.objects.all().values_list('pk', 'nombre')
-        )
-
-        self.fields['integrantes'].choices = list(mieintegrantesmbros)
+        self.fields['integrantes'].choices = trabajadores_personas_choices()
 
 
 class FormCrearTutoria(BSModalForm):

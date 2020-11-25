@@ -64,6 +64,7 @@ class CrearContacto(BSModalCreateView):
         else:
             return super(CrearContacto, self).post(request, *args, **kwargs)
 
+
 class CrearAreaInteres(BSModalCreateView):
     template_name = 'crud/crear_area_de_interes.html'
     form_class = frm_trabajador.FormCrearAreaInteres
@@ -97,6 +98,7 @@ class CrearAreaInteres(BSModalCreateView):
             return JsonResponse(data)
         else:
             return super(CrearAreaInteres, self).post(request, *args, **kwargs)
+
 
 class CrearMunicipio(BSModalCreateView):
     template_name = 'crud/crear_municipio.html'
@@ -145,7 +147,7 @@ class PerfilTrabajador(FormView):
         
         #print(Tesis.objects.filter(content_type_id=self.request.user.trabajador.id).count())
 
-        paginador_de_tesis = Paginator(Tesis.objects.filter(content_type_id=self.request.user.trabajador.id), 15)
+        paginador_de_tesis = Paginator(Tesis.objects.filter(object_id=self.request.user.trabajador.id), 15)
         pagina_de_tesis = self.request.GET.get('page_tesis')
 
         paginador_de_tutorias = Paginator(self.request.user.trabajador.tutorias.all(), 15)
