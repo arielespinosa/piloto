@@ -155,6 +155,11 @@
       formURL: "{% url 'trabajador:crear_centro_de_estudios' %}",
     });
 
+    $("#crear_especialidad").modalForm({
+      formURL: "{% url 'trabajador:crear_especialidad' %}", 
+    });
+
+
     $("#crear_articulo").modalForm({
       formURL: "{% url 'trabajador:crear_articulo' %}",
     });
@@ -175,7 +180,15 @@
       formURL: "{% url 'trabajador:crear_servicio' %}",
     });
 
+    $("#crear_premio_cientifico").modalForm({
+      formURL: "{% url 'trabajador:crear_premio_cientifico' %}",
+    });
+
     // Crear -----------------------------------
+    $("#crear_persona_externa").modalForm({
+      formURL: "{% url 'trabajador:crear_persona_externa' %}", 
+    });
+
     $("#crear_evento").modalForm({
       formURL: "{% url 'trabajador:crear_evento' %}", 
     });

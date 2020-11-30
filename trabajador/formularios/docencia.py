@@ -73,6 +73,66 @@ class FormCrearEvento(BSModalForm):
         return False
 
 
+class FormCrearCertificacion(BSModalForm):  
+
+    class Meta:
+        model = Certificacion
+        fields = '__all__'
+
+
+class FormCrearCurso(BSModalForm):  
+    profesor = forms.ChoiceField(choices=[])
+
+    class Meta:
+        model = Curso
+        fields = [
+            'titulo', 
+            'cantidad_horas', 
+            'centro_estudios',
+            'creditos', 
+            'descripcion',
+            'certificacion'
+        ]
+
+        widgets = {
+            'centro_estudios':forms.Select(attrs={'id': 'id_centro_estudios'}),
+        }
+    
+    @property
+    def is_empity(self):
+        self.is_valid()
+        print(self.clean())
+        print(self.fields.keys())
+        return False
+
+    def __init__(self, *args, **kwargs):
+        super(FormCrearCurso, self).__init__(*args, **kwargs)
+        self.fields['profesor'].choices = trabajadores_personas_choices(self.request.user.trabajador)
+
+
+class FormCrearCursoRealizado(BSModalForm):  
+    profesor = forms.ChoiceField(choices=[])
+
+    class Meta:
+        model = CursoRealizado
+        fields = '__all__'
+        widgets = {
+            'fecha_terminacion': DateInput(),
+            'fecha_inicio': DateInput(),
+        }
+    
+    @property
+    def is_empity(self):
+        self.is_valid()
+        print(self.clean())
+        print(self.fields.keys())
+        return False
+
+    def __init__(self, *args, **kwargs):
+        super(FormCrearCursoRealizado, self).__init__(*args, **kwargs)
+        self.fields['profesor'].choices = trabajadores_personas_choices(self.request.user.trabajador)
+
+
 class FormCrearOponencia(BSModalForm):  
     oponentes = forms.MultipleChoiceField(choices=[], required=False)
     elemento = forms.ChoiceField(choices=[])

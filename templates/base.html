@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{% static 'js/amaranjs/css/amaran.min.css' %}" type="text/css"/>
   <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css"/>
   <link rel="stylesheet" href="{% static 'js/jquery-ui/jquery-ui.min.css' %}" type="text/css"/>
+  <link rel="stylesheet" href="{% static 'css/own.css' %}" type="text/css"/>
 
   <style type="text/css">
     .asteriskField {
@@ -74,7 +75,7 @@
   <section class="vbox">
     <!-- Modal -->
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content"></div>
       </div>
     </div>
@@ -89,7 +90,7 @@
     {% if not user.is_authenticated %}
     <header class="bg-dark dk header navbar navbar-fixed-top-xs">
       <div class="navbar-header aside-md">
-        <a href="#" class="navbar-brand" data-toggle="fullscreen"><img src="{% static 'images/logo.png' %}" class="m-r-sm">CFA</a>
+        <a href="#" class="navbar-brand" data-toggle="fullscreen"><img src="{% static 'images/cfa_logo_2.png' %}" class="m-r-sm">CFA</a>
       </div>      
     </header> 
     {% else %}      

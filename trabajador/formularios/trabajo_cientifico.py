@@ -2,13 +2,14 @@ from datetime import date
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from trabajador.modelos.trabajo_cientifico import (
-    Tesis, Proyecto, Articulo, Servicio, Libro, Resultado
+    Tesis, Proyecto, Articulo, Servicio, Libro, Resultado,
+    PremioElementoCientifico
 )
 from trabajador.modelos.trabajadores import Trabajador, PersonaExterna
 from trabajador.modelos.nomencladores import *
 from django.db.models import Q
 from bootstrap_modal_forms.forms import BSModalForm
-from .utils import trabajadores_personas_choices
+from .utils import trabajadores_personas_choices, elementos_cientificos_choices
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -57,6 +58,7 @@ class FormCrearTesis(BSModalForm):
         widgets = {
             'fecha_inicio': DateInput(),
             'fecha_culminacion': DateInput(),
+            'estudiante': forms.Select(attrs={'id': 'id_estudiante'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -91,6 +93,7 @@ class FormCrearProyecto(BSModalForm):
         exclude = ['content_type', 'object_id']
         widgets = {
             'descripcion': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
+            'fecha_aprobado': DateInput(),
             'fecha_inicio': DateInput(),
             'fecha_terminacion': DateInput(),
         }
@@ -155,7 +158,7 @@ class FormCrearResultado(BSModalForm):
 
 class FormCrearServicio(BSModalForm):
     responsable = forms.ChoiceField(choices=[])
-    participantes = forms.MultipleChoiceField(choices=[])
+    participantes = forms.MultipleChoiceField(choices=[], required=False)
     
     class Meta:
         model = Servicio
@@ -196,8 +199,21 @@ class FormCrearServicio(BSModalForm):
             raise forms.ValidationError("La fecha de terminación no pude ser menor a la fecha de inicio.")
         """
 
-            
 
 
+class FormCrearPremioElementoCientifico(BSModalForm):
+    elemento = forms.ChoiceField(choices=[])
+    participantes = forms.MultipleChoiceField(choices=[], required=False)
+    
+    class Meta:
+        model = PremioElementoCientifico
+        exclude = ['content_type', 'object_id']
+        widgets = {            
+            'fecha': DateInput(),
+        }
 
+    def __init__(self, *args, **kwargs):
+        super(FormCrearPremioElementoCientifico, self).__init__(*args, **kwargs)
+        self.fields['elemento'].choices = elementos_cientificos_choices()
+ 
 

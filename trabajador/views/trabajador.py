@@ -15,7 +15,6 @@ from bootstrap_modal_forms.generic import (
 from trabajador.mixins import BSModalAjaxFormMixin
 from trabajador.formularios import trabajador as frm_trabajador
 from trabajador.modelos.trabajadores import Trabajador, PersonaExterna
-from trabajador.modelos.hoja_de_vida import Certificacion
 from trabajador.modelos.trabajo_cientifico import Tesis
 from django_pdfkit import PDFView
 
@@ -28,6 +27,36 @@ class TrabajadorCV(PDFView):
         context = super().get_context_data(**kwargs)
         context['trabajador'] = self.request.user.trabajador        
         return context
+
+
+class CrearPersonaExterna(BSModalCreateView):
+    template_name = 'crud/crear_persona_externa.html'
+    form_class = frm_trabajador.FormCrearPersonaExterna
+    success_message = 'La persona se añadio satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearPersonaExterna, self).get_context_data(**kwargs)
+        context.update({
+            'form': self.get_form(self.form_class),
+        })
+        return context
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'title': "Notificación",
+            'message': self.success_message,
+        }
+
+        form = self.form_class(request.POST)
+        form.request = request
+
+        if form.is_valid():            
+            contacto = form.save()
+            contacto.save()
+            return JsonResponse(data)
+        else:
+            return super(CrearPersonaExterna, self).post(request, *args, **kwargs)
 
 
 class CrearContacto(BSModalCreateView):
@@ -159,8 +188,8 @@ class PerfilTrabajador(FormView):
         paginador_de_oponencias = Paginator(self.request.user.trabajador.oponencias.all(), 15)
         pagina_de_oponencias = self.request.GET.get('page_oponencias')
 
-        paginador_de_certificaciones = Paginator(self.request.user.trabajador.certificaciones.all(), 15)
-        pagina_de_certificaciones = self.request.GET.get('page_certificaciones')
+        #paginador_de_certificaciones = Paginator(self.request.user.trabajador.certificaciones.all(), 15)
+        #pagina_de_certificaciones = self.request.GET.get('page_certificaciones')
         
         paginador_de_articulos = Paginator(self.request.user.trabajador.articulos.all(), 15)
         pagina_de_articulos = self.request.GET.get('page_articulos')
@@ -195,8 +224,8 @@ class PerfilTrabajador(FormView):
         if paginador_de_articulos.count > 0:
             context['articulos'] = paginador_de_articulos.get_page(pagina_de_articulos)
        
-        if paginador_de_certificaciones.count > 0:
-            context['certificaciones'] = paginador_de_certificaciones.get_page(pagina_de_certificaciones)
+        #if paginador_de_certificaciones.count > 0:
+            #context['certificaciones'] = paginador_de_certificaciones.get_page(pagina_de_certificaciones)
 
         if paginador_de_oponencias.count > 0:
             context['oponencias'] = paginador_de_oponencias.get_page(pagina_de_oponencias)
@@ -218,8 +247,8 @@ class PerfilTrabajador(FormView):
             context['active'] = 'tesis'
         elif pagina_de_libros:
             context['active'] = 'libros'
-        elif pagina_de_certificaciones:
-            context['active'] = 'certificaciones'
+        #elif pagina_de_certificaciones:
+            #context['active'] = 'certificaciones'
         elif pagina_de_oponencias:
             context['active'] = 'oponencias'
         elif pagina_de_proyectos:
@@ -256,6 +285,8 @@ class ModificarTrabajador(BSModalUpdateView):
             return response
 
 
+"""
+Movido a docencia
 # Hoja de vida ----------------------------------------------
 class CrearCertificacion(BSModalCreateView):
     template_name = 'crud/crear_certificacion.html'
@@ -350,5 +381,5 @@ class ListaCertificaciones(ListView):
             'certificaciones': self.get_queryset,
         })
         return context
-    
+"""  
 

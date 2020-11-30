@@ -1,4 +1,8 @@
 from trabajador.modelos.trabajadores import Trabajador, PersonaExterna
+from trabajador.modelos.trabajo_cientifico import(
+    Tesis, Articulo, Resultado, Proyecto, Libro, Servicio
+)
+
 
 def trabajadores_personas_choices(trabajador=None):
     if trabajador:      
@@ -8,3 +12,12 @@ def trabajadores_personas_choices(trabajador=None):
     choices += [(p.pk, '{0} {1} {2}'.format(p.nombre, p.apellido1, p.apellido2)) for p in PersonaExterna.objects.all()]
     return choices
 
+
+def elementos_cientificos_choices():      
+    choices = [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Tesis.objects.all()]       
+    choices += [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Articulo.objects.all()]       
+    choices += [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Resultado.objects.all()]       
+    choices += [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Proyecto.objects.all()]       
+    choices += [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Libro.objects.all()]       
+
+    return choices

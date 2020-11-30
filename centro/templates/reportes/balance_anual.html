@@ -1,0 +1,330 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css"/>
+<link rel="stylesheet" href="{% static 'css/font.css' %}" type="text/css"/>
+<link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css"/>
+<link rel="stylesheet" href="{% static 'js/calendar/bootstrap_calendar.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'js/datatables_2/datatables.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'js/fuelux/fuelux.css' %}" type="text/css"/>
+
+<style type="text/css">
+
+  .pagination > li > a, .pagination > li > span {
+    color: #717171;
+    font-weight: bold;
+  }
+
+  .pagination > li > a:hover{
+    color: #333;
+    font-weight: bold;
+  }
+  
+  #datos_trabajador_activo.panel-body > .row > .col-lg-5 > .row {
+    font-size: 15px;
+    margin-left: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  #datos_trabajador_activo.panel-body > .row > .col-lg-7 > .row {
+    font-size: 15px;
+    margin-left: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .text-success{
+    color: chartreuse;
+  }
+
+</style>
+{% endblock %}
+
+
+{% block content_wrapper %}
+<section class="vbox bg-white">
+  <header class="header b-b b-light hidden-print">
+    <img src="" class="img-circle">
+  </header>
+  <section class="scrollable wrapper">
+    <i class="fa fa-apple fa fa-3x"></i>
+    <div class="row">
+      <div class="col-xs-6">
+        <img src="" class="img-circle">
+        <h4>CFA</h4>
+        <p><a href="http://www.apple.com">www.apple.com</a></p>
+        <p>1 Infinite Loop <br>
+          95014 Cuperino, CA<br>
+          United States
+        </p>
+        <p>
+          Telephone:  800-692-7753<br>
+          Fax:  800-692-7753
+        </p>
+      </div>
+      <div class="col-xs-6 text-right">
+        <p class="h4">#9048392</p>
+        <h5>29th Mar 2013</h5>           
+      </div>
+    </div>          
+    <div class="well m-t">
+      <div class="row">
+        <div class="col-xs-6">
+          <strong>TO:</strong>
+          <h4>John Smith</h4>
+          <p>
+            2nd Floor<br>
+            St John Street, Aberdeenshire 2541<br>
+            United Kingdom<br>
+            Phone: 031-432-678<br>
+            Email: youemail@gmail.com<br>
+          </p>
+        </div>
+        <div class="col-xs-6">
+          <strong>SHIP TO:</strong>
+          <h4>John Smith</h4>
+          <p>
+            2nd Floor<br>
+            St John Street, Aberdeenshire 2541<br>
+            United Kingdom<br>
+            Phone: 031-432-678<br>
+            Email: youemail@gmail.com<br>
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <h4 class="text-uc text-success font-bold"><i class="fa fa-flask" style="font-size: 15px;"></i>  Proyectos</h4>  
+    <div class="line"></div>   
+      {% if proyectos.count > 0 %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="60">LIDER</th>
+              <th width="60">#</th>
+              <th>PROYECTO</th>
+              <th width="70">ESTADO</th>
+              <th width="70">ALCANCE</th>
+              <th width="250">JEFE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for proyecto in proyectos %}
+              <tr>
+                <td>
+                  {% if proyecto.dirigido_por_cfa %}
+                    <div class="fa fa-coffee"></i>
+                  {% endif %}
+                </td>
+                <td>{{proyecto.pk}}</td>
+                <td>{{proyecto}}</td>
+                <td>
+                  {% if proyecto.terminado %}
+                    <div class="fa fa-check"></i>
+                  {% elif proyecto.en_desarrollo %}
+                    <div class="fa fa-thumbs-up"></i>
+                  {% elif proyecto.atrasado %}
+                    <div class="fa fa-thumbs-down"></i>
+                  {% elif proyecto.para_proximo_ano %}
+                    {{proximo_ano}}
+                  {% endif %}
+                </td>
+                <td>
+                  {% if proyecto.tipo == "I" %}
+                    <div class="fa fa-globe"></i>
+                  {% endif %}
+                </td>
+                <td>{{proyecto.jefe}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    <br><br>
+
+    <h4 class="text-uc text-info font-bold"><i class="fa fa-trophy" style="font-size: 15px;"></i>  Resultados</h4>  
+    <div class="line"></div> 
+      {% if resultados.count > 0 %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="60">LIDER</th>
+              <th width="60">#</th>
+              <th>RESULTADO</th>
+              <th>APROBADO CC</th>
+              <th>NIVEL</th>
+              <th width="250">RESPONSABLE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for resultado in resultados %}
+              <tr>
+                <td>
+                  {% if resultado.dirigido_por_cfa %}
+                    <div class="fa fa-coffee"></i>
+                  {% endif %}
+                </td>
+                <td>{{resultado.pk}}</td>
+                <td>{{resultado}}</td>
+                <td>{{resultado.aprobado_cc}}</td>
+                <td>{{resultado.nivel}}</td>
+                <td></td>
+              </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+    <br><br>
+    <h4 class="text-uc text-info font-bold"><i class="fa fa-book" style="font-size: 15px;"></i>  Publicaciones</h4>
+    <div class="line"></div>   
+      {% if publicaciones.count > 0 %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="60">ARBITRADA</th>
+              <th width="60">#</th>
+              <th>ARTÍCULO</th>
+              <th>WEB</th>
+              <th width="250">AUTORES</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for publicacion in publicaciones %}
+              <tr>
+                <td>
+                  {% if publicacion.arbitrado %}
+                    <div class="fa fa-tags"></i>
+                  {% endif %}
+                </td>
+                <td>{{publicacion.pk}}</td>
+                <td>{{publicacion}}</td>
+                <td>{{publicacion.referencia_web}}</td>
+                <td>
+                  {% for autor in publicacion.autores.all %}
+                    {{ autor }} <br>
+                  {% endfor %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    
+    <br><br>
+    <h4 class="text-uc text-info font-bold"><i class="fa fa-glass" style="font-size: 15px;"></i>  Eventos</h4>
+    <div class="line"></div> 
+    {% if eventos.count > 0 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="60">#</th>
+            <th>EVENTO</th>
+            <th>LUGAR</th>
+            <th width="250">PARTICIPANTES</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for evento in eventos %}
+            <tr>
+              <td>
+              <td>{{evento.pk}}</td>
+              <td>{{evento}}</td>
+              <td>{{evento.lugar}}</td>
+              <td>{{evento.participantes.count}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    <!--Arreglar este-->
+    <br><br>
+    <h4 class="text-uc text-info font-bold"><i class="fa fa-glass" style="font-size: 15px;"></i>  Premios</h4>
+    <div class="line"></div> 
+    {% if premios.count > 0 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="60">#</th>
+            <th>PREMIADO</th>
+            <th>PREMIO</th>
+            <th width="250">NIVEL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for premio in premios %}
+            <tr>
+              <td>
+              <td>{{premio.pk}}</td>
+              <td>{{premio.elemento}}</td>
+              <td>{{premio}}</td>
+              <td>{{premio.premio.nivel}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    
+    <br><br>
+    <h4 class="text-uc text-info font-bold"><i class="fa fa-glass" style="font-size: 15px;"></i>  Servicios</h4>
+    <div class="line"></div> 
+    {% if servicios.count > 0 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="60">#</th>
+            <th>PREMIADO</th>
+            <th>PREMIO</th>
+            <th width="250">NIVEL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for servicio in servicios %}
+            <tr>
+              <td>
+              <td>{{evento.pk}}</td>
+              <td>{{evento}}</td>
+              <td>{{evento.lugar}}</td>
+              <td>{{evento.participantes.count}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+  </section>
+</section>
+<a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+
+
+
+
+
+{% endblock %}
+
+{% block content_footer %}
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/jquery3.2.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/tether.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/app.plugin.js' %}"></script>
+<script src="{% static 'fontawesome/js/all.js' %}"></script>
+<script src="{% static 'js/datatables_2/datatables.min.js' %}"></script>
+<script src="{% static 'js/calendar/bootstrap_calendar.js' %}"></script>
+<script src="{% static 'js/calendar/demo.js' %}"></script>
+<script src="{% static 'js/fuelux/fuelux.js' %}"></script>
+<script src="{% static 'js/trabajadores.js' %}"></script>
+
+{% endblock %}   

@@ -1,18 +1,271 @@
 
-<ul class="nav"> 
-  <li>
-    <a href="{% url 'centro:plan_de_trabajo' %}">
-      <i class="fa fa-file icon"></i>
-      <span>Plan de Trabajo</span>
-    </a>         
-  </li>         
-  <li>
-    <a href="{% url 'centro:inventario' %}">
-      <b class="badge bg-info pull-right">3</b>
-      <i class="fa fa-trophy icon"></i>
-      <span>Inventario</span>
-    </a>         
-  </li>               
+ <ul class="nav">
+  <li class="active">
+    <a href="{% url 'centro:inicio' %}" class="active">
+      <i class="fa fa-home icon">
+        <b class="bg-danger"></b>
+      </i>
+      <span>Centro</span>
+    </a>
+    <ul class="nav lt">
+      <li>
+        <a class="menu" href="{% url 'centro:inicio' %}" >
+          <i class="fa fa-user icon"></i>
+          <span>Objetivos</span>
+        </a>
+      </li>      
+    </ul>
+  </li>
+  <li >
+    <a href="#recursos_humanos"  >
+      <i class="fa fa-users icon">
+        <b class="bg-warning"></b>
+      </i>
+      <span class="pull-right">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>
+      <span>Recursos Humanos</span>
+    </a>
+    <ul class="nav lt">
+      <li >
+        <a class="menu" href="" >
+          <i class="fa fa-user icon"></i>
+          <span>Trabajadores</span>
+        </a>
+      </li>
+      <li >
+        <a class="menu" href="#" >
+          <i class="fa fa-angle-right text"></i>
+          <span>Otro 1</span>
+        </a>
+      </li>
+      <li >
+        <a class="menu" href="#" >
+          <span>Otro 2</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li >
+    <a href="#comercial"  >
+      <i class="fa fa-balance-scale-right icon">
+        <b class="bg-success"></b>
+      </i>
+      <span class="pull-right">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>
+      <span>Comercial</span>
+    </a>
+    <ul class="nav lt">
+      <li >
+        <a href="" >
+          <i class="fa fa-angle-right"></i>
+          <span>Contratos</span>
+        </a>
+      </li>
+      <li >
+        <a href="" >
+          <b class="badge bg-info pull-right">369</b>
+          <i class="fa fa-angle-right"></i>
+          <span>Clientes</span>
+        </a>
+      </li>
+      <li >
+        <a href="grid.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Grid</span>
+        </a>
+      </li>
+      <li >
+        <a href="widgets.html" >
+          <b class="badge  pull-right">8</b>
+          <i class="fa fa-angle-right"></i>
+          <span>Widgets</span>
+        </a>
+      </li>
+      <li >
+        <a href="components.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Components</span>
+        </a>
+      </li>
+      <li >
+        <a href="list.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>List group</span>
+        </a>
+      </li>
+      <li >
+        <a href="#table" >
+          <i class="fa fa-angle-down text"></i>
+          <i class="fa fa-angle-up text-active"></i>
+          <span>Table</span>
+        </a>
+        <ul class="nav bg">
+          <li >
+            <a href="table-static.html" >
+              <i class="fa fa-angle-right"></i>
+              <span>Table static</span>
+            </a>
+          </li>
+          <li >
+            <a href="table-datatable.html" >
+              <i class="fa fa-angle-right"></i>
+              <span>Datatable</span>
+            </a>
+          </li>
+          <li >
+            <a href="table-datagrid.html" >
+              <i class="fa fa-angle-right"></i>
+              <span>Datagrid</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li >
+        <a href="#form" >
+          <i class="fa fa-angle-down text"></i>
+          <i class="fa fa-angle-up text-active"></i>
+          <span>Form</span>
+        </a>
+        <ul class="nav bg">
+          <li >
+            <a href="form-elements.html" >
+              <i class="fa fa-angle-right"></i>
+              <span>Form elements</span>
+            </a>
+          </li>
+          <li >
+            <a href="form-validation.html" >
+              <i class="fa fa-angle-right"></i>
+              <span>Form validation</span>
+            </a>
+          </li>
+          <li >
+            <a href="form-wizard.html" >
+              <i class="fa fa-angle-right"></i>
+              <span>Form wizard</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li >
+        <a href="chart.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Chart</span>
+        </a>
+      </li>
+      <li >
+        <a href="fullcalendar.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Fullcalendar</span>
+        </a>
+      </li>
+      <li >
+        <a href="portlet.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Portlet</span>
+        </a>
+      </li>
+      <li >
+        <a href="timeline.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Timeline</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li >
+    <a href="#produccion"  >
+      <i class="fa fa-gavel icon">
+        <b class="bg-primary"></b>
+      </i>
+      <span class="pull-right">
+        <i class="fa fa-angle-down text"></i>
+        <i class="fa fa-angle-up text-active"></i>
+      </span>
+      <span>Producci&oacute;n</span>
+    </a>
+    <ul class="nav lt">
+      <li >
+        <a href="" >
+          <i class="fa fa-angle-right"></i>
+          <span>Ordenes en proceso</span>
+        </a>
+      </li>
+      <li >
+        <a href="#" >
+          <i class="fa fa-angle-right"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+      <li >
+        <a href="invoice.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Invoice</span>
+        </a>
+      </li>
+      <li >
+        <a href="intro.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Intro</span>
+        </a>
+      </li>
+      <li >
+        <a href="master.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Master</span>
+        </a>
+      </li>
+      <li >
+        <a href="gmap.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Google Map</span>
+        </a>
+      </li>
+      <li >
+        <a href="jvectormap.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Vector Map</span>
+        </a>
+      </li>
+      <li >
+        <a href="signin.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Signin</span>
+        </a>
+      </li>
+      <li >
+        <a href="signup.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Signup</span>
+        </a>
+      </li>
+      <li >
+        <a href="404.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>404</span>
+        </a>
+      </li>
+      <li >
+        <a href="docs.html" >
+          <i class="fa fa-angle-right"></i>
+          <span>Documentation</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li >
+    <a href=""  >
+      <b class="badge bg-danger pull-right">3</b>
+      <i class="fa fa-cogs icon">
+        <b class="bg-primary dker"></b>
+      </i>
+      <span>Configuraci&oacute;n</span>
+    </a>
+  </li>
 </ul>
 
 

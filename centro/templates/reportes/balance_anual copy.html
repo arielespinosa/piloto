@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'js/calendar/bootstrap_calendar.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'js/datatables_2/datatables.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'js/fuelux/fuelux.css' %}" type="text/css"/>
+
+<style type="text/css">
+
+  .pagination > li > a, .pagination > li > span {
+    color: #717171;
+    font-weight: bold;
+  }
+
+  .pagination > li > a:hover{
+    color: #333;
+    font-weight: bold;
+  }
+  
+  #datos_trabajador_activo.panel-body > .row > .col-lg-5 > .row {
+    font-size: 15px;
+    margin-left: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  #datos_trabajador_activo.panel-body > .row > .col-lg-7 > .row {
+    font-size: 15px;
+    margin-left: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .text-success{
+    color: chartreuse;
+  }
+
+</style>
+{% endblock %}
+
+
+{% block content_wrapper %}
+<section class="vbox bg-white">
+  <header class="header b-b b-light hidden-print">
+    <img src="" class="img-circle">
+  </header>
+  <section class="scrollable wrapper">
+    <i class="fa fa-apple fa fa-3x"></i>
+    <div class="row">
+      <div class="col-xs-6">
+        <img src="" class="img-circle">
+        <h4>CFA</h4>
+        <p><a href="http://www.apple.com">www.apple.com</a></p>
+        <p>1 Infinite Loop <br>
+          95014 Cuperino, CA<br>
+          United States
+        </p>
+        <p>
+          Telephone:  800-692-7753<br>
+          Fax:  800-692-7753
+        </p>
+      </div>
+      <div class="col-xs-6 text-right">
+        <p class="h4">#9048392</p>
+        <h5>29th Mar 2013</h5>           
+      </div>
+    </div>          
+    <div class="well m-t">
+      <div class="row">
+        <div class="col-xs-6">
+          <strong>TO:</strong>
+          <h4>John Smith</h4>
+          <p>
+            2nd Floor<br>
+            St John Street, Aberdeenshire 2541<br>
+            United Kingdom<br>
+            Phone: 031-432-678<br>
+            Email: youemail@gmail.com<br>
+          </p>
+        </div>
+        <div class="col-xs-6">
+          <strong>SHIP TO:</strong>
+          <h4>John Smith</h4>
+          <p>
+            2nd Floor<br>
+            St John Street, Aberdeenshire 2541<br>
+            United Kingdom<br>
+            Phone: 031-432-678<br>
+            Email: youemail@gmail.com<br>
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <h3 class="text-uc text-success font-bold"><i class="fa fa-flask" style="font-size: 20px;"></i>  Proyectos</h3>  
+    <div class="line"></div> 
+    <!-- PROYECTOS TERMINADOS -->
+    <h5 class="text-uc font-bold">terminados</h5>
+      {% if proyectos_terminados.count > 0 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="60">#</th>
+            <th>PROYECTO</th>
+            <th width="250">JEFE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for proyecto in proyectos_terminados %}
+            <tr>
+              <td>{{proyecto.pk}}</td>
+              <td>{{proyecto}}</td>
+              <td>{{proyecto.jefe}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table> 
+      {% else %}
+        <h5 class="text-uc font-bold">no hay terminados</h5>
+      {% endif %}
+    
+    <!-- PROYECTOS EN DESARROLLO -->
+    <h5 class="text-uc font-bold">en desarrollo</h5>  
+      {% if proyectos_en_desarrollo.count > 0 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="60">#</th>
+            <th>PROYECTO</th>
+            <th width="250">JEFE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for proyecto in proyectos_en_desarrollo %}
+            <tr>
+              <td>1</td>
+              <td>{{proyecto}}</td>
+              <td>{{proyecto.jefe}}</td>
+            </tr>      
+          {% endfor %}
+        </tbody>
+      </table> 
+      {% else %}
+        <h5 class="text-uc font-bold">no hay en desarrollo</h5>
+      {% endif %}
+
+    <h5 class="text-uc font-bold">aprobados para comenzar en el {{proximo_ano}}</h5>           
+
+    <h5 class="text-uc font-bold">colaboración internacional</h5>           
+      {% if proyectos_internacionales.count > 0 %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="60">#</th>
+            <th>PROYECTO</th>
+            <th width="250">JEFE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for proyecto in proyectos_internacionales %}
+            <tr>
+              <td>1</td>
+              <td>{{proyecto}}</td>
+              <td>{{proyecto.jefe}}</td>
+            </tr>      
+          {% endfor %}
+        </tbody>
+      </table> 
+      {% else %}
+        <h5 class="text-uc font-bold">no hay internacional</h5>
+      {% endif %}
+
+    <h3 class="text-uc text-info font-bold">Resultados</h3>  
+    <div class="line"></div> 
+    <h5 class="text-uc font-bold">aprobados por el Consejo Científico</h5>           
+    
+    
+    <h5 class="text-uc font-bold">terminados</h3>           
+
+    <h5 class="text-uc font-bold">Publicaciones</h3>    
+      
+      
+    <div class="line"></div> 
+
+  </section>
+</section>
+<a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+{% endblock %}
+
+{% block content_footer %}
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/datatables_2/datatables.min.js' %}"></script>
+<script src="{% static 'js/calendar/bootstrap_calendar.js' %}"></script>
+<script src="{% static 'js/calendar/demo.js' %}"></script>
+<script src="{% static 'js/fuelux/fuelux.js' %}"></script>
+<script src="{% static 'js/trabajadores.js' %}"></script>
+
+
+{% endblock %}   

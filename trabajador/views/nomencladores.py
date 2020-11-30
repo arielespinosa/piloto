@@ -73,6 +73,37 @@ class ListaCentrosEstudios(ListView):
         })
         return context
 
+
+class CrearEspecialidad(BSModalCreateView):
+    template_name = 'crud/crear_especialidad.html'
+    form_class = forms.FormCrearEspecialidad
+    success_message = 'La especialidad se añadio satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearEspecialidad, self).get_context_data(**kwargs)
+        context.update({
+            'form': self.get_form(self.form_class),
+        })
+        return context
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'title': "Notificación",
+            'message': self.success_message,
+        }
+
+        form = self.form_class(request.POST)
+        form.request = request
+
+        if form.is_valid():            
+            especialidad = form.save()
+            especialidad.save()
+            return JsonResponse(data)
+        else:
+            return super(CrearEspecialidad, self).post(request, *args, **kwargs)
+
+
 class CrearPremio(BSModalCreateView):
     template_name = 'crud/crear_premio.html'
     form_class = forms.FormCrearPremio
@@ -90,7 +121,6 @@ class CrearPremio(BSModalCreateView):
         data = {
             'title': "Notificación",
             'message': self.success_message,
-            'premio': {},
         }
 
         form = self.form_class(request.POST)
@@ -241,6 +271,7 @@ class CrearCentroCosto(BSModalCreateView):
         else:
             return super(CrearCentroCosto, self).post(request, *args, **kwargs)
 
+
 class CrearEspecialidad(BSModalCreateView):
     template_name = 'crud/crear_especialidad.html'
     form_class = forms.FormCrearEspecialidad
@@ -249,7 +280,7 @@ class CrearEspecialidad(BSModalCreateView):
     success_url = reverse_lazy('trabajador:perfil')
 
     def get_context_data(self, **kwargs):
-        context = super(CrearCentroCosto, self).get_context_data(**kwargs)
+        context = super(CrearEspecialidad, self).get_context_data(**kwargs)
         context.update({
             'form': self.get_form(self.form_class),
         })
@@ -275,3 +306,7 @@ class CrearEspecialidad(BSModalCreateView):
             return JsonResponse(data)
         else:
             return super(CrearCentroCosto, self).post(request, *args, **kwargs)
+
+
+
+

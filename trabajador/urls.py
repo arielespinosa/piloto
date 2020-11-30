@@ -3,6 +3,7 @@ from .views import trabajo_cientifico as v_trabajo_cientifico
 from .views import trabajador as v_trabajador
 from .views import docencia as v_docencia
 from .views import nomencladores as v_nomencladores
+
 from django_pdfkit import PDFView
 
 
@@ -10,13 +11,15 @@ app_name = 'trabajador'
 
 urlpatterns = [
     path('', v_trabajador.PerfilTrabajador.as_view(), name='perfil'),
+    path('crear/persona_externa/', v_trabajador.CrearPersonaExterna.as_view(), name="crear_persona_externa"),
     path('modificar/<int:pk>', v_trabajador.ModificarTrabajador.as_view(), name='modificar_datos_personales'),
-    path('crear/certificacion/', v_trabajador.CrearCertificacion.as_view(), name="crear_certificacion"),
+    path('crear/certificacion/', v_docencia.CrearCertificacion.as_view(), name="crear_certificacion"),
     path('cv/', v_trabajador.TrabajadorCV.as_view(), name='exportar_cv'),
 
     # NOMENCLADORES ----------
     # Crear
     path('crear/premio/', v_nomencladores.CrearPremio.as_view(), name='crear_premio'),
+    path('crear/especialidad/', v_nomencladores.CrearEspecialidad.as_view(), name='crear_especialidad'),
     path('crear/entidad/', v_nomencladores.CrearEntidad.as_view(), name='crear_entidad'),
     path('crear/programa/', v_nomencladores.CrearPrograma.as_view(), name='crear_programa'),
     path('crear/cliente/', v_nomencladores.CrearCliente.as_view(), name='crear_cliente'),
@@ -25,7 +28,6 @@ urlpatterns = [
     path('centros_de_estudios/', v_nomencladores.ListaCentrosEstudios.as_view(), name="centros_de_estudios"),
     path('ver/centros_de_estudios/<int:pk>', v_nomencladores.VerCentroEstudios.as_view(), name="ver_centro_de_estudios"),
     path('eliminar/centros_de_estudios/<int:pk>', v_nomencladores.EliminarCentroEstudios.as_view(), name="eliminar_centro_de_estudios"),
-
 
     # TRABAJO CIENTIFICO -------------
     # Crear
@@ -39,7 +41,8 @@ urlpatterns = [
     path('crear/libro/', v_trabajo_cientifico.CrearLibro.as_view(), name='crear_libro'),
     path('crear/resultado/', v_trabajo_cientifico.CrearResultado.as_view(), name='crear_resultado'),
     path('crear/servicio/', v_trabajo_cientifico.CrearServicio.as_view(), name='crear_servicio'),
-
+    path('crear/premio_cientifico/', v_trabajo_cientifico.CrearPremioElementoCientifico.as_view(), name='crear_premio_cientifico'),
+        
     # Ver
     path('ver/proyecto/<int:pk>', v_trabajo_cientifico.VerProyecto.as_view(), name='ver_proyecto'),
     path('ver/articulo/<int:pk>', v_trabajo_cientifico.VerArticulo.as_view(), name='ver_articulo'),

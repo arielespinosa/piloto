@@ -1,0 +1,11 @@
+
+#div_id_estudiante > div.controls, 
+#div_id_centro_estudios > div.controls,
+#div_id_especialidad > div.controls{
+    display: table;
+}
+
+.ui-dialog{
+    z-index: 2050;
+}
+

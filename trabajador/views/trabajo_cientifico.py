@@ -218,7 +218,7 @@ class CrearArticulo(BSModalCreateView):
          }
 
         # Añadir el centro creado
-        form_crear_articulo = self.form_class(request.POST)
+        form_crear_articulo = self.get_form(self.form_class)
         form_crear_articulo.request = request
 
         if form_crear_articulo.is_valid():            
@@ -432,5 +432,80 @@ class EliminarServicio(BSModalAjaxFormMixin, BSModalDeleteView):
     template_name = 'eliminar_elemento.html'
     success_message = 'El servicio fue eliminado de su CV satisfactoriamente.'
     success_url = reverse_lazy('trabajador:perfil')
+
+
+
+class CrearPremioElementoCientifico(BSModalCreateView):
+    template_name = 'crud/crear_premio_cientifico.html'
+    form_class = forms.FormCrearPremioElementoCientifico
+    success_message = 'El premio asociado se añadio satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+    def to_dict(self, proyecto):
+        modelo = model_to_dict(proyecto, exclude=['elemento'])
+        #modelo['elemento'] = CentroCosto.objects.get(pk=modelo['elemento']).nombre
+        return modelo
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearPremioElementoCientifico, self).get_context_data(**kwargs)
+        context.update({
+            'form_crear_premio': self.get_form(self.form_class),
+        })
+        return context
+    
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'title': "Notificación",
+            'message': self.success_message,
+        }
+
+        # Añadir el centro creado
+        form_crear_premio = self.get_form(self.form_class)
+        form_crear_premio.request = request
+
+        if form_crear_premio.is_valid():
+            elemento_pk = request.POST.get('elemento')
+            
+            try:
+                elemento = Tesis.objects.get(pk=elemento_pk)
+            except:
+                pass
+            
+            try:
+                elemento = Articulo.objects.get(pk=elemento_pk)
+            except:
+                pass
+
+            try:
+                elemento = Resultado.objects.get(pk=elemento_pk)
+            except:
+                pass
+
+            try:
+                elemento = Proyecto.objects.get(pk=elemento_pk)
+            except:
+                pass
+
+            try:
+                elemento = Libro.objects.get(pk=elemento_pk)
+            except:
+                pass
+
+            premio = form_crear_premio.save(commit=False)
+            premio.elemento = elemento 
+            premio.save()
+
+            """
+            data.update({
+                'nuevo_servicio':self.to_dict(servicio),
+            })
+            """
+            return JsonResponse(data)
+        else:
+            return super(CrearPremioElementoCientifico, self).post(request, *args, **kwargs)
+
+
+
 
 

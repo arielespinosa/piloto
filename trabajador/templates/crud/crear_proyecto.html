@@ -9,14 +9,17 @@
     <h5 class="modal-title font-bold" id="myModalLabel">A&Ntilde;ADIR PROYECTO</h5>
   </div>
   <div class="modal-body">
-    <div class="form-group pull-in clearfix">  
-      <div class="col-sm-4">
+    <div class="form-group pull-in clearfix"> 
+      <div class="col-sm-3">
+        {{ form_crear_proyecto.fecha_aprobado|as_crispy_field }}
+      </div> 
+      <div class="col-sm-3">
         {{ form_crear_proyecto.fecha_inicio|as_crispy_field }}
       </div>
-      <div class="col-sm-4">          
+      <div class="col-sm-3">          
         {{ form_crear_proyecto.fecha_terminacion|as_crispy_field }}
       </div>  
-      <div class="col-sm-4">          
+      <div class="col-sm-3">          
         {{ form_crear_proyecto.centro_costo|as_crispy_field }}
       </div>     
     </div>  

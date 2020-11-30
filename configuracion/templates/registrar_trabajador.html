@@ -10,10 +10,20 @@
   <div style="margin: 1% "> 
     <div class="m-b-md">
       <h3 class="m-b-none">Registro</h3>
-        <small>
-          Por favor, complete los siguientes datos para registrarse en la aplicaci&oacute;n.
-          Usted podr&aacute; iniciar sesi&oacute;n una vez se apruebe su registro.
-        </small>
+        <div class="row">
+          <div class="col-sm-11">
+            <small>
+              Por favor, complete los siguientes datos para registrarse en la aplicaci&oacute;n.
+              Usted podr&aacute; iniciar sesi&oacute;n una vez se apruebe su registro.
+            </small>
+          </div>
+          <div class="col-sm-1">
+            <p>
+              <a href="{% url 'configuracion:login' %}" class="btn btn-default btn-sm">Volver al inicio</a>
+            </p>
+          </div>
+        </div>
+
     </div>          
     <section class="panel panel-default"> 
       <div class="wizard clearfix">

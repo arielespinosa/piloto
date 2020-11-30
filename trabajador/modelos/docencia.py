@@ -8,6 +8,40 @@ from .nomencladores import CampoEspecialidad, CentroEstudios
 from .trabajo_cientifico import Resultado, Tesis
 
 
+class Certificacion(models.Model):
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.titulo
+
+
+class Curso(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+
+    titulo = models.CharField(max_length=100)
+    profesor = GenericForeignKey('content_type', 'object_id')
+    cantidad_horas = models.FloatField()
+    centro_estudios = models.ForeignKey(CentroEstudios, on_delete=models.DO_NOTHING)
+    creditos = models.IntegerField()
+    descripcion = models.TextField(null=True, blank=True)
+    certificacion = models.ForeignKey(Certificacion, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.titulo
+
+
+class CursoRealizado(models.Model):
+    fecha_inicio = models.DateField()
+    fecha_terminacion = models.DateField()
+    curso = models.ForeignKey(Curso, on_delete=models.DO_NOTHING)
+    estudiantes = models.ManyToManyField(Trabajador)
+
+    def __str__(self):
+        return self.curso.titulo
+
+
 # Ok
 class Evento(models.Model):
     NIVEL = (
@@ -20,9 +54,11 @@ class Evento(models.Model):
     lugar = models.ForeignKey(Lugar, on_delete=models.DO_NOTHING)
     nivel = models.CharField(max_length=20, choices=NIVEL)
     descripcion = models.TextField(null=True, blank=True)
+    participantes = models.ManyToManyField(Trabajador, null=True, blank=True)
 
     def __str__(self):
         return self.nombre
+
 
 # Ok
 class Oponencia(models.Model):
@@ -40,6 +76,7 @@ class Oponencia(models.Model):
     def __str__(self):
         return self.elemento.titulo
 
+
 # Ok
 class Ponencia(models.Model):
     titulo = models.CharField(max_length=100)    
@@ -47,6 +84,7 @@ class Ponencia(models.Model):
 
     def __str__(self):
         return self.titulo
+
 
 # Ok
 class PonenciasRealizadas(models.Model):   
@@ -63,6 +101,7 @@ class PonenciasRealizadas(models.Model):
     def __str__(self):
         return self.ponencia.titulo
 
+
 # Ok
 class Tribunal(models.Model):
     fecha = models.DateField()
@@ -72,6 +111,7 @@ class Tribunal(models.Model):
     def __str__(self):
         return self.tesis.titulo
  
+
 # Ok
 class Comision(models.Model):
     fecha = models.DateField()
@@ -82,6 +122,7 @@ class Comision(models.Model):
         return self.resultado.titulo
 
 
+
 class Tutoria(models.Model):
     fecha_inicio = models.DateField()
     tesis = models.ForeignKey(Tesis, on_delete=models.CASCADE)
@@ -89,3 +130,7 @@ class Tutoria(models.Model):
 
     def __str__(self):
         return self.tesis.titulo
+
+    @property
+    def fecha_culminacion(self):
+        self.tesis.fecha_culminacion

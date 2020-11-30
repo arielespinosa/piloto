@@ -121,6 +121,7 @@ class Premio(models.Model):
 
 class Entidad(models.Model):
     nombre = models.CharField(max_length=50)
+    pais = models.CharField(max_length=50, default='Cuba')
 
     def __str__(self):
         return self.nombre
@@ -131,6 +132,16 @@ class Programa(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+class Tarea(models.Model):
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    nombre = models.TextField()
+    descripcion = models.TextField()
+    
+    def __str__(self):
+        return self.descripcion
 
 
 
