@@ -18,6 +18,9 @@ admin.site.register(CampoEspecialidad)
 admin.site.register(CentroCosto)
 admin.site.register(Trabajador)
 
+
+admin.site.register(Curso)
+admin.site.register(CursoRealizado)
 admin.site.register(Premio)
 admin.site.register(PremioTrabajador)
 admin.site.register(Entidad)

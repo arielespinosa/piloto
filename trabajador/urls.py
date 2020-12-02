@@ -60,6 +60,8 @@ urlpatterns = [
     # DOCENCIA
     # Crear
     path('crear/evento/', v_docencia.CrearEvento.as_view(), name="crear_evento"),
+    path('crear/curso/', v_docencia.CrearCurso.as_view(), name="crear_curso"),
+    path('crear/curso_realizado/', v_docencia.CrearCursoRealizado.as_view(), name="crear_curso_realizado"),
     path('crear/ponencia/', v_docencia.CrearPonencia.as_view(), name="crear_ponencia"),
     path('crear/oponencia/',v_docencia.CrearOponencia.as_view(), name="crear_oponencia"),    
     path('crear/tribunal/', v_docencia.CrearTribunal.as_view(), name="crear_tribunal"),

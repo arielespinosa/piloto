@@ -14,7 +14,6 @@ from trabajador.modelos.trabajo_cientifico import Tesis, Resultado, Proyecto, Ar
 from trabajador.formularios import docencia as forms
 
 
-# Eventos ----------------------------------
 class CrearEvento(BSModalCreateView):
     form_class = forms.FormCrearEvento
     form_seleccionar_eventos = forms.FormEventos
@@ -27,8 +26,9 @@ class CrearEvento(BSModalCreateView):
 
         # Establecer formulario para seleccionar eventos existentes que el usuario no haya participado
         form_seleccionar_eventos = self.form_seleccionar_eventos(self.request.GET)
-        form_seleccionar_eventos.fields['eventos'].queryset = Evento.objects.all().exclude(trabajador=self.request.user.trabajador)
-        
+        form_seleccionar_eventos.fields['eventos'].queryset = Evento.objects.all().exclude(
+            trabajador=self.request.user.trabajador)
+
         # Si hay Eventos en los que el trabajador no ha participado, enviarlos al template
         if form_seleccionar_eventos.fields['eventos'].queryset.count() > 0:
             context.update({
@@ -65,7 +65,7 @@ class CrearEvento(BSModalCreateView):
                 evento = form_crear_evento.save(commit=False)
                 evento.save()
                 request.user.trabajador.eventos.add(evento)
-                
+
                 data.update({
                     'nuevo_evento': model_to_dict(evento),
                 })
@@ -74,6 +74,288 @@ class CrearEvento(BSModalCreateView):
                 return JsonResponse(data)
             else:
                 return super(CrearEvento, self).post(request, *args, **kwargs)
+
+
+class CrearCurso(BSModalCreateView):
+    template_name = 'crud/crear_curso.html'
+    form_class = forms.FormCrearCurso
+    success_message = 'El curso se añadio satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearCurso, self).get_context_data(**kwargs)
+
+        context.update({
+            'form_crear_curso': self.get_form(self.form_class),
+        })
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'title': "Notificación",
+            'message': self.success_message,
+        }
+
+        # Añadir el tribunales creado al trabajador. Hacerlo via formset mas adelante
+        form_crear_curso = self.get_form(self.form_class)
+
+        if form_crear_curso.is_valid():
+            curso = form_crear_curso.save(commit=False)
+            curso.save()
+            return JsonResponse(data)
+        else:
+            return super(CrearCurso, self).post(request, *args, **kwargs)
+
+
+class CrearCursoRealizado(BSModalCreateView):
+    template_name = 'crud/crear_curso_realizado.html'
+    form_seleccionar_curso = forms.FormSeleccionarCursos
+    form_class = forms.FormCrearCursoRealizado
+    success_message = 'El curso se añadio satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearCursoRealizado, self).get_context_data(**kwargs)
+
+        # Establecer formulario para seleccionar tribunales existentes que el usuario no haya participado
+        form_seleccionar_curso = self.form_seleccionar_curso(trabajador=self.request.user.trabajador)
+
+        # Si hay Cursos en los que el trabajador no tiene, enviarlos al template
+        if len(form_seleccionar_curso.fields['cursos'].choices) > 0:
+            context.update({
+                'form_seleccionar_curso': form_seleccionar_curso,
+            })
+
+        context.update({
+            'form_crear_curso_realizado': self.get_form(self.form_class),
+        })
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'title': "Notificación",
+            'message': self.success_message,
+            'cursos': {},
+        }
+
+        # Añadir los cursos seleccionados al trabajador
+        cursos_realizados = request.POST.getlist('cursos')
+        if cursos_realizados:
+            for curso_realizado_pk in cursos_realizados:
+                curso = CursoRealizado.objects.get(pk=curso_realizado_pk)
+                curso.estudiantes.add(request.user.trabajador)
+                # data['cursos'].update(model_to_dict(curso))
+
+        # Añadir el tribunales creado al trabajador. Hacerlo via formset mas adelante
+        form_crear_curso_realizado = self.get_form(self.form_class)
+
+        if not form_crear_curso_realizado.is_empity:
+            if form_crear_curso_realizado.is_valid():
+                profesor_pk = request.POST.get('profesor')
+
+                try:
+                    profesor = Trabajador.objects.get(pk=profesor_pk)
+                except:
+                    profesor = PersonaExterna.objects.get(pk=profesor_pk)
+
+                curso_realizado = form_crear_curso_realizado.save(commit=False)
+                curso_realizado.edicion = CursoRealizado.objects.filter(curso__pk=curso_realizado.curso.pk).count() + 1
+                curso_realizado.profesor = profesor
+                curso_realizado.save()
+
+                """
+                # Añadir los estudiantes al curso
+                estudiantes = request.POST.getlist('estudiantes')
+                for estudiante_pk in estudiantes:
+                    try:
+                        miembro = Trabajador.objects.get(pk=miembro_pk)
+                    except:
+                        miembro = PersonaExterna.objects.get(pk=miembro_pk)
+                    tribunal.miembros.add(miembro)
+                tribunal.miembros.add(request.user.trabajador)
+
+
+
+                data.update({
+                    'nueva_certificacion': model_to_dict(certificacion),
+                })
+                """
+
+                return JsonResponse(data)
+            else:
+                return super(CrearCursoRealizado, self).post(request, *args, **kwargs)
+
+
+# Eventos ----------------------------------
+
+class CrearTribunal(BSModalCreateView):
+    template_name = 'crud/crear_tribunal.html'
+    form_class = forms.FormCrearTribunal
+    form_seleccionar_tribunal = forms.FormTribunales
+    success_message = 'El tribunal se añadio satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+    def to_dict(self, tribunal):
+        tribunal = model_to_dict(tribunal, exclude=['miembros'])
+        tribunal['tesis'] = Tesis.objects.get(pk=tribunal['tesis']).titulo
+        return tribunal
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearTribunal, self).get_context_data(**kwargs)
+
+        # Establecer formulario para seleccionar tribunales existentes que el usuario no haya participado
+        form_seleccionar_tribunal = self.form_seleccionar_tribunal(self.request.GET)
+        form_seleccionar_tribunal.fields['tribunales'].queryset = Tribunal.objects.all()
+
+        # Si hay Eventos en los que el trabajador no ha participado, enviarlos al template
+        if form_seleccionar_tribunal.fields['tribunales'].queryset.count() > 0:
+            context.update({
+                'form_seleccionar_tribunal': form_seleccionar_tribunal,
+            })
+
+        # Ofrecer siempre la posibilidad de crear un nuevo evento
+        context.update({
+            'form_crear_tribunal': self.get_form(self.form_class),
+        })
+        return context
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'title': "Notificación",
+            'message': self.success_message,
+            'tribunales': {},
+        }
+
+        # Añadir los tribunales cesionados seleccionados al trabajador
+        tribunales = request.POST.get('tribunales')
+        if tribunales:
+            for tribunal_pk in tribunales:
+                tribunal = Tribunal.objects.get(pk=tribunal_pk)
+                tribunal.miembros.add(request.user.trabajador)
+                # data['tribunales'].update(model_to_dict(tribunal))
+
+        # Añadir el tribunal creado al trabajador. Hacerlo via formset mas adelante
+        form_crear_tribunal = self.get_form(self.form_class)
+        form_crear_tribunal.request = request
+        if not form_crear_tribunal.is_empity:
+            if form_crear_tribunal.is_valid():
+                tribunal = form_crear_tribunal.save(commit=False)
+                tribunal.save()
+
+                # Añadir los miembros de tribunal
+                miembros = request.POST.getlist('miembros')
+                for miembro_pk in miembros:
+                    try:
+                        miembro = Trabajador.objects.get(pk=miembro_pk)
+                    except:
+                        miembro = PersonaExterna.objects.get(pk=miembro_pk)
+                    tribunal.miembros.add(miembro)
+                tribunal.miembros.add(request.user.trabajador)
+
+                data.update({
+                    'nuevo_tribunal': self.to_dict(tribunal),
+                })
+                return JsonResponse(data)
+            else:
+                return super(CrearTribunal, self).post(request, *args, **kwargs)
+
+
+class CrearCertificacion(BSModalCreateView):
+    template_name = 'crud/crear_certificacion.html'
+    form_seleccionar_certificacion = forms.FormCertificaciones
+    form_class = forms.FormCrearCertificacion
+    success_message = 'La certificación se añadio satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearCertificacion, self).get_context_data(**kwargs)
+
+        # Establecer formulario para seleccionar tribunales existentes que el usuario no haya participado
+        form_seleccionar_certificacion = self.form_seleccionar_certificacion(self.request.GET)
+        form_seleccionar_certificacion.fields['certificaciones'].queryset = Certificacion.objects.all()
+        
+        # Si hay Certificaciones en los que el trabajador no tiene, enviarlos al template
+        if form_seleccionar_certificacion.fields['certificaciones'].queryset.count() > 0:
+            context.update({
+                'form_seleccionar_certificacion': form_seleccionar_certificacion,
+            })
+
+        # Ofrecer siempre la posibilidad de crear una nueva certificacion
+        form_crear_certificacion = self.get_form(self.form_class)
+        context.update({
+            'form_crear_certificacion': form_crear_certificacion,
+        })
+        return context
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'title': "Notificación",
+            'message': self.success_message,
+            'certificaciones': {},
+        }
+
+        # Añadir los tribunales seleccionados al trabajador
+        certificaciones = request.POST.getlist('certificaciones')
+        if certificaciones:
+            for certificacion_pk in certificaciones:
+                certificacion = Certificacion.objects.get(pk=certificacion_pk)
+                request.user.trabajador.certificaciones.add(certificacion)
+
+                data['certificaciones'].update(model_to_dict(certificacion))
+
+        # Añadir el tribunales creado al trabajador. Hacerlo via formset mas adelante
+        form_crear_certificacion = self.get_form(self.form_class)
+        form_crear_certificacion.request = request
+        if not form_crear_certificacion.is_empity:
+            if form_crear_certificacion.is_valid():
+                profesor_pk = request.POST.get('profesor')
+
+                try:
+                    profesor = Trabajador.objects.get(pk=profesor_pk)
+                except:
+                    profesor = PersonaExterna.objects.get(pk=profesor_pk)
+
+                certificacion = form_crear_certificacion.save(commit=False)
+                certificacion.profesor = profesor
+               
+                certificacion.save()
+                request.user.trabajador.certificaciones.add(certificacion)
+                
+                data.update({
+                    'nueva_certificacion': model_to_dict(certificacion),
+                })
+                return JsonResponse(data)
+            else:
+                return super(CrearCertificacion, self).post(request, *args, **kwargs)
+
+
+class VerCertificacion(BSModalReadView):
+    model = Certificacion
+    template_name = 'crud/ver_certificacion.html'
+
+
+class EliminarCertificacion(BSModalAjaxFormMixin, BSModalDeleteView):
+    model = Certificacion
+    template_name = 'eliminar_elemento.html'
+    success_message = 'La certificacion fue eliminada de su CV satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+
+class ListaCertificaciones(ListView):
+    template_name = 'crud/listar_certificaciones.html'
+
+    def get_queryset(self):
+        return Certificacion.objects.order_by('-fecha')
+
+    def get_context_data(self, **kwargs):
+        context = super(ListaCertificaciones, self).get_context_data(**kwargs)
+        context.update({
+            'certificaciones': self.get_queryset,
+        })
+        return context
+
 
 
 class VerEvento(BSModalReadView):
@@ -110,77 +392,6 @@ class ListaEventos(ListView):
 
 
 # Tribunal ----------------------------------
-class CrearTribunal(BSModalCreateView):
-    template_name = 'crud/crear_tribunal.html'
-    form_class = forms.FormCrearTribunal
-    form_seleccionar_tribunal = forms.FormTribunales
-    success_message = 'El tribunal se añadio satisfactoriamente.'
-    success_url = reverse_lazy('trabajador:perfil')
-
-    def to_dict(self, tribunal):
-        tribunal = model_to_dict(tribunal, exclude=['miembros'])
-        tribunal['tesis'] = Tesis.objects.get(pk=tribunal['tesis']).titulo
-        return tribunal
-
-    def get_context_data(self, **kwargs):
-        context = super(CrearTribunal, self).get_context_data(**kwargs)
-
-        # Establecer formulario para seleccionar tribunales existentes que el usuario no haya participado
-        form_seleccionar_tribunal = self.form_seleccionar_tribunal(self.request.GET)
-        form_seleccionar_tribunal.fields['tribunales'].queryset = Tribunal.objects.all()
-        
-        # Si hay Eventos en los que el trabajador no ha participado, enviarlos al template
-        if form_seleccionar_tribunal.fields['tribunales'].queryset.count() > 0:
-            context.update({
-                'form_seleccionar_tribunal': form_seleccionar_tribunal,
-            })
-
-        # Ofrecer siempre la posibilidad de crear un nuevo evento
-        context.update({
-            'form_crear_tribunal': self.get_form(self.form_class),
-        })
-        return context
-
-    def post(self, request, *args, **kwargs):
-        data = {
-            'title': "Notificación",
-            'message': self.success_message,
-            'tribunales': {},
-        }
-
-        # Añadir los tribunales cesionados seleccionados al trabajador
-        tribunales = request.POST.get('tribunales')
-        if tribunales:
-            for tribunal_pk in tribunales:
-                tribunal = Tribunal.objects.get(pk=tribunal_pk)
-                tribunal.miembros.add( request.user.trabajador)
-                #data['tribunales'].update(model_to_dict(tribunal))
-
-        # Añadir el tribunal creado al trabajador. Hacerlo via formset mas adelante
-        form_crear_tribunal = self.get_form(self.form_class)
-        form_crear_tribunal.request = request
-        if not form_crear_tribunal.is_empity:
-            if form_crear_tribunal.is_valid():
-                tribunal = form_crear_tribunal.save(commit=False)
-                tribunal.save()
-
-                # Añadir los miembros de tribunal
-                miembros = request.POST.getlist('miembros')
-                for miembro_pk in miembros:
-                    try:
-                        miembro = Trabajador.objects.get(pk=miembro_pk)
-                    except:
-                        miembro = PersonaExterna.objects.get(pk=miembro_pk)
-                    tribunal.miembros.add(miembro)
-                tribunal.miembros.add(request.user.trabajador)
-
-                data.update({
-                    'nuevo_tribunal': self.to_dict(tribunal),
-                })
-                return JsonResponse(data)
-            else:
-                return super(CrearTribunal, self).post(request, *args, **kwargs)
-
 
 class VerTribunal(BSModalReadView):
     model = Tribunal
@@ -506,98 +717,3 @@ class EliminarTutoria(BSModalAjaxFormMixin, BSModalDeleteView):
     success_url = reverse_lazy('trabajador:perfil')
 
 
-# Certificacion -------------------------------
-class CrearCertificacion(BSModalCreateView):
-    template_name = 'crud/crear_certificacion.html'
-    form_seleccionar_certificacion = forms.FormCertificaciones
-    form_class = forms.FormCrearCertificacion
-    success_message = 'La certificación se añadio satisfactoriamente.'
-    success_url = reverse_lazy('trabajador:perfil')
-
-    def get_context_data(self, **kwargs):
-        context = super(CrearCertificacion, self).get_context_data(**kwargs)
-
-        # Establecer formulario para seleccionar tribunales existentes que el usuario no haya participado
-        form_seleccionar_certificacion = self.form_seleccionar_certificacion(self.request.GET)
-        form_seleccionar_certificacion.fields['certificaciones'].queryset = Certificacion.objects.all()
-        
-        # Si hay Certificaciones en los que el trabajador no tiene, enviarlos al template
-        if form_seleccionar_certificacion.fields['certificaciones'].queryset.count() > 0:
-            context.update({
-                'form_seleccionar_certificacion': form_seleccionar_certificacion,
-            })
-
-        # Ofrecer siempre la posibilidad de crear una nueva certificacion
-        form_crear_certificacion = self.get_form(self.form_class)
-        context.update({
-            'form_crear_certificacion': form_crear_certificacion,
-        })
-        return context
-
-    def post(self, request, *args, **kwargs):
-        data = {
-            'title': "Notificación",
-            'message': self.success_message,
-            'certificaciones': {},
-        }
-
-        # Añadir los tribunales seleccionados al trabajador
-        certificaciones = request.POST.getlist('certificaciones')
-        if certificaciones:
-            for certificacion_pk in certificaciones:
-                certificacion = Certificacion.objects.get(pk=certificacion_pk)
-                request.user.trabajador.certificaciones.add(certificacion)
-
-                data['certificaciones'].update(model_to_dict(certificacion))
-
-        # Añadir el tribunales creado al trabajador. Hacerlo via formset mas adelante
-        form_crear_certificacion = self.get_form(self.form_class)
-        form_crear_certificacion.request = request
-        if not form_crear_certificacion.is_empity:
-            if form_crear_certificacion.is_valid():
-                profesor_pk = request.POST.get('profesor')
-
-                try:
-                    profesor = Trabajador.objects.get(pk=profesor_pk)
-                except:
-                    profesor = PersonaExterna.objects.get(pk=profesor_pk)
-
-                certificacion = form_crear_certificacion.save(commit=False)
-                certificacion.profesor = profesor
-               
-                certificacion.save()
-                request.user.trabajador.certificaciones.add(certificacion)
-                
-                data.update({
-                    'nueva_certificacion': model_to_dict(certificacion),
-                })
-                return JsonResponse(data)
-            else:
-                return super(CrearCertificacion, self).post(request, *args, **kwargs)
-
-
-class VerCertificacion(BSModalReadView):
-    model = Certificacion
-    template_name = 'crud/ver_certificacion.html'
-
-
-class EliminarCertificacion(BSModalAjaxFormMixin, BSModalDeleteView):
-    model = Certificacion
-    template_name = 'eliminar_elemento.html'
-    success_message = 'La certificacion fue eliminada de su CV satisfactoriamente.'
-    success_url = reverse_lazy('trabajador:perfil')
-
-
-class ListaCertificaciones(ListView):
-    template_name = 'crud/listar_certificaciones.html'
-
-    def get_queryset(self):
-        return Certificacion.objects.order_by('-fecha')
-
-    def get_context_data(self, **kwargs):
-        context = super(ListaCertificaciones, self).get_context_data(**kwargs)
-        context.update({
-            'certificaciones': self.get_queryset,
-        })
-        return context
-    

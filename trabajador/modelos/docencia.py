@@ -17,11 +17,7 @@ class Certificacion(models.Model):
 
 
 class Curso(models.Model):
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-
     titulo = models.CharField(max_length=100)
-    profesor = GenericForeignKey('content_type', 'object_id')
     cantidad_horas = models.FloatField()
     centro_estudios = models.ForeignKey(CentroEstudios, on_delete=models.DO_NOTHING)
     creditos = models.IntegerField()
@@ -33,10 +29,15 @@ class Curso(models.Model):
 
 
 class CursoRealizado(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+
+    edicion = models.PositiveSmallIntegerField()
+    profesor = GenericForeignKey('content_type', 'object_id')
     fecha_inicio = models.DateField()
     fecha_terminacion = models.DateField()
     curso = models.ForeignKey(Curso, on_delete=models.DO_NOTHING)
-    estudiantes = models.ManyToManyField(Trabajador)
+    estudiantes = models.ManyToManyField(Trabajador, related_name='cursos_recibidos')
 
     def __str__(self):
         return self.curso.titulo
@@ -122,7 +123,7 @@ class Comision(models.Model):
         return self.resultado.titulo
 
 
-
+# Eliminar esto
 class Tutoria(models.Model):
     fecha_inicio = models.DateField()
     tesis = models.ForeignKey(Tesis, on_delete=models.CASCADE)

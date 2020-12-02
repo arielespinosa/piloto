@@ -6,10 +6,22 @@ from django import forms
 from bootstrap_modal_forms.forms import BSModalForm
 from trabajador.modelos.trabajo_cientifico import (Tesis, Articulo, Resultado, Proyecto)
 from trabajador.modelos.docencia import *
-from .utils import trabajadores_personas_choices
+from .utils import trabajadores_personas_choices, cursos_choices
+
 
 class DateInput(forms.DateInput):
     input_type = 'date'
+
+
+class FormSeleccionarCursos(forms.Form):
+    cursos = forms.MultipleChoiceField(label='Cursos en los que no ha participado', choices=[], required=False) 
+    
+    class Meta:
+        fields = ['cursos']
+
+    def __init__(self, trabajador=None, *args, **kwargs):
+        super(FormSeleccionarCursos, self).__init__(*args, **kwargs)
+        self.fields['cursos'].choices = cursos_choices(trabajador)
 
 
 class FormCrearCentroEstudios(BSModalForm):  
@@ -80,42 +92,28 @@ class FormCrearCertificacion(BSModalForm):
         fields = '__all__'
 
 
-class FormCrearCurso(BSModalForm):  
-    profesor = forms.ChoiceField(choices=[])
+class FormCrearCurso(BSModalForm): 
 
     class Meta:
         model = Curso
-        fields = [
-            'titulo', 
-            'cantidad_horas', 
-            'centro_estudios',
-            'creditos', 
-            'descripcion',
-            'certificacion'
-        ]
-
+        fields = '__all__'
         widgets = {
             'centro_estudios':forms.Select(attrs={'id': 'id_centro_estudios'}),
         }
-    
-    @property
-    def is_empity(self):
-        self.is_valid()
-        print(self.clean())
-        print(self.fields.keys())
-        return False
-
-    def __init__(self, *args, **kwargs):
-        super(FormCrearCurso, self).__init__(*args, **kwargs)
-        self.fields['profesor'].choices = trabajadores_personas_choices(self.request.user.trabajador)
 
 
 class FormCrearCursoRealizado(BSModalForm):  
     profesor = forms.ChoiceField(choices=[])
+    estudiantes = forms.MultipleChoiceField(choices=[])
 
     class Meta:
         model = CursoRealizado
-        fields = '__all__'
+        fields = [
+            'fecha_inicio', 
+            'fecha_terminacion', 
+            'curso',
+            'estudiantes', 
+        ]
         widgets = {
             'fecha_terminacion': DateInput(),
             'fecha_inicio': DateInput(),
@@ -130,7 +128,17 @@ class FormCrearCursoRealizado(BSModalForm):
 
     def __init__(self, *args, **kwargs):
         super(FormCrearCursoRealizado, self).__init__(*args, **kwargs)
-        self.fields['profesor'].choices = trabajadores_personas_choices(self.request.user.trabajador)
+        self.fields['profesor'].choices = trabajadores_personas_choices()
+        self.fields['estudiantes'].choices = trabajadores_personas_choices()
+
+    def clean(self):
+        cleaned_data = super().clean()
+        profesor = cleaned_data.get('profesor')
+        estudiantes = cleaned_data.get('estudiantes')
+        
+        if profesor in estudiantes:
+            self.add_error('estudiantes', "El profesor no puede ser estudiante del curso.")    
+        return cleaned_data
 
 
 class FormCrearOponencia(BSModalForm):  

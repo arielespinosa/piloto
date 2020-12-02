@@ -1,0 +1,91 @@
+<section class="panel panel-default">
+    <div class="row wrapper">
+      <div class="col-sm-8 m-b-xs">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-sm btn-default active">
+            <input type="radio" name="options" id="option1"> Todos
+          </label>
+          <label class="btn btn-sm btn-default">
+            <input type="radio" name="options" id="option2"> Hoy
+          </label>
+          <label class="btn btn-sm btn-default">
+            <input type="radio" name="options" id="option3"> &Uacute;ltimos 3 d&iacute;a
+          </label>
+          <label class="btn btn-sm btn-default">
+            <input type="radio" name="options" id="option4"> Semana
+          </label>
+          <label class="btn btn-sm btn-default">
+            <input type="radio" name="options" id="option5"> Mes
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="input-group">
+          <input type="text" class="input-sm form-control" placeholder="Search">
+          <span class="input-group-btn">
+            <button class="btn btn-sm btn-default" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped b-t b-light">
+        <thead>
+          <tr>
+            <th width="20"><input type="checkbox"></th>
+            <th class="th-sortable" data-toggle="class">Fecha de Inicio
+              <span class="th-sort">
+                <i class="fa fa-sort-down text"></i>
+                <i class="fa fa-sort-up text-active"></i>
+                <i class="fa fa-sort"></i>
+              </span>
+            </th>    
+            <th>Fecha de terminaci&oacute;n</th>       
+            <th>Curso</th>
+            <th>Profesor</th>
+            <th width="80"></th>
+          </tr>
+        </thead>
+        <tbody id="tb_trabajador_certificaciones">          
+          {% for curso in cursos_impartidos %}
+          <tr>
+            <td><input type="checkbox" name="post[]" value="{{ certificacion.pk }}"></td>
+            <td>{{ curso.fecha_inicio }}</td>       
+            <td>{{ curso.fecha_terminacion }}</td>
+            <td>{{ curso }}</td>
+            <td>{{ curso.profesor }}</td>  
+            <td class="text-right">
+              <a class="ver_certificacion" data-id=""><i class="fa fa-eye icon-muted"></i></a>
+              <a class="eliminar_certificacion" data-id=""><i class="fa fa-trash icon-muted "></i></a>
+            </td>          
+          </tr>
+          {% endfor %}
+
+      </tbody>
+      </table>
+    </div>
+    <footer class="panel-footer">
+      <div class="row">
+        <div class="col-sm-5">
+          <strong>
+            <small class="inline m-t-sm m-b-sm">Mostrando {{ certificacions.start_index }}-{{ certificacions.end_index }} de {{ certificacions.paginator.count }} elementos</small>
+          </strong>
+        </div>
+        <div class="col-sm-7 text-right text-center-xs">    
+          <ul class="pagination pagination-sm m-t-none m-b-none">
+            {% if certificaciones.has_previous %}
+                <li><a href="?page_certificaciones={{ certificaciones.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="?page_certificaciones=1">Inicio</a></li>          
+            {% endif %}
+
+            <li><a href="#"> P&aacute;gina {{ certificaciones.number }} de {{ certificaciones.paginator.num_pages }}</a></li>
+
+            {% if certificaciones.has_next %}
+                <li><a href="?page_certificaciones={{ certificaciones.paginator.num_pages }}">&Uacute;ltima</a></li>
+                <li><a href="?page_certificaciones={{ certificaciones.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>         
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </section>

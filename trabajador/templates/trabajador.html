@@ -58,6 +58,7 @@
         <ul class="nav nav-tabs nav-white">
           {% if trabajador.eventos.count > 0 %}<li class="{% if active == 'eventos' %} active {% endif %}"><a href="#eventos" data-toggle="tab">Eventos</a></li>{% endif %}
           {% if tesis %}<li class="{% if active == 'tesis' %} active {% endif %}"><a href="#tesis" data-toggle="tab">Tesis</a></li>{% endif %}
+          {% if cursos_impartidos %}<li class="{% if active == 'cursos_impartidos' %} active {% endif %}"><a href="#cursos_impartidos" data-toggle="tab">Cursos impartidos</a></li>{% endif %}
           {% if trabajador.tutorias.count > 0 %}<li class="{% if active == 'tutorias' %} active {% endif %}"><a href="#tutorias" data-toggle="tab">Tutorias</a></li>{% endif %}
           {% if trabajador.articulos.count > 0 %}<li class="{% if active == 'articulos' %} active {% endif %}"><a href="#articulos" data-toggle="tab">Art&iacute;culos</a></li>{% endif %}
           {% if trabajador.libros.count > 0 %}<li class="{% if active == 'libros' %} active {% endif %}"><a href="#libros" data-toggle="tab">Libros</a></li>{% endif %}
@@ -77,10 +78,10 @@
             </div>
           {% endif %}
           {% if trabajador.tutorias.count > 0 %}
-          <div class="tab-pane {% if active == 'tutorias' %} active {% endif %}" id="tutorias">
-            {% include 'trabajador_tutorias.html'%}             
-          </div>
-        {% endif %}
+            <div class="tab-pane {% if active == 'tutorias' %} active {% endif %}" id="tutorias">
+              {% include 'trabajador_tutorias.html'%}             
+            </div>
+          {% endif %}
           {% if trabajador.eventos.count > 0 %}
             <div class="tab-pane {% if active == 'eventos' %} active {% endif %}" id="eventos">
               {% include 'trabajador_eventos.html'%}             
@@ -91,10 +92,15 @@
               {% include 'trabajador_articulos.html'%}             
             </div>
           {% endif %}
+          {% if cursos_impartidos %}
+            <div class="tab-pane {% if active == 'articulos' %} active {% endif %}" id="cursos_impartidos">
+              {% include 'trabajador_cursos_impartidos.html'%}             
+            </div>
+          {% endif %}
           {% if trabajador.libros.count > 0 %}
-          <div class="tab-pane {% if active == 'libros' %} active {% endif %}" id="libros">
-            {% include 'trabajador_libros.html'%}             
-          </div>
+            <div class="tab-pane {% if active == 'libros' %} active {% endif %}" id="libros">
+              {% include 'trabajador_libros.html'%}             
+            </div>
           {% endif %}
           {% if trabajador.certificaciones.count > 0 %}
             <div class="tab-pane {% if active == 'certificaciones' %} active {% endif %}" id="certificaciones">
@@ -159,7 +165,6 @@
       formURL: "{% url 'trabajador:crear_especialidad' %}", 
     });
 
-
     $("#crear_articulo").modalForm({
       formURL: "{% url 'trabajador:crear_articulo' %}",
     });
@@ -191,6 +196,14 @@
 
     $("#crear_evento").modalForm({
       formURL: "{% url 'trabajador:crear_evento' %}", 
+    });
+
+    $("#crear_curso").modalForm({
+      formURL: "{% url 'trabajador:crear_curso' %}",
+    }); 
+
+    $("#crear_curso_realizado").modalForm({
+      formURL: "{% url 'trabajador:crear_curso_realizado' %}",
     });
 
     $("#crear_tesis").modalForm({

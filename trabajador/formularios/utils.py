@@ -2,6 +2,7 @@ from trabajador.modelos.trabajadores import Trabajador, PersonaExterna
 from trabajador.modelos.trabajo_cientifico import(
     Tesis, Articulo, Resultado, Proyecto, Libro, Servicio
 )
+from trabajador.modelos.docencia import CursoRealizado
 
 
 def trabajadores_personas_choices(trabajador=None):
@@ -18,6 +19,17 @@ def elementos_cientificos_choices():
     choices += [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Articulo.objects.all()]       
     choices += [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Resultado.objects.all()]       
     choices += [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Proyecto.objects.all()]       
-    choices += [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Libro.objects.all()]       
-
+    choices += [(e.pk, '{0}: {1}'.format(type(e).__name__, e.titulo)) for e in Libro.objects.all()] 
     return choices
+
+
+def cursos_choices(trabajador=None):
+    if trabajador:      
+        choices = [(c.pk, 'Edición {0}: {1}'.format(c.edicion, c)) for c in CursoRealizado.objects.all()] # .exclude(estudiantes__pk=trabajador.pk)
+    else:
+        pass
+    return choices
+
+
+
+

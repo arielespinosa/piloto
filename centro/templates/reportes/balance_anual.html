@@ -3,13 +3,13 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
-<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css"/>
-<link rel="stylesheet" href="{% static 'css/font.css' %}" type="text/css"/>
-<link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css"/>
-<link rel="stylesheet" href="{% static 'js/calendar/bootstrap_calendar.css' %}" type="text/css">
-<link rel="stylesheet" href="{% static 'js/datatables_2/datatables.min.css' %}" type="text/css">
-<link rel="stylesheet" href="{% static 'js/fuelux/fuelux.css' %}" type="text/css"/>
+<link rel="stylesheet" href="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/css/bootstrap.css" type="text/css"/>
+<link rel="stylesheet" href="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/css/font-awesome.min.css" type="text/css"/>
+<link rel="stylesheet" href="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/css/font.css" type="text/css"/>
+<link rel="stylesheet" href="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/css/app.css" type="text/css"/>
+<link rel="stylesheet" href="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/calendar/bootstrap_calendar.css" type="text/css">
+<link rel="stylesheet" href="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/datatables_2/datatables.min.css" type="text/css">
+<link rel="stylesheet" href="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/fuelux/fuelux.css" type="text/css"/>
 
 <style type="text/css">
 
@@ -41,185 +41,178 @@
     color: chartreuse;
   }
 
+  .logo {
+    width: 15rem;
+    height: 15rem";
+  }
+
+  .title{
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+  }
+
 </style>
 {% endblock %}
 
 
 {% block content_wrapper %}
 <section class="vbox bg-white">
-  <header class="header b-b b-light hidden-print">
-    <img src="" class="img-circle">
-  </header>
+
+
   <section class="scrollable wrapper">
-    <i class="fa fa-apple fa fa-3x"></i>
-    <div class="row">
+     <div class="row">
       <div class="col-xs-6">
-        <img src="" class="img-circle">
-        <h4>CFA</h4>
-        <p><a href="http://www.apple.com">www.apple.com</a></p>
-        <p>1 Infinite Loop <br>
-          95014 Cuperino, CA<br>
-          United States
-        </p>
-        <p>
-          Telephone:  800-692-7753<br>
-          Fax:  800-692-7753
-        </p>
+         <img class="logo" src="{% static 'images/cfa_logo.png' %}">
       </div>
       <div class="col-xs-6 text-right">
-        <p class="h4">#9048392</p>
-        <h5>29th Mar 2013</h5>           
+         <img class="logo" src="{% static 'images/insmet_logo.png' %}">
       </div>
-    </div>          
+    </div>
+
+    <div class="row title">
+      <h1 class="text-uc font-bold" style="text-align: center;">Informe de balance Anual</h1>
+    </div>
+
     <div class="well m-t">
       <div class="row">
         <div class="col-xs-6">
-          <strong>TO:</strong>
-          <h4>John Smith</h4>
+          <h4 class="font-bold">Centro de F&iacute;sica de la Atm&oacute;sfera</h4>
+          <h5>Instituto de Meteorología</h5><br>
           <p>
-            2nd Floor<br>
-            St John Street, Aberdeenshire 2541<br>
-            United Kingdom<br>
-            Phone: 031-432-678<br>
-            Email: youemail@gmail.com<br>
+            <i class="fa fa-facebook"></i> &#64ModelosCfaInsmet<br>
+            <i class="fa fa-twitter"></i> &#64cfa_modelos<br>
+            <i class="fa fa-phone"></i> (+53) 78686622<br>
+            <i class="fa fa-mail"></i> cfa@insmet.cu
           </p>
         </div>
-        <div class="col-xs-6">
-          <strong>SHIP TO:</strong>
-          <h4>John Smith</h4>
-          <p>
-            2nd Floor<br>
-            St John Street, Aberdeenshire 2541<br>
-            United Kingdom<br>
-            Phone: 031-432-678<br>
-            Email: youemail@gmail.com<br>
-          </p>
+        <div class="col-xs-6 text-right font-bold">
+          20 de Diciembre del 2020
         </div>
       </div>
     </div>
-    
-    <h4 class="text-uc text-success font-bold"><i class="fa fa-flask" style="font-size: 15px;"></i>  Proyectos</h4>  
-    <div class="line"></div>   
-      {% if proyectos.count > 0 %}
-        <table class="table">
-          <thead>
-            <tr>
-              <th width="60">LIDER</th>
-              <th width="60">#</th>
-              <th>PROYECTO</th>
-              <th width="70">ESTADO</th>
-              <th width="70">ALCANCE</th>
-              <th width="250">JEFE</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for proyecto in proyectos %}
-              <tr>
-                <td>
-                  {% if proyecto.dirigido_por_cfa %}
-                    <div class="fa fa-coffee"></i>
-                  {% endif %}
-                </td>
-                <td>{{proyecto.pk}}</td>
-                <td>{{proyecto}}</td>
-                <td>
-                  {% if proyecto.terminado %}
-                    <div class="fa fa-check"></i>
-                  {% elif proyecto.en_desarrollo %}
-                    <div class="fa fa-thumbs-up"></i>
-                  {% elif proyecto.atrasado %}
-                    <div class="fa fa-thumbs-down"></i>
-                  {% elif proyecto.para_proximo_ano %}
-                    {{proximo_ano}}
-                  {% endif %}
-                </td>
-                <td>
-                  {% if proyecto.tipo == "I" %}
-                    <div class="fa fa-globe"></i>
-                  {% endif %}
-                </td>
-                <td>{{proyecto.jefe}}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% endif %}
-    <br><br>
 
-    <h4 class="text-uc text-info font-bold"><i class="fa fa-trophy" style="font-size: 15px;"></i>  Resultados</h4>  
-    <div class="line"></div> 
-      {% if resultados.count > 0 %}
-        <table class="table">
-          <thead>
+    {% if proyectos.count > 0 %}
+      <h4 class="text-uc text-success font-bold"><i class="fa fa-flask" style="font-size: 15px;"></i>  Proyectos</h4>
+      <div class="line"></div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="60">LIDER</th>
+            <th width="60">#</th>
+            <th>PROYECTO</th>
+            <th width="70">ESTADO</th>
+            <th width="70">ALCANCE</th>
+            <th width="250">JEFE</th>
+          </tr>
+        </thead>y
+        <tbody>
+          {% for proyecto in proyectos %}
             <tr>
-              <th width="60">LIDER</th>
-              <th width="60">#</th>
-              <th>RESULTADO</th>
-              <th>APROBADO CC</th>
-              <th>NIVEL</th>
-              <th width="250">RESPONSABLE</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for resultado in resultados %}
-              <tr>
-                <td>
-                  {% if resultado.dirigido_por_cfa %}
-                    <div class="fa fa-coffee"></i>
-                  {% endif %}
-                </td>
-                <td>{{resultado.pk}}</td>
-                <td>{{resultado}}</td>
-                <td>{{resultado.aprobado_cc}}</td>
-                <td>{{resultado.nivel}}</td>
-                <td></td>
+              <td>
+                {% if proyecto.dirigido_por_cfa %}
+                  <i class="fa fa-coffee"></i>
+                {% endif %}
               </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% endif %}
-
-    <br><br>
-    <h4 class="text-uc text-info font-bold"><i class="fa fa-book" style="font-size: 15px;"></i>  Publicaciones</h4>
-    <div class="line"></div>   
-      {% if publicaciones.count > 0 %}
-        <table class="table">
-          <thead>
-            <tr>
-              <th width="60">ARBITRADA</th>
-              <th width="60">#</th>
-              <th>ARTÍCULO</th>
-              <th>WEB</th>
-              <th width="250">AUTORES</th>
+              <td>{{proyecto.pk}}</td>
+              <td>{{proyecto}}</td>
+              <td>
+                {% if proyecto.terminado %}
+                  <i class="fa fa-check"></i>
+                {% elif proyecto.en_desarrollo %}
+                  <i class="fa fa-thumbs-up"></i>
+                {% elif proyecto.atrasado %}
+                  <i class="fa fa-thumbs-down"></i>
+                {% elif proyecto.para_proximo_ano %}
+                  {{proximo_ano}}
+                {% endif %}
+              </td>
+              <td>
+                {% if proyecto.tipo == "I" %}
+                  <i class="fa fa-globe"></i>
+                {% endif %}
+              </td>
+              <td>{{proyecto.jefe}}</td>
             </tr>
-          </thead>
-          <tbody>
-            {% for publicacion in publicaciones %}
-              <tr>
-                <td>
-                  {% if publicacion.arbitrado %}
-                    <div class="fa fa-tags"></i>
-                  {% endif %}
-                </td>
-                <td>{{publicacion.pk}}</td>
-                <td>{{publicacion}}</td>
-                <td>{{publicacion.referencia_web}}</td>
-                <td>
-                  {% for autor in publicacion.autores.all %}
-                    {{ autor }} <br>
-                  {% endfor %}
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% endif %}
-    
-    <br><br>
-    <h4 class="text-uc text-info font-bold"><i class="fa fa-glass" style="font-size: 15px;"></i>  Eventos</h4>
-    <div class="line"></div> 
+          {% endfor %}
+        </tbody>
+      </table>
+      <br><br>
+    {% endif %}
+
+    {% if resultados.count > 0 %}
+      <h4 class="text-uc text-info font-bold"><i class="fa fa-trophy" style="font-size: 15px;"></i>  Resultados</h4>
+      <div class="line"></div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="60">LIDER</th>
+            <th width="60">#</th>
+            <th>RESULTADO</th>
+            <th>APROBADO CC</th>
+            <th>NIVEL</th>
+            <th width="250">RESPONSABLE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for resultado in resultados %}
+            <tr>
+              <td>
+                {% if resultado.dirigido_por_cfa %}
+                  <i class="fa fa-coffee"></i>
+                {% endif %}
+              </td>
+              <td>{{resultado.pk}}</td>
+              <td>{{resultado}}</td>
+              <td>{{resultado.aprobado_cc}}</td>
+              <td>{{resultado.nivel}}</td>
+              <td></td>
+            </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br><br>
+    {% endif %}
+
+    {% if publicaciones.count > 0 %}
+      <h4 class="text-uc text-info font-bold"><i class="fa fa-book" style="font-size: 15px;"></i>  Publicaciones</h4>
+      <div class="line"></div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="60">ARBITRADA</th>
+            <th width="60">#</th>
+            <th>ARTÍCULO</th>
+            <th>WEB</th>
+            <th width="250">AUTORES</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for publicacion in publicaciones %}
+            <tr>
+              <td>
+                {% if publicacion.arbitrado %}
+                  <i class="fa fa-tags"></i>
+                {% endif %}
+              </td>
+              <td>{{publicacion.pk}}</td>
+              <td>{{publicacion}}</td>
+              <td>{{publicacion.referencia_web}}</td>
+              <td>
+                {% for autor in publicacion.autores.all %}
+                  {{ autor }} <br>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br><br>
+    {% endif %}
+
     {% if eventos.count > 0 %}
+      <h4 class="text-uc text-info font-bold"><i class="fa fa-glass" style="font-size: 15px;"></i>  Eventos</h4>
+      <div class="line"></div>
       <table class="table">
         <thead>
           <tr>
@@ -232,7 +225,6 @@
         <tbody>
           {% for evento in eventos %}
             <tr>
-              <td>
               <td>{{evento.pk}}</td>
               <td>{{evento}}</td>
               <td>{{evento.lugar}}</td>
@@ -241,13 +233,12 @@
           {% endfor %}
         </tbody>
       </table>
+      <br><br>
     {% endif %}
 
-    <!--Arreglar este-->
-    <br><br>
-    <h4 class="text-uc text-info font-bold"><i class="fa fa-glass" style="font-size: 15px;"></i>  Premios</h4>
-    <div class="line"></div> 
     {% if premios.count > 0 %}
+      <h4 class="text-uc text-info font-bold"><i class="fa fa-glass" style="font-size: 15px;"></i>  Premios</h4>
+      <div class="line"></div>
       <table class="table">
         <thead>
           <tr>
@@ -269,13 +260,12 @@
           {% endfor %}
         </tbody>
       </table>
+      <br><br>
     {% endif %}
 
-    
-    <br><br>
-    <h4 class="text-uc text-info font-bold"><i class="fa fa-glass" style="font-size: 15px;"></i>  Servicios</h4>
-    <div class="line"></div> 
     {% if servicios.count > 0 %}
+      <h4 class="text-uc text-info font-bold"><i class="fa fa-glass" style="font-size: 15px;"></i>  Servicios</h4>
+      <div class="line"></div>
       <table class="table">
         <thead>
           <tr>
@@ -297,11 +287,11 @@
           {% endfor %}
         </tbody>
       </table>
+      <br><br>
     {% endif %}
 
   </section>
 </section>
-<a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
 
 
 
@@ -314,17 +304,17 @@
 {% endblock %}
 
 {% block javascript %}
-<script src="{% static 'js/jquery3.2.min.js' %}"></script>
-<script src="{% static 'js/jquery-ui/jquery-ui.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.js' %}"></script>
-<script src="{% static 'js/tether.min.js' %}"></script>
-<script src="{% static 'js/app.js' %}"></script>
-<script src="{% static 'js/app.plugin.js' %}"></script>
-<script src="{% static 'fontawesome/js/all.js' %}"></script>
-<script src="{% static 'js/datatables_2/datatables.min.js' %}"></script>
-<script src="{% static 'js/calendar/bootstrap_calendar.js' %}"></script>
-<script src="{% static 'js/calendar/demo.js' %}"></script>
-<script src="{% static 'js/fuelux/fuelux.js' %}"></script>
-<script src="{% static 'js/trabajadores.js' %}"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/jquery3.2.min.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/jquery-ui/jquery-ui.min.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/bootstrap.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/tether.min.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/app.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/app.plugin.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/fontawesome/js/all.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/datatables_2/datatables.min.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/calendar/bootstrap_calendar.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/calendar/demo.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/fuelux/fuelux.js"></script>
+<script src="/home/ariel/Trabajo/django_venv3.6/CFA/static_files/js/trabajadores.js"></script>
 
 {% endblock %}   

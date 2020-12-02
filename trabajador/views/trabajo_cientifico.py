@@ -65,7 +65,7 @@ class CrearTesis(BSModalCreateView):
 
             for tutor in tesis.tutores.all():
                 try:
-                    if not tutor.tutorias.get(tesis=tesis): 
+                    if not tutor.tutorias.get(tesis__pk=tesis.pk):
                         tutor.tutoria_set.create(
                             fecha_inicio=tesis.fecha_inicio,
                             tesis=tesis

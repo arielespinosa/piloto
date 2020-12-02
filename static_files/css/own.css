@@ -1,7 +1,10 @@
 
 #div_id_estudiante > div.controls, 
 #div_id_centro_estudios > div.controls,
-#div_id_especialidad > div.controls{
+#div_id_especialidad > div.controls,
+#div_id_curso > div.controls,
+#div_id_curso_realizado > div.controls
+{
     display: table;
 }
 
