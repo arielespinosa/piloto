@@ -8,6 +8,7 @@ from .managers import *
 import datetime
 
 
+
 class ElementoCientifico(models.Model):
     titulo = models.CharField(max_length=200)
     
@@ -35,7 +36,7 @@ class Tesis(ElementoCientifico):
 
     @property
     def en_curso(self):
-        return True if not fecha_inicio else False
+        return True if not self.fecha_inicio else False
 
 
 class Articulo(ElementoCientifico):

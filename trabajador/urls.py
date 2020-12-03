@@ -13,12 +13,13 @@ urlpatterns = [
     path('', v_trabajador.PerfilTrabajador.as_view(), name='perfil'),
     path('crear/persona_externa/', v_trabajador.CrearPersonaExterna.as_view(), name="crear_persona_externa"),
     path('modificar/<int:pk>', v_trabajador.ModificarTrabajador.as_view(), name='modificar_datos_personales'),
-    path('crear/certificacion/', v_docencia.CrearCertificacion.as_view(), name="crear_certificacion"),
+    
     path('cv/', v_trabajador.TrabajadorCV.as_view(), name='exportar_cv'),
 
     # NOMENCLADORES ----------
     # Crear
     path('crear/premio/', v_nomencladores.CrearPremio.as_view(), name='crear_premio'),
+    path('crear/certificacion/', v_nomencladores.CrearCertificacion.as_view(), name="crear_certificacion"),
     path('crear/especialidad/', v_nomencladores.CrearEspecialidad.as_view(), name='crear_especialidad'),
     path('crear/entidad/', v_nomencladores.CrearEntidad.as_view(), name='crear_entidad'),
     path('crear/programa/', v_nomencladores.CrearPrograma.as_view(), name='crear_programa'),
@@ -60,6 +61,7 @@ urlpatterns = [
     # DOCENCIA
     # Crear
     path('crear/evento/', v_docencia.CrearEvento.as_view(), name="crear_evento"),
+    path('crear/certificacion_trabajador/', v_docencia.CrearCertificarTrabajador.as_view(), name="crear_certificacion_trabajador"),
     path('crear/curso/', v_docencia.CrearCurso.as_view(), name="crear_curso"),
     path('crear/curso_realizado/', v_docencia.CrearCursoRealizado.as_view(), name="crear_curso_realizado"),
     path('crear/ponencia/', v_docencia.CrearPonencia.as_view(), name="crear_ponencia"),

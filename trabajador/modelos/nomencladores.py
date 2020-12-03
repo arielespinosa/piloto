@@ -3,6 +3,13 @@ from django.db import models
 from gm2m import GM2MField
 
 
+class Certificacion(models.Model):
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.titulo
+        
 class Cliente(models.Model):
     nombre = models.CharField(max_length=50)
 

@@ -8,7 +8,18 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 
-# Forms crear -----------------------------
+class FormCertificaciones(forms.Form):
+    certificaciones = forms.ModelMultipleChoiceField(label='Certificaciones que no posee', queryset=None, required=False)
+    class Meta:
+        fields = ['certificaciones']
+
+        
+class FormCrearCertificacion(BSModalForm):  
+
+    class Meta:
+        model = Certificacion
+        fields = '__all__'
+        
 class FormCrearPremio(BSModalForm):
     class Meta:
         model = Premio

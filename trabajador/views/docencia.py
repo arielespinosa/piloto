@@ -150,7 +150,8 @@ class CrearCursoRealizado(BSModalCreateView):
 
         # Añadir el tribunales creado al trabajador. Hacerlo via formset mas adelante
         form_crear_curso_realizado = self.get_form(self.form_class)
-
+        form_crear_curso_realizado.request = request
+    
         if not form_crear_curso_realizado.is_empity:
             if form_crear_curso_realizado.is_valid():
                 profesor_pk = request.POST.get('profesor')
@@ -187,8 +188,6 @@ class CrearCursoRealizado(BSModalCreateView):
             else:
                 return super(CrearCursoRealizado, self).post(request, *args, **kwargs)
 
-
-# Eventos ----------------------------------
 
 class CrearTribunal(BSModalCreateView):
     template_name = 'crud/crear_tribunal.html'
@@ -262,164 +261,6 @@ class CrearTribunal(BSModalCreateView):
                 return super(CrearTribunal, self).post(request, *args, **kwargs)
 
 
-class CrearCertificacion(BSModalCreateView):
-    template_name = 'crud/crear_certificacion.html'
-    form_seleccionar_certificacion = forms.FormCertificaciones
-    form_class = forms.FormCrearCertificacion
-    success_message = 'La certificación se añadio satisfactoriamente.'
-    success_url = reverse_lazy('trabajador:perfil')
-
-    def get_context_data(self, **kwargs):
-        context = super(CrearCertificacion, self).get_context_data(**kwargs)
-
-        # Establecer formulario para seleccionar tribunales existentes que el usuario no haya participado
-        form_seleccionar_certificacion = self.form_seleccionar_certificacion(self.request.GET)
-        form_seleccionar_certificacion.fields['certificaciones'].queryset = Certificacion.objects.all()
-        
-        # Si hay Certificaciones en los que el trabajador no tiene, enviarlos al template
-        if form_seleccionar_certificacion.fields['certificaciones'].queryset.count() > 0:
-            context.update({
-                'form_seleccionar_certificacion': form_seleccionar_certificacion,
-            })
-
-        # Ofrecer siempre la posibilidad de crear una nueva certificacion
-        form_crear_certificacion = self.get_form(self.form_class)
-        context.update({
-            'form_crear_certificacion': form_crear_certificacion,
-        })
-        return context
-
-    def post(self, request, *args, **kwargs):
-        data = {
-            'title': "Notificación",
-            'message': self.success_message,
-            'certificaciones': {},
-        }
-
-        # Añadir los tribunales seleccionados al trabajador
-        certificaciones = request.POST.getlist('certificaciones')
-        if certificaciones:
-            for certificacion_pk in certificaciones:
-                certificacion = Certificacion.objects.get(pk=certificacion_pk)
-                request.user.trabajador.certificaciones.add(certificacion)
-
-                data['certificaciones'].update(model_to_dict(certificacion))
-
-        # Añadir el tribunales creado al trabajador. Hacerlo via formset mas adelante
-        form_crear_certificacion = self.get_form(self.form_class)
-        form_crear_certificacion.request = request
-        if not form_crear_certificacion.is_empity:
-            if form_crear_certificacion.is_valid():
-                profesor_pk = request.POST.get('profesor')
-
-                try:
-                    profesor = Trabajador.objects.get(pk=profesor_pk)
-                except:
-                    profesor = PersonaExterna.objects.get(pk=profesor_pk)
-
-                certificacion = form_crear_certificacion.save(commit=False)
-                certificacion.profesor = profesor
-               
-                certificacion.save()
-                request.user.trabajador.certificaciones.add(certificacion)
-                
-                data.update({
-                    'nueva_certificacion': model_to_dict(certificacion),
-                })
-                return JsonResponse(data)
-            else:
-                return super(CrearCertificacion, self).post(request, *args, **kwargs)
-
-
-class VerCertificacion(BSModalReadView):
-    model = Certificacion
-    template_name = 'crud/ver_certificacion.html'
-
-
-class EliminarCertificacion(BSModalAjaxFormMixin, BSModalDeleteView):
-    model = Certificacion
-    template_name = 'eliminar_elemento.html'
-    success_message = 'La certificacion fue eliminada de su CV satisfactoriamente.'
-    success_url = reverse_lazy('trabajador:perfil')
-
-
-class ListaCertificaciones(ListView):
-    template_name = 'crud/listar_certificaciones.html'
-
-    def get_queryset(self):
-        return Certificacion.objects.order_by('-fecha')
-
-    def get_context_data(self, **kwargs):
-        context = super(ListaCertificaciones, self).get_context_data(**kwargs)
-        context.update({
-            'certificaciones': self.get_queryset,
-        })
-        return context
-
-
-
-class VerEvento(BSModalReadView):
-    model = Evento
-    template_name = 'crud/ver_evento.html'
-
-
-class ModificarEvento(BSModalAjaxFormMixin, BSModalUpdateView):
-    model = Evento
-    template_name = 'crud/modificar_evento.html'
-    form_class = forms.FormCrearEvento
-    success_message = 'La nota meteorológica fue modificada satisfactoriamente.'
-
-
-class EliminarEvento(BSModalAjaxFormMixin, BSModalDeleteView):
-    model = Evento
-    template_name = 'eliminar_elemento.html'
-    success_message = 'El evento fue eliminado de su CV satisfactoriamente.'
-    success_url = reverse_lazy('trabajador:perfil')
-
-
-class ListaEventos(ListView):
-    template_name = 'eventos.html'
-
-    def get_queryset(self):
-        return Evento.objects.order_by('-fecha')
-
-    def get_context_data(self, **kwargs):
-        context = super(ListaEventos, self).get_context_data(**kwargs)
-        context.update({
-            'eventos': self.get_queryset,
-        })
-        return context
-
-
-# Tribunal ----------------------------------
-
-class VerTribunal(BSModalReadView):
-    model = Tribunal
-    template_name = 'crud/ver_tribunal.html'
-
-
-class EliminarTribunal(BSModalAjaxFormMixin, BSModalDeleteView):
-    model = Tribunal
-    template_name = 'eliminar_elemento.html'
-    success_message = 'El tribunal fue eliminado de su CV satisfactoriamente.'
-    success_url = reverse_lazy('trabajador:perfil')
-
-
-class ListaTribunales(ListView):
-    template_name = 'tribunales.html'
-
-    def get_queryset(self):
-        return Tesis.objects.order_by('-fecha')
-
-    def get_context_data(self, **kwargs):
-        context = super(ListaTribunales, self).get_context_data(**kwargs)
-        context.update({
-            'tribunales': self.get_queryset,
-        })
-        return context
-
-
-# Oponencias -------------------------------
 class CrearOponencia(BSModalCreateView):
     template_name = 'crud/crear_oponencia.html'
     form_class = forms.FormCrearOponencia
@@ -523,33 +364,6 @@ class CrearOponencia(BSModalCreateView):
                 return super(CrearOponencia, self).post(request, *args, **kwargs)
 
 
-class VerOponencia(BSModalReadView):
-    model = Oponencia
-    template_name = 'crud/ver_oponencia.html'
-
-
-class EliminarOponencia(BSModalAjaxFormMixin, BSModalDeleteView):
-    model = Oponencia
-    template_name = 'eliminar_elemento.html'
-    success_message = 'La oponencia fue eliminada de su CV satisfactoriamente.'
-    success_url = reverse_lazy('trabajador:perfil')
-
-
-class ListaOponencias(ListView):
-    template_name = 'oponencias.html'
-
-    def get_queryset(self):
-        return Oponencia.objects.order_by('-fecha')
-
-    def get_context_data(self, **kwargs):
-        context = super(ListaOponencias, self).get_context_data(**kwargs)
-        context.update({
-            'oponencias': self.get_queryset,
-        })
-        return context
-
-
-# Ponencias -------------------------------
 class CrearPonencia(BSModalCreateView):
     template_name = 'crud/crear_ponencia.html'
     form_class = forms.FormCrearPonencia
@@ -640,33 +454,6 @@ class CrearPonencia(BSModalCreateView):
                 return super(CrearPonencia, self).post(request, *args, **kwargs)
 
 
-class VerPonencia(BSModalReadView):
-    model = Ponencia
-    template_name = 'crud/ver_ponencia.html'
-
-
-class EliminarPonencia(BSModalAjaxFormMixin, BSModalDeleteView):
-    model = Ponencia
-    template_name = 'eliminar_elemento.html'
-    success_message = 'La Ponencia fue eliminada de su CV satisfactoriamente.'
-    success_url = reverse_lazy('trabajador:perfil')
-
-
-class ListaPonencias(ListView):
-    template_name = 'ponencias.html'
-
-    def get_queryset(self):
-        return Ponencia.objects.order_by('-fecha')
-
-    def get_context_data(self, **kwargs):
-        context = super(ListaPonencias, self).get_context_data(**kwargs)
-        context.update({
-            'ponencias': self.get_queryset,
-        })
-        return context
-
-
-# Tutoria -------------------------------
 class CrearTutoria(BSModalCreateView):
     template_name = 'crud/crear_tutoria.html'
     form_class = forms.FormCrearTutoria
@@ -709,6 +496,173 @@ class CrearTutoria(BSModalCreateView):
         else:
             return super(CrearTutoria, self).post(request, *args, **kwargs)
 
+
+class CrearCertificarTrabajador(BSModalCreateView):
+    template_name = 'crud/crear_certificar_trabajador.html'
+    form_class = forms.FormCrearCertificarTrabajador
+    success_message = 'El certificado se añadio satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+    @staticmethod
+    def to_dict(tutoria):
+        _tutoria = model_to_dict(tutoria)
+        _tutoria['tesis'] = tutoria.tesis.titulo
+        return _tutoria
+
+    def get_context_data(self, **kwargs):
+        context = super(CrearCertificarTrabajador, self).get_context_data(**kwargs)
+
+        context.update({
+            'form_crear_certificacion': self.get_form(self.form_class),
+        })
+        return context
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'title': "Notificación",
+            'message': self.success_message,
+        }
+
+        form_crear_certificacion = self.get_form(self.form_class)
+        form_crear_certificacion.request = request
+      
+        if form_crear_certificacion.is_valid():
+            trabajador_certificacion = form_crear_certificacion.save(commit=False)
+            trabajador_certificacion.trabajador = request.user.trabajador
+            trabajador_certificacion.save()
+            """
+            data.update({
+                'nueva_certificacion': self.to_dict(tutoria),
+            })
+            """
+            return JsonResponse(data)
+        else:
+            return super(CrearCertificarTrabajador, self).post(request, *args, **kwargs)
+
+
+
+
+
+class VerEvento(BSModalReadView):
+    model = Evento
+    template_name = 'crud/ver_evento.html'
+
+
+class VerTribunal(BSModalReadView):
+    model = Tribunal
+    template_name = 'crud/ver_tribunal.html'
+
+class VerOponencia(BSModalReadView):
+    model = Oponencia
+    template_name = 'crud/ver_oponencia.html'
+
+
+class ModificarEvento(BSModalAjaxFormMixin, BSModalUpdateView):
+    model = Evento
+    template_name = 'crud/modificar_evento.html'
+    form_class = forms.FormCrearEvento
+    success_message = 'La nota meteorológica fue modificada satisfactoriamente.'
+
+
+class EliminarEvento(BSModalAjaxFormMixin, BSModalDeleteView):
+    model = Evento
+    template_name = 'eliminar_elemento.html'
+    success_message = 'El evento fue eliminado de su CV satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+
+class ListaEventos(ListView):
+    template_name = 'eventos.html'
+
+    def get_queryset(self):
+        return Evento.objects.order_by('-fecha')
+
+    def get_context_data(self, **kwargs):
+        context = super(ListaEventos, self).get_context_data(**kwargs)
+        context.update({
+            'eventos': self.get_queryset,
+        })
+        return context
+
+
+# Tribunal ----------------------------------
+
+
+
+class EliminarTribunal(BSModalAjaxFormMixin, BSModalDeleteView):
+    model = Tribunal
+    template_name = 'eliminar_elemento.html'
+    success_message = 'El tribunal fue eliminado de su CV satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+
+class ListaTribunales(ListView):
+    template_name = 'tribunales.html'
+
+    def get_queryset(self):
+        return Tesis.objects.order_by('-fecha')
+
+    def get_context_data(self, **kwargs):
+        context = super(ListaTribunales, self).get_context_data(**kwargs)
+        context.update({
+            'tribunales': self.get_queryset,
+        })
+        return context
+
+
+# Oponencias -------------------------------
+
+
+
+class EliminarOponencia(BSModalAjaxFormMixin, BSModalDeleteView):
+    model = Oponencia
+    template_name = 'eliminar_elemento.html'
+    success_message = 'La oponencia fue eliminada de su CV satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+
+class ListaOponencias(ListView):
+    template_name = 'oponencias.html'
+
+    def get_queryset(self):
+        return Oponencia.objects.order_by('-fecha')
+
+    def get_context_data(self, **kwargs):
+        context = super(ListaOponencias, self).get_context_data(**kwargs)
+        context.update({
+            'oponencias': self.get_queryset,
+        })
+        return context
+
+
+
+class VerPonencia(BSModalReadView):
+    model = Ponencia
+    template_name = 'crud/ver_ponencia.html'
+
+
+class EliminarPonencia(BSModalAjaxFormMixin, BSModalDeleteView):
+    model = Ponencia
+    template_name = 'eliminar_elemento.html'
+    success_message = 'La Ponencia fue eliminada de su CV satisfactoriamente.'
+    success_url = reverse_lazy('trabajador:perfil')
+
+
+class ListaPonencias(ListView):
+    template_name = 'ponencias.html'
+
+    def get_queryset(self):
+        return Ponencia.objects.order_by('-fecha')
+
+    def get_context_data(self, **kwargs):
+        context = super(ListaPonencias, self).get_context_data(**kwargs)
+        context.update({
+            'ponencias': self.get_queryset,
+        })
+        return context
+
+
+# Tutoria -------------------------------
 
 class EliminarTutoria(BSModalAjaxFormMixin, BSModalDeleteView):
     model = Tutoria

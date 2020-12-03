@@ -36,12 +36,6 @@ class FormEventos(forms.Form):
         fields = ['eventos']
 
 
-class FormCertificaciones(forms.Form):
-    certificaciones = forms.ModelMultipleChoiceField(label='Certificaciones que no posee', queryset=None, required=False)
-    class Meta:
-        fields = ['certificaciones']
-
-
 class FormOponencias(forms.Form):
     oponencias = forms.ModelMultipleChoiceField(label='Oponencias en las que no ha participado', queryset=None, required=False)
     class Meta:
@@ -85,11 +79,21 @@ class FormCrearEvento(BSModalForm):
         return False
 
 
-class FormCrearCertificacion(BSModalForm):  
-
+class FormCrearCertificarTrabajador(BSModalForm):  
+    
     class Meta:
-        model = Certificacion
-        fields = '__all__'
+        model = CertificarTrabajador
+        exclude = ['trabajador']
+        widgets = {
+            'fecha': DateInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(FormCrearCertificarTrabajador, self).__init__(*args, **kwargs)
+
+        # Certificaciones que el trabajador no tenga 
+        # ni por curso ni asociada directamente
+        #self.fields['certificacion'].queryset = trabajadores_personas_choices()
 
 
 class FormCrearCurso(BSModalForm): 
@@ -122,8 +126,8 @@ class FormCrearCursoRealizado(BSModalForm):
     @property
     def is_empity(self):
         self.is_valid()
-        print(self.clean())
-        print(self.fields.keys())
+        #print(self.clean())
+        #print(self.fields.keys())
         return False
 
     def __init__(self, *args, **kwargs):
@@ -135,6 +139,10 @@ class FormCrearCursoRealizado(BSModalForm):
         cleaned_data = super().clean()
         profesor = cleaned_data.get('profesor')
         estudiantes = cleaned_data.get('estudiantes')
+
+        print(estudiantes)
+        print(profesor)
+        print("hola")
         
         if profesor in estudiantes:
             self.add_error('estudiantes', "El profesor no puede ser estudiante del curso.")    

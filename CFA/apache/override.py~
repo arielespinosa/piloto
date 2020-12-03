@@ -1,0 +1,6 @@
+# override.py
+
+from sispy.settings import *
+
+DEBUG = False
+ALLOWED_HOSTS = ['www.sispy.local', 'sispy.local']

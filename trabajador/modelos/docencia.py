@@ -4,16 +4,8 @@ from gm2m import GM2MField
 from django.db import models
 from centro.modelos.nomencladores import Lugar
 from .trabajadores import Trabajador, PersonaExterna
-from .nomencladores import CampoEspecialidad, CentroEstudios
+from .nomencladores import CampoEspecialidad, CentroEstudios, Certificacion
 from .trabajo_cientifico import Resultado, Tesis
-
-
-class Certificacion(models.Model):
-    titulo = models.CharField(max_length=100)
-    descripcion = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return self.titulo
 
 
 class Curso(models.Model):
@@ -43,7 +35,15 @@ class CursoRealizado(models.Model):
         return self.curso.titulo
 
 
-# Ok
+class CertificarTrabajador(models.Model):
+    fecha = models.DateField()
+    certificacion = models.ForeignKey(Certificacion, on_delete=models.DO_NOTHING)
+    trabajador = models.ForeignKey(Trabajador, on_delete=models.DO_NOTHING, related_name='certificaciones')
+
+    def __str__(self):
+        return self.certificacion.titulo
+
+
 class Evento(models.Model):
     NIVEL = (
         ('N', 'Nacional'),
@@ -55,7 +55,6 @@ class Evento(models.Model):
     lugar = models.ForeignKey(Lugar, on_delete=models.DO_NOTHING)
     nivel = models.CharField(max_length=20, choices=NIVEL)
     descripcion = models.TextField(null=True, blank=True)
-    participantes = models.ManyToManyField(Trabajador, null=True, blank=True)
 
     def __str__(self):
         return self.nombre

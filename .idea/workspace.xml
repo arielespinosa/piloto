@@ -3,22 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="85128127-3ed5-4ba9-9dfa-cbf1acc127a3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CFA/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/CFA/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/centro/templates/reportes/balance_anual.html" beforeDir="false" afterPath="$PROJECT_DIR$/centro/templates/reportes/balance_anual.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_files/css/own.css" beforeDir="false" afterPath="$PROJECT_DIR$/static_files/css/own.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/formularios/docencia.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/formularios/docencia.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/formularios/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/formularios/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/modelos/docencia.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/modelos/docencia.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/templates/cabecera_perfil_trabajador.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/cabecera_perfil_trabajador.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/templates/trabajador.html" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/templates/trabajador.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/views/docencia.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/views/docencia.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/views/trabajador.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/views/trabajador.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/views/trabajo_cientifico.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/views/trabajo_cientifico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/modelos/trabajo_cientifico.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/modelos/trabajo_cientifico.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

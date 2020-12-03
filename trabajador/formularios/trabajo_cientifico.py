@@ -11,6 +11,7 @@ from django.db.models import Q
 from bootstrap_modal_forms.forms import BSModalForm
 from .utils import trabajadores_personas_choices, elementos_cientificos_choices
 
+
 class DateInput(forms.DateInput):
     input_type = 'date'
 
