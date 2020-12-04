@@ -3,7 +3,7 @@ from trabajador.modelos.trabajo_cientifico import(
     Tesis, Articulo, Resultado, Proyecto, Libro, Servicio
 )
 from trabajador.modelos.docencia import CursoRealizado
-
+from trabajador.modelos.nomencladores import Especialidad
 
 def trabajadores_personas_choices(trabajador=None):
     if trabajador:      
@@ -31,5 +31,7 @@ def cursos_choices(trabajador=None):
     return choices
 
 
-
+def especialidad_choices():
+    choices = [(e.pk, '{0}. en {1}'.format(e.categoria, e.campo)) for e in Especialidad.objects.all()]
+    return choices
 

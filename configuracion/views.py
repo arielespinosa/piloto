@@ -15,7 +15,7 @@ from bootstrap_modal_forms.generic import (BSModalLoginView,
                                            BSModalReadView,
                                            BSModalDeleteView)
 
-import time
+from trabajador.modelos.nomencladores import Especialidad
 
 from django.contrib.auth.decorators import login_required
 
@@ -41,14 +41,16 @@ class RegistrarTrabajador(CreateView):
 
     def post(self, request, *args, **kwargs):
         form_registrar_usuario = self.form_registrar_usuario(request.POST)
-        form_registrar_trabajador = self.form_class(request.POST)
+        form_registrar_trabajador = self.form_class(request.POST, request.FILES)
 
         if form_registrar_usuario.is_valid() and form_registrar_trabajador.is_valid():
             trabajador = form_registrar_trabajador.save(commit=False)
             usuario = form_registrar_usuario.save(commit=False)
 
             usuario.is_active = False
+            #usuario.is_active = True
             usuario.save()
+
             trabajador.usuario = usuario
             trabajador.save()
 

@@ -4,6 +4,10 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate
 from trabajador.modelos.trabajadores import Trabajador
 from bootstrap_modal_forms.forms import BSModalForm
+from trabajador.formularios.utils import especialidad_choices
+from trabajador.modelos.nomencladores import Especialidad
+
+
 
 
 class DateInput(forms.DateInput):
@@ -81,6 +85,7 @@ class FormRegistrarUsuario(UserCreationForm):
 
 
 class FormRegistrarTrabajador(forms.ModelForm):
+    especialidad = forms.ChoiceField(choices=[])
 
     class Meta:
         model = Trabajador
@@ -95,15 +100,12 @@ class FormRegistrarTrabajador(forms.ModelForm):
             'fecha_entrada_insmet': DateInput(),
         }
 
-        """
-        # Validar email    
-        def clean_email(self):
-            email_address = self.cleaned_data['email']
+    def __init__(self, *args, **kwargs):
+        super(FormRegistrarTrabajador, self).__init__(*args, **kwargs)
+        self.fields['especialidad'].choices = especialidad_choices()
 
-            if '@insmet.cu' not in email_address:
-                raise forms.ValidationError('La dirección de correo debe ser del dominio insmet.cu')
-            return  email_address
-        """
+    def clean_especialidad(self):
+        return Especialidad.objects.get(pk=self.cleaned_data.get("especialidad"))
 
 
 class FormAppUser(BSModalForm):

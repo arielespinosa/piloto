@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85128127-3ed5-4ba9-9dfa-cbf1acc127a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trabajador/modelos/trabajo_cientifico.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/modelos/trabajo_cientifico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuracion/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/configuracion/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuracion/templates/registrar_trabajador.html" beforeDir="false" afterPath="$PROJECT_DIR$/configuracion/templates/registrar_trabajador.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuracion/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/configuracion/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trabajador/formularios/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/trabajador/formularios/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +22,7 @@
   <component name="ProjectId" id="1gWMcPA5podPfxWjhTPs7P4DSDY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -77,6 +83,14 @@
       <option name="presentableId" value="Default" />
       <updated>1598225973768</updated>
     </task>
+    <task id="LOCAL-00001" summary="prueba">
+      <created>1607102284253</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1607102284253</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -91,5 +105,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="prueba" />
+    <option name="LAST_COMMIT_MESSAGE" value="prueba" />
   </component>
 </project>

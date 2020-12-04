@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="step-content">
-        <form role="form" method="POST" class="panel-body wrapper-sm" action="{% url 'configuracion:registrar_trabajador' %}">
+        <form role="form" method="POST" enctype="multipart/form-data" class="panel-body wrapper-sm" action="{% url 'configuracion:registrar_trabajador' %}">
           {% csrf_token %}
           <div class="step-pane active" id="step1">
             <div class="form-group pull-in clearfix">    
